@@ -12,30 +12,16 @@ import './InvitationCard.css'
 
 export default function InvitationCard() {
   const { couple, general, events, venueSummary, rsvp } = wedding
-  const { containerRef, cardRef, needsIosPermission, enableMotion } = use3DCardTilt()
+  const { containerRef, cardRef } = use3DCardTilt()
 
   return (
     <main
       ref={containerRef}
       className="invite-stage"
-      aria-label={`Royal wedding invitation for ${couple.bride.firstName} and ${couple.groom.firstName}`}
+      aria-label={`Royal wedding invitation for ${couple.groom.firstName} and ${couple.bride.firstName}`}
     >
       {/* Global SVG Definitions for Metallic Gold Foils */}
       <SvgGoldDefs />
-
-      {/* iOS Gyroscope Activation Banner (if Safari gesture permission needed) */}
-      {needsIosPermission && (
-        <aside className="invite-gyro-prompt" aria-label="Device Motion">
-          <button
-            type="button"
-            className="invite-gyro-prompt__btn"
-            onClick={enableMotion}
-          >
-            <span className="invite-gyro-prompt__icon">✨</span>
-            <span>Enable 3D Tilt</span>
-          </button>
-        </aside>
-      )}
 
       {/* The Physical Luxury Handcrafted Card with Interactive 3D Depth */}
       <article ref={cardRef} className="invite-card">
@@ -46,7 +32,7 @@ export default function InvitationCard() {
         {/* Dynamic Specular Gold Foil Reflection Sheen */}
         <div className="invite-card__specular-sheen" aria-hidden="true" />
         {/* Ambient 3D Floating Gold Dust Particles */}
-        <AmbientParticles count={16} />
+        <AmbientParticles count={18} />
 
         {/* 3D Paper Bevel & Outer Inset Frame */}
         <div className="invite-card__frame" aria-hidden="true">

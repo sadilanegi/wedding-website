@@ -19,7 +19,7 @@ export default function InvitationFooter({ couple, general }) {
       </div>
 
       <p className="footer-section__names">
-        {couple.bride.firstName} &amp; {couple.groom.firstName}
+        {couple.groom.firstName} &amp; {couple.bride.firstName}
       </p>
 
       {hasHashtag && (

@@ -76,7 +76,7 @@ export default function WeddingCountdown({ weddingData }) {
         ) : countdown.isLive ? (
           <div className="countdown-celebration">
             <p className="countdown-celebration__text">
-              Today, Prachi & Sumit unite in sacred marriage. Thank you for gracing our joyous celebration!
+              Today, Sumit &amp; Prachi unite in sacred marriage. Thank you for gracing our joyous celebration!
             </p>
           </div>
         ) : countdown.isConcluded ? (

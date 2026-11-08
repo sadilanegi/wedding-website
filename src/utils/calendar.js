@@ -36,7 +36,7 @@ export const createGoogleCalendarUrl = ({ event, couple }) => {
   // Default event duration: 4 hours
   const endDate = new Date(startDate.getTime() + 4 * 60 * 60 * 1000)
 
-  const title = `${event.title} — ${couple?.bride?.firstName || 'Prachi'} & ${couple?.groom?.firstName || 'Sumit'} Wedding`
+  const title = `${event.title} — ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'} Wedding`
   const dates = `${formatIcsDate(startDate)}/${formatIcsDate(endDate)}`
 
   const locationParts = [event.venue, event.address].filter(isConfirmed)
@@ -45,7 +45,7 @@ export const createGoogleCalendarUrl = ({ event, couple }) => {
   const detailsParts = [
     event.tagline,
     isConfirmed(event.dressCode) ? `Dress Code: ${event.dressCode}` : null,
-    `Celebrating the wedding of ${couple?.bride?.firstName || 'Prachi'} & ${couple?.groom?.firstName || 'Sumit'}`
+    `Celebrating the wedding of ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'}`
   ].filter(Boolean)
   const details = detailsParts.join('\n\n')
 
@@ -67,13 +67,13 @@ export const downloadIcsFile = ({ event, couple }) => {
   if (!startDate) return false
 
   const endDate = new Date(startDate.getTime() + 4 * 60 * 60 * 1000)
-  const title = `${event.title} — ${couple?.bride?.firstName || 'Prachi'} & ${couple?.groom?.firstName || 'Sumit'} Wedding`
+  const title = `${event.title} — ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'} Wedding`
   const locationParts = [event.venue, event.address].filter(isConfirmed)
   const location = locationParts.join(', ')
   const description = [
     event.tagline,
     isConfirmed(event.dressCode) ? `Dress Code: ${event.dressCode}` : null,
-    `Celebrating the wedding of ${couple?.bride?.firstName || 'Prachi'} & ${couple?.groom?.firstName || 'Sumit'}`
+    `Celebrating the wedding of ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'}`
   ].filter(Boolean).join(' \\n ')
 
   const now = new Date()

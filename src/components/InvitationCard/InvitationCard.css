@@ -1,5 +1,5 @@
 /* ==========================================================================
-   Ultra-Premium Physical Wedding Invitation Card — Prachi & Sumit
+   Ultra-Premium Physical Wedding Invitation Card — Sumit & Prachi
    Handcrafted 350 GSM Cotton Rag Paper with 24K Hot-Foil Gold Stamping
    ========================================================================== */
 
@@ -55,21 +55,28 @@
   will-change: transform;
 }
 
-/* --- Dynamic Specular Gold Foil Reflection Sheen --- */
+/* --- Dynamic Specular Gold Foil & Sunbeam Reflection Sheen --- */
 .invite-card__specular-sheen {
   position: absolute;
   inset: 0;
   pointer-events: none;
   z-index: 4;
   border-radius: inherit;
-  background: radial-gradient(
-    circle 340px at var(--sheen-x, 50%) var(--sheen-y, 30%),
-    rgba(255, 252, 235, 0.45) 0%,
-    rgba(224, 186, 95, 0.22) 35%,
-    transparent 70%
-  );
+  background:
+    radial-gradient(
+      circle 320px at var(--sheen-x, 50%) var(--sheen-y, 35%),
+      rgba(255, 252, 235, 0.55) 0%,
+      rgba(224, 186, 95, 0.25) 38%,
+      transparent 72%
+    ),
+    linear-gradient(
+      125deg,
+      transparent calc(var(--sheen-x, 50%) - 28%),
+      rgba(255, 248, 214, 0.28) var(--sheen-x, 50%),
+      transparent calc(var(--sheen-x, 50%) + 28%)
+    );
   mix-blend-mode: color-dodge;
-  opacity: 0.85;
+  opacity: 0.9;
 }
 
 /* --- Cotton Paper Fiber Texture (Procedural Inline SVG Noise) --- */
@@ -215,54 +222,10 @@
   }
 }
 
-/* --- Gyroscope Motion Permission Floating Prompt --- */
-.invite-gyro-prompt {
-  position: fixed;
-  bottom: 24px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-  pointer-events: auto;
-  animation: gyroPromptFloat 3s ease-in-out infinite;
-}
-
-@keyframes gyroPromptFloat {
-  0%, 100% { transform: translate(-50%, 0); }
-  50% { transform: translate(-50%, -4px); }
-}
-
-.invite-gyro-prompt__btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 22px;
-  background: linear-gradient(135deg, #2a1810 0%, #150a06 100%);
-  border: 1px solid rgba(224, 186, 95, 0.65);
-  border-radius: 999px;
-  color: #e0ba5f;
-  font-family: var(--font-cinzel, 'Cinzel', serif);
-  font-size: 0.75rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-weight: 600;
-  cursor: pointer;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28), 0 0 16px rgba(224, 186, 95, 0.25);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.invite-gyro-prompt__btn:hover,
-.invite-gyro-prompt__btn:active {
-  transform: scale(1.04);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.38), 0 0 22px rgba(224, 186, 95, 0.45);
-}
-
-.invite-gyro-prompt__icon {
-  font-size: 0.95rem;
-}
-
 /* --- Prefers Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  .invite-card__light-glint {
+  .invite-card__light-glint,
+  .invite-card__specular-sheen {
     display: none;
   }
   .event-card {

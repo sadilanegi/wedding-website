@@ -33,31 +33,55 @@ export default function InvitationHero({ couple, general }) {
 
       <p className="hero__greeting">{general.invitationGreeting}</p>
 
-      {/* The Couple Reveal — Visual Centerpiece */}
+      {/* The Couple Reveal — Visual Centerpiece (Sumit on top, Prachi below) */}
       <div className="hero__couple-stage">
+        {/* Gyroscope-Reactive 3D Sacred Mandala Halo */}
+        <div className="hero__sacred-halo" aria-hidden="true">
+          <svg
+            className="hero__halo-svg"
+            viewBox="0 0 240 240"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="120" cy="120" r="108" stroke="url(#gold-foil-grad)" strokeWidth="0.7" strokeDasharray="3 4" opacity="0.55" />
+            <circle cx="120" cy="120" r="88" stroke="url(#gold-foil-grad)" strokeWidth="0.6" opacity="0.4" />
+            <circle cx="120" cy="120" r="64" stroke="url(#gold-foil-grad)" strokeWidth="0.5" strokeDasharray="2 3" opacity="0.35" />
+            {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
+              <path
+                key={deg}
+                d="M120 16 C126 36 126 52 120 68 C114 52 114 36 120 16 Z"
+                stroke="url(#gold-foil-grad)"
+                strokeWidth="0.65"
+                opacity="0.35"
+                transform={`rotate(${deg} 120 120)`}
+              />
+            ))}
+          </svg>
+        </div>
+
         <h1 className="hero__names">
-          <span className="hero__name hero__name--bride">{bride.firstName}</span>
+          <span className="hero__name hero__name--groom">{groom.firstName}</span>
           <span className="hero__amp" aria-hidden="true">
             <span className="hero__amp-line" />
             <span className="hero__amp-glyph">&amp;</span>
             <span className="hero__amp-line" />
           </span>
           <span className="sr-only"> and </span>
-          <span className="hero__name hero__name--groom">{groom.firstName}</span>
+          <span className="hero__name hero__name--bride">{bride.firstName}</span>
         </h1>
       </div>
 
       {/* Parents / Heritage Line (Shown only when confirmed) */}
-      {(hasBrideParents || hasGroomParents) && (
+      {(hasGroomParents || hasBrideParents) && (
         <div className="hero__heritage">
-          {hasBrideParents && (
-            <p className="hero__parent-line">
-              <span className="hero__parent-label">Daughter of</span> {bride.parents}
-            </p>
-          )}
           {hasGroomParents && (
             <p className="hero__parent-line">
               <span className="hero__parent-label">Son of</span> {groom.parents}
+            </p>
+          )}
+          {hasBrideParents && (
+            <p className="hero__parent-line">
+              <span className="hero__parent-label">Daughter of</span> {bride.parents}
             </p>
           )}
         </div>

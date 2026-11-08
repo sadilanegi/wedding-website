@@ -15,10 +15,11 @@ export default function AmbientParticles({ count = 18 }) {
       const left = 5 + ((i * 19) % 90) // 5% to 95%
       const top = 4 + ((i * 23) % 92) // 4% to 96%
       const depth = -20 + (i % 5) * 15 // -20px to +40px Z-depth
+      const shift = 8 + (i % 5) * 6 // 8px to 32px gyro parallax shift
       const duration = 7 + (i % 6) * 1.8 // 7s to 16s
       const delay = (i % 5) * -1.6 // staggered negative delay for instant flow
       const blur = i % 3 === 0 ? 1.5 : 0.4 // depth of field bokeh
-      const opacity = 0.25 + (i % 4) * 0.15 // 0.25 to 0.7
+      const opacity = 0.28 + (i % 4) * 0.15 // 0.28 to 0.73
 
       return {
         id: i,
@@ -26,6 +27,7 @@ export default function AmbientParticles({ count = 18 }) {
         left: `${left}%`,
         top: `${top}%`,
         depth: `${depth}px`,
+        shift: `${shift}px`,
         duration: `${duration.toFixed(1)}s`,
         delay: `${delay.toFixed(1)}s`,
         blur: `${blur}px`,
@@ -48,6 +50,7 @@ export default function AmbientParticles({ count = 18 }) {
             opacity: p.opacity,
             filter: `blur(${p.blur})`,
             '--p-depth': p.depth,
+            '--p-shift': p.shift,
             '--p-duration': p.duration,
             '--p-delay': p.delay,
           }}

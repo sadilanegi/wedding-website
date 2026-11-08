@@ -90,17 +90,57 @@
   position: relative;
   width: 100%;
   margin: 14px 0 16px;
-  padding: 8px 0;
+  padding: 12px 0;
   transform-style: preserve-3d;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Gyroscope-Reactive Sacred Mandala Halo in Deep 3D Layer */
+.hero__sacred-halo {
+  position: absolute;
+  width: 230px;
+  height: 230px;
+  pointer-events: none;
+  z-index: 0;
+  transform: translate3d(
+    calc(var(--gyro-x, 0) * -14px),
+    calc(var(--gyro-y, 0) * -14px),
+    -12px
+  );
+  transition: transform 0.1s ease-out;
+}
+
+.hero__halo-svg {
+  width: 100%;
+  height: 100%;
+  animation: sacredHaloSpin 48s linear infinite;
+  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.22));
+}
+
+@keyframes sacredHaloSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .hero__names {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: 0;
   transform-style: preserve-3d;
-  transform: translateZ(24px);
+  transform: translate3d(
+    calc(var(--gyro-x, 0) * 6px),
+    calc(var(--gyro-y, 0) * 5px),
+    24px
+  );
 }
 
 .hero__name {
@@ -109,35 +149,37 @@
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: 0.03em;
-  /* 24K Hot-Foil Metallic Stamping Effect with Rich Deep Contrast */
+  /* 24K Hot-Foil Metallic Stamping Effect with Live Gyroscope Shimmer */
   background: linear-gradient(
-    135deg,
+    125deg,
     #5a3a0e 0%,
     #996e23 18%,
-    #edd485 36%,
-    #fff7dc 46%,
-    #caa042 60%,
-    #6f4812 80%,
-    #b88d31 100%
+    #edd485 34%,
+    #fff9e6 45%,
+    #caa042 58%,
+    #6f4812 78%,
+    #e5bf62 92%,
+    #8c621b 100%
   );
-  background-size: 200% auto;
+  background-size: 240% 240%;
+  background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   /* Dynamic 3D foil deboss & specular shadow */
   filter: drop-shadow(
-    calc(var(--card-ry-num, 0) * -0.6px)
-    calc(2px + var(--card-rx-num, 0) * 0.6px)
+    calc(var(--card-ry-num, 0) * -0.9px)
+    calc(2px + var(--card-rx-num, 0) * 0.9px)
     4px
     rgba(60, 35, 10, 0.35)
   );
   transition: filter 0.08s ease-out;
 }
 
-.hero__name--bride {
+.hero__name--groom {
   transform: translateY(2px);
 }
 
-.hero__name--groom {
+.hero__name--bride {
   transform: translateY(-2px);
 }
 
