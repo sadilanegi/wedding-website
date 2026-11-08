@@ -11,7 +11,8 @@ function prefersReducedMotion() {
 
 function App() {
   const hasVideo = typeof wedding.general.videoUrl === 'string' && wedding.general.videoUrl.trim() !== ''
-  const [phase, setPhase] = useState(hasVideo ? 'video' : 'card')
+  const isDirectCard = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('card') === 'true'
+  const [phase, setPhase] = useState(isDirectCard ? 'card' : (hasVideo ? 'video' : 'card'))
 
   useEffect(() => {
     if (phase !== 'revealing') return undefined

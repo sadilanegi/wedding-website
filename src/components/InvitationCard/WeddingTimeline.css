@@ -1,0 +1,57 @@
+.timeline-section {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.timeline-section__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+.timeline-section__divider {
+  width: 100%;
+  max-width: 280px;
+  margin: 18px auto 14px;
+}
+
+.timeline-section__kicker {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.timeline-section__title {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #641e32;
+}
+
+.timeline-section__sub {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  color: #574438;
+  max-width: 32ch;
+  line-height: 1.45;
+}
+
+.timeline-section__list {
+  width: 100%;
+  max-width: 390px;
+  display: flex;
+  flex-direction: column;
+}
+

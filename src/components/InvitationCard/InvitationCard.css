@@ -1,366 +1,167 @@
-.invite {
+/* ==========================================================================
+   Ultra-Premium Physical Wedding Invitation Card — Prachi & Sumit
+   Handcrafted 350 GSM Cotton Rag Paper with 24K Hot-Foil Gold Stamping
+   ========================================================================== */
+
+.invite-stage {
+  position: relative;
+  width: 100%;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
-  background: #f6f1e6;
-  color: var(--color-ink-primary);
+  -webkit-overflow-scrolling: touch;
+  /* Authentic Continuous 350 GSM Cotton Rag Paper */
+  background-color: #fcf8ee;
+  background: 
+    radial-gradient(ellipse at 50% 8%, #ffffff 0%, #faf3e6 40%, #f4ebd8 80%, #ebdcc5 100%);
+  color: #23160e;
   scrollbar-width: thin;
-  scrollbar-color: #d9cbb3 transparent;
+  scrollbar-color: #aa8745 transparent;
+  display: block;
 }
 
-.invite__sheet {
-  position: relative;
-  width: min(100%, 440px);
-  margin: 0 auto;
-  padding:
-    calc(52px + env(safe-area-inset-top))
-    34px
-    calc(64px + env(safe-area-inset-bottom));
+/* Custom Luxury Scrollbar for Desktop WebKit */
+.invite-stage::-webkit-scrollbar {
+  width: 5px;
 }
 
-.invite__sheet::before {
-  content: '';
-  position: absolute;
-  inset: calc(16px + env(safe-area-inset-top)) 14px calc(16px + env(safe-area-inset-bottom));
-  border: 1px solid rgba(160, 125, 58, 0.55);
-  pointer-events: none;
+.invite-stage::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.invite__masthead,
-.invite__events,
-.invite__venue,
-.invite__rsvp,
-.invite__footer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.invite__om {
-  font-family: var(--font-devanagari);
-  font-size: 28px;
-  line-height: 1;
-  color: #8a6424;
-}
-
-.invite__shloka {
-  margin-top: 14px;
-  font-family: var(--font-devanagari);
-  font-size: 18px;
-  line-height: 1.6;
-  color: #7a1f2e;
-}
-
-.invite__shloka-en {
-  margin-top: 2px;
-  font-family: var(--font-serif);
-  font-size: 10px;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--color-ink-muted);
-}
-
-.invite__rule {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 148px;
-  margin: 26px 0;
-}
-
-.invite__rule::before,
-.invite__rule::after {
-  content: '';
-  width: 56px;
-  height: 1px;
-  background: #a07d3a;
-}
-
-.invite__diamond {
-  width: 6px;
-  height: 6px;
-  margin: 0 10px;
-  background: #a07d3a;
-  transform: rotate(45deg);
-}
-
-.invite__kicker {
-  font-family: var(--font-serif);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.38em;
-  text-transform: uppercase;
-  color: #6e5420;
-}
-
-.invite__greeting {
-  margin-top: 14px;
-  font-family: var(--font-display);
-  font-size: 16px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  color: var(--color-ink-secondary);
-}
-
-.invite__names {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 8px;
-}
-
-.invite__name {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-style: italic;
-  font-size: clamp(48px, 14vw, 64px);
-  line-height: 0.96;
-  letter-spacing: 0.01em;
-  color: #2a160f;
-}
-
-.invite__amp {
-  font-family: var(--font-script);
-  font-size: 40px;
-  line-height: 1.15;
-  color: #7a1f2e;
-}
-
-.invite__families {
-  margin-top: 14px;
-}
-
-.invite__person-line,
-.invite__plea,
-.invite__tagline,
-.invite__event-tagline,
-.invite__detail,
-.invite__rsvp-note,
-.invite__blessing {
-  font-family: var(--font-display);
-}
-
-.invite__person-line {
-  font-size: 14px;
-  font-style: italic;
-  line-height: 1.45;
-  color: var(--color-ink-secondary);
-}
-
-.invite__person-key {
-  margin-right: 4px;
-  font-family: var(--font-serif);
-  font-size: 9px;
-  font-style: normal;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: #6e5420;
-}
-
-.invite__plea {
-  max-width: 28ch;
-  margin-top: 26px;
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.55;
-  color: #3a2a20;
-}
-
-.invite__tagline {
-  max-width: 30ch;
-  margin-top: 10px;
-  font-size: 15px;
-  font-style: italic;
-  line-height: 1.45;
-  color: var(--color-ink-secondary);
-}
-
-.invite__when {
-  margin-top: 22px;
-  padding-top: 16px;
-  border-top: 1px solid rgba(160, 125, 58, 0.4);
-  min-width: 160px;
-}
-
-.invite__when-label,
-.invite__section-title,
-.invite__event-index,
-.invite__event-title,
-.invite__detail-label,
-.invite__monogram,
-.invite__hashtag {
-  font-family: var(--font-serif);
-  text-transform: uppercase;
-}
-
-.invite__when-label {
-  margin-bottom: 8px;
-  font-size: 10px;
-  letter-spacing: 0.32em;
-  color: #6e5420;
-}
-
-.invite__section-head {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.invite__section-title {
-  max-width: 250px;
-  font-size: 12px;
-  font-weight: 500;
-  letter-spacing: 0.2em;
-  line-height: 1.6;
-  color: #6e5420;
-}
-
-.invite__events,
-.invite__venue,
-.invite__rsvp {
-  margin-top: 8px;
-}
-
-.invite__event-list {
-  list-style: none;
-  width: 100%;
-  max-width: 320px;
-}
-
-.invite__event {
-  padding: 22px 0 24px;
-  border-bottom: 1px solid rgba(160, 125, 58, 0.28);
-}
-
-.invite__event-index {
-  font-size: 11px;
-  letter-spacing: 0.32em;
-  color: #8a6424;
-}
-
-.invite__event-title {
-  margin-top: 6px;
-  font-size: 15px;
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  line-height: 1.35;
-  color: #2a160f;
-}
-
-.invite__event-tagline {
-  margin-top: 6px;
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--color-ink-secondary);
-}
-
-.invite__event-details {
-  margin-top: 12px;
-}
-
-.invite__detail {
-  font-size: 15.5px;
-  line-height: 1.45;
-  color: var(--color-ink-primary);
-}
-
-.invite__detail + .invite__detail {
-  margin-top: 3px;
-}
-
-.invite__detail-label {
-  margin-right: 6px;
-  font-size: 10px;
-  letter-spacing: 0.16em;
-  color: #6e5420;
-}
-
-.invite__link {
-  display: inline-flex;
-  align-items: center;
-  min-height: 44px;
-  margin-top: 4px;
-  font-family: var(--font-serif);
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  text-decoration: underline;
-  text-underline-offset: 4px;
-  color: #7a1f2e;
-}
-
-.invite__venue .invite__detail,
-.invite__rsvp-note {
-  max-width: 30ch;
-}
-
-.invite__rsvp-note {
-  font-size: 17px;
-  font-weight: 500;
-  line-height: 1.55;
-  color: #3a2a20;
-}
-
-.invite__rsvp-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  margin-top: 8px;
-}
-
-.invite__button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 48px;
-  margin-top: 8px;
-  padding: 0 22px;
+.invite-stage::-webkit-scrollbar-thumb {
+  background: rgba(170, 135, 69, 0.4);
   border-radius: 999px;
-  font-family: var(--font-serif);
-  font-size: 11px;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: #fbf6ea;
-  background: #7a1f2e;
 }
 
-.invite__button:focus-visible,
-.invite__link:focus-visible {
-  outline: 2px solid #7a1f2e;
-  outline-offset: 3px;
+.invite-stage::-webkit-scrollbar-thumb:hover {
+  background: rgba(170, 135, 69, 0.7);
 }
 
-.invite__footer {
-  margin-top: 8px;
+/* --- The Physical Card Folio --- */
+.invite-card {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  min-height: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
 }
 
-.invite__blessing {
-  max-width: 30ch;
-  font-size: 16px;
-  font-style: italic;
-  line-height: 1.5;
-  color: var(--color-ink-secondary);
+/* --- Cotton Paper Fiber Texture (Procedural Inline SVG Noise) --- */
+.invite-card__texture-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.045;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
 
-.invite__monogram {
-  margin-top: 16px;
-  font-size: 13px;
-  letter-spacing: 0.42em;
-  color: #6e5420;
+/* --- Realistic Paper Vignette & Edge Shading --- */
+.invite-card__texture-vignette {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  box-shadow:
+    inset 0 0 45px rgba(138, 102, 53, 0.08),
+    inset 0 0 85px rgba(90, 60, 25, 0.06);
 }
 
-.invite__hashtag {
-  margin-top: 8px;
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  color: var(--color-ink-muted);
+/* --- Ambient Golden Sheen Sweep on Initial Revelation --- */
+.invite-card__light-glint {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(255, 248, 220, 0.28) 45%,
+    rgba(255, 255, 255, 0.45) 50%,
+    rgba(255, 248, 220, 0.28) 55%,
+    transparent 80%
+  );
+  background-size: 300% 300%;
+  opacity: 0;
+  animation: cardLightGlint 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
 }
 
+@keyframes cardLightGlint {
+  0% {
+    opacity: 0;
+    background-position: 100% 0%;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 0.6;
+    background-position: 0% 100%;
+  }
+  100% {
+    opacity: 0;
+    background-position: 0% 100%;
+  }
+}
+
+/* --- Continuous Card Frame Hairlines --- */
+.invite-card__frame {
+  position: absolute;
+  inset: calc(12px + env(safe-area-inset-top)) 10px calc(14px + env(safe-area-inset-bottom));
+  pointer-events: none;
+  z-index: 3;
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  box-shadow:
+    inset 0 0 0 3px rgba(247, 237, 219, 0.6),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.25);
+}
+
+/* Corner Flourishes anchored to frame */
+.ornament-corner {
+  position: absolute;
+  z-index: 4;
+}
+
+.ornament-corner--top-left {
+  top: -4px;
+  left: -4px;
+}
+
+.ornament-corner--top-right {
+  top: -4px;
+  right: -4px;
+}
+
+.ornament-corner--bottom-left {
+  bottom: -4px;
+  left: -4px;
+}
+
+.ornament-corner--bottom-right {
+  bottom: -4px;
+  right: -4px;
+}
+
+/* --- Card Content Container --- */
+.invite-card__content {
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  padding:
+    calc(38px + env(safe-area-inset-top))
+    22px
+    calc(46px + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Screen reader utility */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -373,14 +174,29 @@
   border: 0;
 }
 
-@media (max-width: 340px) {
-  .invite__sheet {
-    padding-left: 24px;
-    padding-right: 24px;
+/* --- Responsive Adjustments --- */
+@media (max-width: 380px) {
+  .invite-card__content {
+    padding-left: 16px;
+    padding-right: 16px;
   }
-
-  .invite__name {
-    font-size: 44px;
+  .invite-card__frame {
+    inset: calc(10px + env(safe-area-inset-top)) 8px calc(10px + env(safe-area-inset-bottom));
   }
+}
 
+@media (min-width: 441px) {
+  .invite-card {
+    border-radius: 12px;
+  }
+}
+
+/* --- Prefers Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  .invite-card__light-glint {
+    display: none;
+  }
+  .event-card {
+    transition: none !important;
+  }
 }

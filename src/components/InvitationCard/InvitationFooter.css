@@ -1,0 +1,57 @@
+.footer-section {
+  width: 100%;
+  margin-top: 14px;
+  padding-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.footer-section__divider {
+  width: 100%;
+  max-width: 280px;
+  margin: 18px auto 16px;
+}
+
+.footer-section__blessing {
+  max-width: 32ch;
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.55;
+  color: #574438;
+}
+
+.footer-section__monogram {
+  margin: 20px 0 12px;
+}
+
+.footer-section__names {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #641e32;
+}
+
+.footer-section__hashtag {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.footer-section__tribute {
+  margin-top: 18px;
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #9c8e84;
+}
+

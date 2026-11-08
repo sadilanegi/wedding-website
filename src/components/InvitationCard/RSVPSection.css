@@ -1,0 +1,144 @@
+.rsvp-section {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rsvp-section__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.rsvp-section__divider {
+  width: 100%;
+  max-width: 280px;
+  margin: 18px auto 14px;
+}
+
+.rsvp-section__kicker {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.rsvp-section__title {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #641e32;
+}
+
+.rsvp-card {
+  width: 100%;
+  max-width: 380px;
+  padding: 24px 20px 22px;
+  background: radial-gradient(circle at 50% 20%, #fffdfa 0%, #fcf7ec 70%, #f6ecdc 100%);
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  border-radius: 6px;
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
+    0 8px 24px rgba(70, 45, 15, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.rsvp-card__note {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: #3a2a20;
+  max-width: 32ch;
+}
+
+.rsvp-card__actions {
+  margin-top: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.rsvp-card__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 46px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rsvp-card__btn--whatsapp {
+  background: #15803d;
+  color: #ffffff;
+  border: 1px solid #0f5d2c;
+  box-shadow: 0 3px 10px rgba(21, 128, 61, 0.28);
+}
+
+.rsvp-card__btn--whatsapp:hover {
+  background: #166534;
+  transform: translateY(-1px);
+}
+
+.rsvp-card__btn--disabled {
+  background: rgba(150, 140, 130, 0.12);
+  color: #8c7e75;
+  border: 1px dashed rgba(150, 140, 130, 0.35);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.rsvp-card__pending-wrap {
+  width: 100%;
+}
+
+.rsvp-card__phone-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.rsvp-card__or {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-style: italic;
+  color: #78846b;
+}
+
+.rsvp-card__phone-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-serif);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #641e32;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+

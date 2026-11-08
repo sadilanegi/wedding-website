@@ -1,0 +1,321 @@
+.hero {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  width: 100%;
+  padding-bottom: 24px;
+}
+
+/* --- Sacred Invocation --- */
+.hero__invocation-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 4px;
+}
+
+.hero__ganesha {
+  filter: drop-shadow(0 2px 4px rgba(70, 45, 15, 0.25));
+  margin-bottom: 8px;
+}
+
+.hero__shloka {
+  font-family: var(--font-devanagari);
+  font-size: 20px;
+  line-height: 1.5;
+  color: #641e32;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.hero__shloka-en {
+  margin-top: 3px;
+  font-family: var(--font-serif);
+  font-size: 10px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: #8c672b;
+  font-weight: 500;
+}
+
+.hero__divider {
+  width: 100%;
+  max-width: 280px;
+  margin: 18px auto;
+}
+
+/* --- Kicker & Greeting --- */
+.hero__kicker-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 4px;
+}
+
+.hero__kicker-ornament {
+  font-size: 8px;
+  color: #aa8745;
+  opacity: 0.8;
+}
+
+.hero__kicker {
+  font-family: var(--font-serif);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #7a5618;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.hero__greeting {
+  margin-top: 14px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-style: italic;
+  font-weight: 500;
+  letter-spacing: 0.03em;
+  color: #574438;
+}
+
+/* --- Couple Name Reveal (The Centerpiece) --- */
+.hero__couple-stage {
+  position: relative;
+  width: 100%;
+  margin: 14px 0 16px;
+  padding: 8px 0;
+}
+
+.hero__names {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+}
+
+.hero__name {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 13vw, 70px);
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: 0.03em;
+  /* 24K Hot-Foil Metallic Stamping Effect with Rich Deep Contrast */
+  background: linear-gradient(
+    135deg,
+    #5a3a0e 0%,
+    #996e23 18%,
+    #edd485 36%,
+    #fff7dc 46%,
+    #caa042 60%,
+    #6f4812 80%,
+    #b88d31 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Deep foil deboss & specular shadow */
+  filter: drop-shadow(0 2px 4px rgba(60, 35, 10, 0.32));
+}
+
+.hero__name--bride {
+  transform: translateY(2px);
+}
+
+.hero__name--groom {
+  transform: translateY(-2px);
+}
+
+.hero__amp {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 180px;
+  margin: 4px 0;
+  gap: 12px;
+}
+
+.hero__amp-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(170, 135, 69, 0.6) 50%,
+    transparent 100%
+  );
+}
+
+.hero__amp-glyph {
+  font-family: var(--font-script);
+  font-size: 38px;
+  line-height: 1;
+  color: #641e32;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+/* --- Heritage / Parent Lines --- */
+.hero__heritage {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.hero__parent-line {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-style: italic;
+  color: #574438;
+  line-height: 1.45;
+}
+
+.hero__parent-label {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-style: normal;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8c672b;
+  margin-right: 4px;
+}
+
+/* --- Invitation Plea & Tagline --- */
+.hero__plea {
+  max-width: 32ch;
+  margin-top: 18px;
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 1.6;
+  color: #33251e;
+  letter-spacing: 0.01em;
+}
+
+.hero__tagline {
+  max-width: 34ch;
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-style: italic;
+  line-height: 1.5;
+  color: #78846b;
+}
+
+/* --- Monogram Medallion --- */
+.hero__monogram-wrap {
+  margin: 22px 0 18px;
+}
+
+.monogram-seal__rim {
+  position: relative;
+  width: 72px;
+  height: 72px;
+  margin: 0 auto;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #aa8745 0%, #fdf2c5 50%, #7a5518 100%);
+  box-shadow: 
+    0 6px 18px rgba(70, 45, 15, 0.25),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    inset 0 -1px 2px rgba(60, 35, 10, 0.4);
+}
+
+.monogram-seal__inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, #fffbf4 0%, #f7edd9 70%, #ebdcc2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: inset 0 2px 4px rgba(70, 45, 15, 0.15);
+}
+
+.monogram-seal__wreath {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.monogram-seal__text {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  background: linear-gradient(135deg, #7a5518 0%, #caa049 50%, #573e0a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.8));
+}
+
+/* --- Save the Date Medallion --- */
+.hero__date-medallion {
+  width: 100%;
+  max-width: 320px;
+  margin-top: 6px;
+}
+
+.hero__medallion-border {
+  position: relative;
+  padding: 16px 20px;
+  background: #fffdfa;
+  border: 1px solid rgba(170, 135, 69, 0.55);
+  border-radius: 6px;
+  box-shadow: 
+    inset 0 0 0 3px rgba(244, 235, 221, 0.9),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.35),
+    0 6px 18px rgba(60, 40, 20, 0.08);
+}
+
+.hero__medallion-badge {
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #8c672b;
+  margin-bottom: 6px;
+}
+
+.hero__medallion-date {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 600;
+  color: #641e32;
+  letter-spacing: 0.04em;
+}
+
+.hero__medallion-pending {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  color: #6b5c52;
+  line-height: 1.4;
+}
+
+.hero__medallion-place {
+  margin-top: 4px;
+  font-family: var(--font-serif);
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #574438;
+}
+
+@media (max-width: 360px) {
+  .hero__name {
+    font-size: 44px;
+  }
+  .hero__plea {
+    font-size: 15.5px;
+  }
+}
