@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import wedding from '../../data/weddingContent.json'
+import { requestMotionPermission } from '../../utils/use3DCardTilt'
 import './VideoOpening.css'
 
 export const VIDEO_SRC = wedding.general.videoUrl
@@ -25,6 +26,8 @@ export default function VideoOpening({ onComplete, leaving = false }) {
 
   const play = () => {
     if (seal !== 'resting') return
+    // Request iOS motion permission on direct user tap of wax seal
+    requestMotionPermission().catch(() => {})
     const video = videoRef.current
     if (!video) return
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches

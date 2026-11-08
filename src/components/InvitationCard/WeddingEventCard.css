@@ -8,14 +8,16 @@
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.9),
     0 6px 20px rgba(60, 40, 20, 0.08);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transform-style: preserve-3d;
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
 }
 
 .event-card:hover {
-  transform: translateY(-2px);
+  transform: translateY(-4px) translateZ(16px);
   box-shadow:
     inset 0 0 0 1px rgba(255, 255, 255, 0.95),
-    0 10px 28px rgba(70, 45, 15, 0.14);
+    0 16px 36px rgba(70, 45, 15, 0.16),
+    0 0 24px color-mix(in srgb, var(--event-accent, #aa8745) 22%, transparent);
 }
 
 /* Event-Specific Luxury Accent Top Strips */
@@ -79,6 +81,12 @@
   width: 44px;
   height: 44px;
   flex-shrink: 0;
+  transform: translateZ(12px);
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.event-card:hover .event-card__emblem-wrap {
+  transform: translateZ(22px) scale(1.06);
 }
 
 .event-card__emblem {

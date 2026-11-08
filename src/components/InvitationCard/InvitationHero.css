@@ -6,6 +6,7 @@
   position: relative;
   width: 100%;
   padding-bottom: 24px;
+  transform-style: preserve-3d;
 }
 
 /* --- Sacred Invocation --- */
@@ -14,11 +15,13 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4px;
+  transform-style: preserve-3d;
 }
 
 .hero__ganesha {
   filter: drop-shadow(0 2px 4px rgba(70, 45, 15, 0.25));
   margin-bottom: 8px;
+  transform: translateZ(16px);
 }
 
 .hero__shloka {
@@ -88,6 +91,7 @@
   width: 100%;
   margin: 14px 0 16px;
   padding: 8px 0;
+  transform-style: preserve-3d;
 }
 
 .hero__names {
@@ -95,6 +99,8 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
+  transform-style: preserve-3d;
+  transform: translateZ(24px);
 }
 
 .hero__name {
@@ -117,8 +123,14 @@
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Deep foil deboss & specular shadow */
-  filter: drop-shadow(0 2px 4px rgba(60, 35, 10, 0.32));
+  /* Dynamic 3D foil deboss & specular shadow */
+  filter: drop-shadow(
+    calc(var(--card-ry-num, 0) * -0.6px)
+    calc(2px + var(--card-rx-num, 0) * 0.6px)
+    4px
+    rgba(60, 35, 10, 0.35)
+  );
+  transition: filter 0.08s ease-out;
 }
 
 .hero__name--bride {
@@ -219,10 +231,16 @@
   border-radius: 50%;
   padding: 3px;
   background: linear-gradient(135deg, #aa8745 0%, #fdf2c5 50%, #7a5518 100%);
+  transform-style: preserve-3d;
+  transform: translateZ(32px);
   box-shadow: 
-    0 6px 18px rgba(70, 45, 15, 0.25),
+    calc(var(--card-ry-num, 0) * -0.8px)
+    calc(6px + var(--card-rx-num, 0) * 0.8px)
+    18px
+    rgba(70, 45, 15, 0.28),
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -1px 2px rgba(60, 35, 10, 0.4);
+  transition: box-shadow 0.08s ease-out;
 }
 
 .monogram-seal__inner {
