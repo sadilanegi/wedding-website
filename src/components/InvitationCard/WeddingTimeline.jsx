@@ -2,7 +2,7 @@ import { RoyalDivider } from './Ornaments'
 import WeddingEventCard from './WeddingEventCard'
 import './WeddingTimeline.css'
 
-export default function WeddingTimeline({ events, couple }) {
+export default function WeddingTimeline({ events, couple, venueSummary }) {
   // STRICT FILTER: Strictly only allow the 5 confirmed functions; engagement is strictly excluded
   const allowedEvents = ['haldi', 'mehendi', 'sangeet', 'wedding', 'reception']
   const filteredEvents = events.filter((e) => allowedEvents.includes(e.id || e.theme))
@@ -25,6 +25,7 @@ export default function WeddingTimeline({ events, couple }) {
             event={event}
             index={index}
             couple={couple}
+            venueSummary={venueSummary}
           />
         ))}
       </div>

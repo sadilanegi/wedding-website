@@ -1,14 +1,74 @@
+import { useState } from 'react'
 import { isConfirmed, formatWhatsAppLink, hasValidPhone } from '../../utils/weddingHelpers.js'
 import { RoyalDivider, WhatsAppIcon, PhoneIcon } from './Ornaments'
 import './RSVPSection.css'
 
-export default function RSVPSection({ rsvp }) {
+const DEFAULT_ATTENDANCE_OPTIONS = ['Joyfully Attending', 'Warm Wishes From Afar']
+const GUEST_COUNTS = ['1', '2', '3', '4+']
+
+export default function RSVPSection({ rsvp, couple }) {
+  const validOptions =
+    Array.isArray(rsvp?.attendanceOptions) &&
+    rsvp.attendanceOptions.filter(isConfirmed).length > 0
+      ? rsvp.attendanceOptions.filter(isConfirmed)
+      : DEFAULT_ATTENDANCE_OPTIONS
+
+  const [guestName, setGuestName] = useState('')
+  const [attendance, setAttendance] = useState(validOptions[0])
+  const [guestCount, setGuestCount] = useState('2')
+  const [copiedRsvp, setCopiedRsvp] = useState(false)
+
   if (!rsvp) return null
 
   const hasPhone = hasValidPhone(rsvp.phone)
   const hasContactPerson = isConfirmed(rsvp.contactPerson)
-  const whatsAppLink = formatWhatsAppLink(rsvp.whatsappNumber, rsvp.whatsappMessage)
+  const hasDeadline = isConfirmed(rsvp.deadline)
+
+  const coupleLabel =
+    couple?.groom?.firstName && couple?.bride?.firstName
+      ? `${couple.groom.firstName} & ${couple.bride.firstName}`
+      : 'Sumit & Prachi'
+
+  const baseGreeting = isConfirmed(rsvp.whatsappMessage)
+    ? rsvp.whatsappMessage
+    : `Hi ${coupleLabel}, I would love to confirm my attendance for your wedding celebrations!`
+
+  const messageParts = [baseGreeting]
+  if (guestName.trim()) {
+    messageParts.push(`Guest Name: ${guestName.trim()}`)
+  }
+  messageParts.push(`Response: ${attendance}`)
+  if (!attendance.toLowerCase().includes('afar') && !attendance.toLowerCase().includes('unable')) {
+    messageParts.push(`Guests: ${guestCount}`)
+  }
+  const composedMessage = messageParts.join('\n')
+
+  const whatsAppLink = formatWhatsAppLink(rsvp.whatsappNumber, composedMessage)
   const isWhatsAppReady = Boolean(whatsAppLink)
+
+  const handleCopyOrShareRsvp = async () => {
+    if (typeof navigator !== 'undefined' && navigator.share) {
+      try {
+        await navigator.share({
+          title: `RSVP — ${coupleLabel} Wedding`,
+          text: composedMessage,
+        })
+        return
+      } catch {
+        // Fallback to clipboard copy if user cancels share sheet
+      }
+    }
+
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      try {
+        await navigator.clipboard.writeText(composedMessage)
+        setCopiedRsvp(true)
+        setTimeout(() => setCopiedRsvp(false), 2200)
+      } catch {
+        // ignore
+      }
+    }
+  }
 
   return (
     <section className="rsvp-section" aria-label="RSVP and guest confirmation">
@@ -25,6 +85,61 @@ export default function RSVPSection({ rsvp }) {
             : 'Your esteemed presence will add boundless joy to our wedding celebrations. Please kindly confirm your attendance.'}
         </p>
 
+        {hasDeadline && (
+          <p className="rsvp-card__deadline">
+            Kindly RSVP by <strong>{rsvp.deadline}</strong>
+          </p>
+        )}
+
+        {/* Interactive Quick-RSVP Composer */}
+        <div className="rsvp-composer" aria-label="Personalize your RSVP response">
+          <label className="rsvp-composer__field">
+            <span className="rsvp-composer__label">Your Name (Optional)</span>
+            <input
+              type="text"
+              className="rsvp-composer__input"
+              placeholder="Enter your name or family name"
+              value={guestName}
+              onChange={(e) => setGuestName(e.target.value)}
+            />
+          </label>
+
+          <div className="rsvp-composer__field">
+            <span className="rsvp-composer__label">Will You Join Us?</span>
+            <div className="rsvp-composer__pills">
+              {validOptions.map((option) => (
+                <button
+                  key={option}
+                  type="button"
+                  className={`rsvp-composer__pill ${attendance === option ? 'is-selected' : ''}`}
+                  onClick={() => setAttendance(option)}
+                >
+                  {option}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {!attendance.toLowerCase().includes('afar') &&
+            !attendance.toLowerCase().includes('unable') && (
+              <div className="rsvp-composer__field">
+                <span className="rsvp-composer__label">Number of Guests</span>
+                <div className="rsvp-composer__counts">
+                  {GUEST_COUNTS.map((cnt) => (
+                    <button
+                      key={cnt}
+                      type="button"
+                      className={`rsvp-composer__count-btn ${guestCount === cnt ? 'is-selected' : ''}`}
+                      onClick={() => setGuestCount(cnt)}
+                    >
+                      {cnt}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+        </div>
+
         {/* WhatsApp & Direct Contact Actions */}
         <div className="rsvp-card__actions">
           {isWhatsAppReady ? (
@@ -35,17 +150,21 @@ export default function RSVPSection({ rsvp }) {
               className="rsvp-card__btn rsvp-card__btn--whatsapp"
             >
               <WhatsAppIcon />
-              <span>Confirm on WhatsApp</span>
+              <span>Send RSVP on WhatsApp</span>
             </a>
           ) : (
             <div className="rsvp-card__pending-wrap">
               <button
                 type="button"
-                disabled
-                className="rsvp-card__btn rsvp-card__btn--disabled"
+                className="rsvp-card__btn rsvp-card__btn--whatsapp"
+                onClick={handleCopyOrShareRsvp}
               >
                 <WhatsAppIcon />
-                <span>RSVP Link Opening Soon</span>
+                <span>
+                  {copiedRsvp
+                    ? '✓ RSVP Message Copied!'
+                    : 'Prepare & Share RSVP Message'}
+                </span>
               </button>
             </div>
           )}

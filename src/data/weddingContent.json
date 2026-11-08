@@ -1,3 +1,4 @@
+
 {
   "couple": {
     "bride": {
@@ -13,6 +14,7 @@
     "monogram": "S & P",
     "hashtag": "#SumitWedsPrachi"
   },
+
   "general": {
     "heading": "Wedding Invitation",
     "showInvocation": true,
@@ -23,10 +25,13 @@
     "tagline": "Celebrating Love, Sacred Tradition & Joyous Beginnings",
     "date": "__",
     "place": "__",
+    "guestArrivalTime": "__",
     "instructionTap": "Tap to open",
     "videoUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794127296/9ed453103d9bbd1196b9d17bd4256d20_720w_online-video-cutter.com_xzvmqy.mp4",
+    "musicUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794140404/aaj-sajeya-alaya-f-goldie-sohel-punit-malhotra-official-video-sneakersong-dharm_QVmldlBL_qngg8r.mp3",
     "familyBlessing": "With best compliments from near and dear ones of both families"
   },
+
   "events": [
     {
       "id": "haldi",
@@ -34,10 +39,15 @@
       "tagline": "A morning of turmeric, sunshine, and laughter",
       "date": "__",
       "time": "__",
+      "guestArrivalTime": "__",
+      "startTime": "__",
+      "endTime": "__",
       "venue": "__",
+      "venueOverride": "__",
       "address": "__",
-      "mapUrl": "https://maps.google.com/?q=__",
+      "mapUrl": "__",
       "dressCode": "Sunshine Yellow & Florals",
+      "instructions": "__",
       "accentColor": "#d97706",
       "theme": "haldi"
     },
@@ -47,10 +57,15 @@
       "tagline": "Intricate henna motifs, folk beats, and festive cheer",
       "date": "__",
       "time": "__",
+      "guestArrivalTime": "__",
+      "startTime": "__",
+      "endTime": "__",
       "venue": "__",
+      "venueOverride": "__",
       "address": "__",
-      "mapUrl": "https://maps.google.com/?q=__",
+      "mapUrl": "__",
       "dressCode": "Henna Greens & Pastels",
+      "instructions": "__",
       "accentColor": "#15803d",
       "theme": "mehendi"
     },
@@ -60,10 +75,15 @@
       "tagline": "An electrifying evening of music, dance, and glam",
       "date": "__",
       "time": "__",
+      "guestArrivalTime": "__",
+      "startTime": "__",
+      "endTime": "__",
       "venue": "__",
+      "venueOverride": "__",
       "address": "__",
-      "mapUrl": "https://maps.google.com/?q=__",
+      "mapUrl": "__",
       "dressCode": "Glamour, Glitz & Royal Hues",
+      "instructions": "__",
       "accentColor": "#7e22ce",
       "theme": "sangeet"
     },
@@ -73,10 +93,15 @@
       "tagline": "The sacred Vedic rituals and the seven holy pheras",
       "date": "__",
       "time": "__",
+      "guestArrivalTime": "__",
+      "startTime": "__",
+      "endTime": "__",
       "venue": "__",
+      "venueOverride": "__",
       "address": "__",
-      "mapUrl": "https://maps.google.com/?q=__",
+      "mapUrl": "__",
       "dressCode": "Traditional Royal Ethnic / Vermillion & Gold",
+      "instructions": "__",
       "accentColor": "#b91c1c",
       "theme": "wedding"
     },
@@ -86,26 +111,72 @@
       "tagline": "Dinner banquet, toasts, and blessings for the newlyweds",
       "date": "__",
       "time": "__",
+      "guestArrivalTime": "__",
+      "startTime": "__",
+      "endTime": "__",
       "venue": "__",
+      "venueOverride": "__",
       "address": "__",
-      "mapUrl": "https://maps.google.com/?q=__",
+      "mapUrl": "__",
       "dressCode": "Black Tie / Indo-Western Haute Couture",
+      "instructions": "__",
       "accentColor": "#1e3a8a",
       "theme": "reception"
     }
   ],
+
   "venueSummary": {
     "title": "Venue & Celebration Location",
     "hall": "__",
     "address": "__",
     "city": "__",
-    "mapUrl": "https://maps.google.com/?q=__"
+    "mapUrl": "__"
   },
+
+  "design": {
+    "theme": "__",
+    "colors": [],
+    "overallStyle": "__",
+    "inspirationUrls": [],
+    "customRequests": []
+  },
+
+  "media": {
+    "photoLinks": [],
+    "videoLinks": [],
+    "galleryPreference": "__",
+    "photoAvailability": "__",
+    "videoAvailability": "__"
+  },
+
+  "features": {
+    "countdown": true,
+    "photoGallery": "__",
+    "rsvp": "__",
+    "googleMaps": "__",
+    "whatsappSharing": "__",
+    "calendarLinks": "__",
+    "qrCode": "__",
+    "guestbook": "__",
+    "thankYouPage": "__"
+  },
+
   "rsvp": {
     "note": "Please kindly grace the occasion and confirm your presence by __",
     "contactPerson": "__",
     "phone": "__",
     "whatsappNumber": "__",
-    "whatsappMessage": "Hi Sumit & Prachi, I would love to confirm my attendance for your wedding celebrations!"
+    "whatsappMessage": "Hi Sumit & Prachi, I would love to confirm my attendance for your wedding celebrations!",
+    "deadline": "__",
+    "attendanceOptions": [],
+    "guestCountPreference": "__",
+    "privacyPreference": "__"
+  },
+
+  "website": {
+    "language": "__",
+    "postWeddingBehavior": "__",
+    "thankYouMessage": "__",
+    "additionalRequests": []
   }
 }

@@ -1,13 +1,14 @@
 import { useState, useRef, useEffect } from 'react'
 import { isConfirmed } from '../../utils/weddingHelpers.js'
-import { getDirectionsUrl } from '../../utils/googleMaps.js'
+import { getDirectionsUrl, detectUserLocation } from '../../utils/googleMaps.js'
 import { createGoogleCalendarUrl, downloadIcsFile } from '../../utils/calendar.js'
 import { EventEmblem, MapPinIcon, CalendarIcon } from './Ornaments'
 import './WeddingEventCard.css'
 
-export default function WeddingEventCard({ event, index, couple }) {
+export default function WeddingEventCard({ event, index, couple, venueSummary }) {
   const [showCalendarMenu, setShowCalendarMenu] = useState(false)
   const [icsDownloaded, setIcsDownloaded] = useState(false)
+  const [locatingRoute, setLocatingRoute] = useState(false)
   const calMenuRef = useRef(null)
 
   // Close calendar menu on click outside or escape key
@@ -34,16 +35,56 @@ export default function WeddingEventCard({ event, index, couple }) {
     }
   }, [showCalendarMenu])
 
+  // Resolve venue & address with support for venueOverride and venueSummary fallback
+  const resolvedVenue = isConfirmed(event.venueOverride)
+    ? event.venueOverride
+    : isConfirmed(event.venue)
+      ? event.venue
+      : isConfirmed(venueSummary?.hall)
+        ? venueSummary.hall
+        : ''
+
+  const resolvedAddress = isConfirmed(event.address)
+    ? event.address
+    : isConfirmed(venueSummary?.address)
+      ? venueSummary.address
+      : ''
+
+  const resolvedCity = isConfirmed(venueSummary?.city) ? venueSummary.city : ''
+
+  const resolvedMapUrl = isConfirmed(event.mapUrl)
+    ? event.mapUrl
+    : isConfirmed(venueSummary?.mapUrl)
+      ? venueSummary.mapUrl
+      : ''
+
   const directionsUrl = getDirectionsUrl({
-    mapUrl: event.mapUrl,
-    address: event.address,
-    venue: event.venue,
+    mapUrl: resolvedMapUrl,
+    address: resolvedAddress,
+    venue: resolvedVenue,
+    city: resolvedCity,
   })
 
+  // Resolve timing fields (startTime, endTime, time, guestArrivalTime)
+  const hasStartTime = isConfirmed(event.startTime)
+  const hasEndTime = isConfirmed(event.endTime)
+  const hasTime = isConfirmed(event.time)
+  const hasGuestArrival = isConfirmed(event.guestArrivalTime)
+
+  const formattedTime =
+    hasStartTime && hasEndTime
+      ? `${event.startTime} – ${event.endTime}`
+      : hasStartTime
+        ? event.startTime
+        : hasTime
+          ? event.time
+          : ''
+
   const googleCalUrl = createGoogleCalendarUrl({ event, couple })
-  const hasSchedule = isConfirmed(event.date) || isConfirmed(event.time)
-  const hasVenue = isConfirmed(event.venue) || isConfirmed(event.address)
+  const hasSchedule = isConfirmed(event.date) || Boolean(formattedTime) || hasGuestArrival
+  const hasVenue = Boolean(resolvedVenue) || Boolean(resolvedAddress)
   const hasDressCode = isConfirmed(event.dressCode)
+  const hasInstructions = isConfirmed(event.instructions)
 
   const handleDownloadIcs = () => {
     const success = downloadIcsFile({ event, couple })
@@ -53,6 +94,28 @@ export default function WeddingEventCard({ event, index, couple }) {
         setIcsDownloaded(false)
         setShowCalendarMenu(false)
       }, 1800)
+    }
+  }
+
+  const handleStartLiveNavigation = async (e) => {
+    if (!directionsUrl) return
+    e.preventDefault()
+    setLocatingRoute(true)
+    try {
+      const coords = await detectUserLocation()
+      const liveUrl = getDirectionsUrl({
+        mapUrl: resolvedMapUrl,
+        address: resolvedAddress,
+        venue: resolvedVenue,
+        city: resolvedCity,
+        originCoords: coords,
+      })
+      window.open(liveUrl || directionsUrl, '_blank', 'noopener,noreferrer')
+    } catch {
+      // Fallback to standard Google Maps directions URL if user declines GPS prompt
+      window.open(directionsUrl, '_blank', 'noopener,noreferrer')
+    } finally {
+      setLocatingRoute(false)
     }
   }
 
@@ -87,8 +150,13 @@ export default function WeddingEventCard({ event, index, couple }) {
                 <span className="event-card__meta-label">Schedule</span>
                 <span className="event-card__meta-value">
                   {isConfirmed(event.date) ? event.date : 'Date to be announced'}
-                  {isConfirmed(event.time) && ` · ${event.time}`}
+                  {formattedTime && ` · ${formattedTime}`}
                 </span>
+                {hasGuestArrival && (
+                  <span className="event-card__arrival-badge">
+                    Guest Arrival: {event.guestArrivalTime}
+                  </span>
+                )}
               </div>
             </div>
           ) : (
@@ -109,9 +177,10 @@ export default function WeddingEventCard({ event, index, couple }) {
               <div className="event-card__meta">
                 <span className="event-card__meta-label">Venue</span>
                 <span className="event-card__meta-value">
-                  {isConfirmed(event.venue) && event.venue}
-                  {isConfirmed(event.venue) && isConfirmed(event.address) && ' — '}
-                  {isConfirmed(event.address) && event.address}
+                  {resolvedVenue}
+                  {resolvedVenue && resolvedAddress && ' — '}
+                  {resolvedAddress}
+                  {resolvedCity && !resolvedAddress.includes(resolvedCity) && `, ${resolvedCity}`}
                 </span>
               </div>
             </div>
@@ -136,9 +205,19 @@ export default function WeddingEventCard({ event, index, couple }) {
               </div>
             </div>
           )}
+
+          {hasInstructions && (
+            <div className="event-card__detail-row event-card__detail-row--instructions">
+              <span className="event-card__icon" aria-hidden="true">📜</span>
+              <div className="event-card__meta">
+                <span className="event-card__meta-label">Guest Note</span>
+                <span className="event-card__meta-value">{event.instructions}</span>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Action Buttons: Directions & Add to Calendar */}
+        {/* Action Buttons: Live GPS Directions & Add to Calendar */}
         <div className="event-card__actions">
           {directionsUrl ? (
             <a
@@ -146,9 +225,10 @@ export default function WeddingEventCard({ event, index, couple }) {
               target="_blank"
               rel="noopener noreferrer"
               className="event-card__btn event-card__btn--directions"
+              onClick={handleStartLiveNavigation}
             >
               <MapPinIcon />
-              <span>Get Directions</span>
+              <span>{locatingRoute ? 'Locating...' : 'Live Route'}</span>
             </a>
           ) : (
             <button

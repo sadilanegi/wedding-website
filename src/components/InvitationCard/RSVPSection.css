@@ -72,6 +72,119 @@
   max-width: 32ch;
 }
 
+.rsvp-card__deadline {
+  margin-top: 8px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(100, 30, 50, 0.08);
+  border: 1px solid rgba(100, 30, 50, 0.25);
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #641e32;
+}
+
+/* --- Interactive Quick-RSVP Composer --- */
+.rsvp-composer {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px;
+  background: rgba(255, 253, 248, 0.82);
+  border: 1px dashed rgba(170, 135, 69, 0.45);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.rsvp-composer__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rsvp-composer__label {
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.rsvp-composer__input {
+  width: 100%;
+  min-height: 38px;
+  padding: 6px 11px;
+  border-radius: 4px;
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  background: #ffffff;
+  font-family: var(--font-display);
+  font-size: 15px;
+  color: #23160e;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.rsvp-composer__input:focus {
+  border-color: #641e32;
+}
+
+.rsvp-composer__pills {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.rsvp-composer__pill {
+  width: 100%;
+  padding: 8px 10px;
+  border-radius: 4px;
+  background: rgba(170, 135, 69, 0.08);
+  border: 1px solid rgba(170, 135, 69, 0.32);
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #574438;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.rsvp-composer__pill.is-selected {
+  background: #641e32;
+  color: #fffdf8;
+  border-color: #4a1323;
+}
+
+.rsvp-composer__counts {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+
+.rsvp-composer__count-btn {
+  padding: 6px 0;
+  border-radius: 4px;
+  background: rgba(170, 135, 69, 0.08);
+  border: 1px solid rgba(170, 135, 69, 0.32);
+  font-family: var(--font-serif);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #574438;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.rsvp-composer__count-btn.is-selected {
+  background: #641e32;
+  color: #fffdf8;
+  border-color: #4a1323;
+}
+
 .rsvp-card__actions {
   margin-top: 20px;
   width: 100%;

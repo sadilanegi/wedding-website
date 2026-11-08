@@ -7,7 +7,7 @@ export const VIDEO_SRC = wedding.general.videoUrl
 
 const SEAL_FADE_MS = 900
 
-export default function VideoOpening({ onComplete, leaving = false }) {
+export default function VideoOpening({ onComplete, onSealClick, leaving = false }) {
   const videoRef = useRef(null)
   const finishedRef = useRef(false)
   const [seal, setSeal] = useState('resting')
@@ -26,6 +26,8 @@ export default function VideoOpening({ onComplete, leaving = false }) {
 
   const play = () => {
     if (seal !== 'resting') return
+    // Trigger background wedding music with smooth fade-in on direct user tap
+    if (onSealClick) onSealClick()
     // Request iOS motion permission on direct user tap of wax seal
     requestMotionPermission().catch(() => {})
     const video = videoRef.current
@@ -41,6 +43,7 @@ export default function VideoOpening({ onComplete, leaving = false }) {
         ref={videoRef}
         className="video-open__media"
         src={VIDEO_SRC}
+        muted
         playsInline
         preload="auto"
         onEnded={() => finish(true)}

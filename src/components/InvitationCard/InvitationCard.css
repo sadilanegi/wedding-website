@@ -22,6 +22,53 @@
   perspective-origin: 50% 40%;
 }
 
+.invite-stage--couple {
+  overflow-y: hidden;
+  cursor: pointer;
+}
+
+/* Full-Bleed Royal Palace Veil behind the Couple during Intro Ceremony */
+.invite-stage__couple-veil {
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      circle at 50% 44%,
+      rgba(255, 252, 242, 0.98) 0%,
+      rgba(249, 233, 200, 0.94) 44%,
+      rgba(214, 174, 108, 0.92) 80%,
+      rgba(110, 42, 35, 0.94) 100%
+    );
+  opacity: 0;
+  transition: opacity 1500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.invite-stage--couple .invite-stage__couple-veil {
+  opacity: 1;
+  transition: none;
+}
+
+.invite-card__chapters-below {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) 300ms,
+    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 300ms;
+}
+
+.invite-stage--couple .invite-card__chapters-below {
+  opacity: 0;
+  transform: translate3d(0, 24px, 0);
+  pointer-events: none;
+  transition: none;
+}
+
 /* Custom Luxury Scrollbar for Desktop WebKit */
 .invite-stage::-webkit-scrollbar {
   width: 5px;
@@ -43,6 +90,7 @@
 /* --- The Physical Card Folio --- */
 .invite-card {
   position: relative;
+  z-index: 5;
   width: 100%;
   max-width: 440px;
   min-height: 100%;
@@ -53,6 +101,14 @@
   transform-origin: center calc(var(--scroll-y, 0px) + 40vh);
   transform: rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg));
   will-change: transform;
+}
+
+.invite-stage--couple .invite-card {
+  transform: none;
+}
+
+.invite-stage--revealing .invite-card {
+  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* --- Dynamic Specular Gold Foil & Sunbeam Reflection Sheen --- */
@@ -149,6 +205,13 @@
   box-shadow:
     inset 0 0 0 3px rgba(247, 237, 219, 0.6),
     inset 0 0 0 4px rgba(170, 135, 69, 0.25);
+  opacity: 1;
+  transition: opacity 1300ms cubic-bezier(0.22, 1, 0.36, 1) 180ms;
+}
+
+.invite-stage--couple .invite-card__frame {
+  opacity: 0;
+  transition: none;
 }
 
 /* Corner Flourishes anchored to frame */

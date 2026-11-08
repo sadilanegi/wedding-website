@@ -9,6 +9,38 @@
   transform-style: preserve-3d;
 }
 
+.hero__upper-reveal,
+.hero__lower-reveal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  transform-style: preserve-3d;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+  transition:
+    opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+}
+
+.hero__lower-reveal {
+  transition-delay: 260ms;
+}
+
+.invite-stage--couple .hero__upper-reveal {
+  opacity: 0;
+  transform: translate3d(0, -16px, 0);
+  pointer-events: none;
+  transition: none;
+}
+
+.invite-stage--couple .hero__lower-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  pointer-events: none;
+  transition: none;
+}
+
 /* --- Sacred Invocation --- */
 .hero__invocation-wrap {
   display: flex;
@@ -369,6 +401,14 @@
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #574438;
+}
+
+.hero__medallion-arrival {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  color: #8c672b;
 }
 
 @media (max-width: 360px) {

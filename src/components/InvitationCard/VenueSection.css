@@ -124,8 +124,227 @@
   color: #8c672b;
 }
 
+.venue-card__copy-btn {
+  margin-top: 8px;
+  align-self: center;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(170, 135, 69, 0.12);
+  border: 1px solid rgba(170, 135, 69, 0.4);
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #641e32;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.venue-card__copy-btn:hover {
+  background: rgba(170, 135, 69, 0.22);
+}
+
+/* --- Live Relative Location & Route Radar --- */
+.venue-route-radar {
+  width: 100%;
+  margin-top: 16px;
+  padding: 14px 14px 12px;
+  background: rgba(255, 253, 248, 0.85);
+  border: 1px dashed rgba(170, 135, 69, 0.45);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+}
+
+.venue-route-radar__endpoints {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.venue-route-radar__node {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.venue-route-radar__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #c7b299;
+  border: 2px solid #fffdf8;
+  box-shadow: 0 0 0 1px rgba(170, 135, 69, 0.5);
+}
+
+.venue-route-radar__dot.is-locked {
+  background: #15803d;
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.2);
+}
+
+.venue-route-radar__dot.is-dest {
+  background: #641e32;
+  box-shadow: 0 0 0 2px rgba(100, 30, 50, 0.2);
+}
+
+.venue-route-radar__info {
+  display: flex;
+  flex-direction: column;
+}
+
+.venue-route-radar__label {
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.venue-route-radar__value {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 600;
+  color: #23160e;
+  line-height: 1.3;
+}
+
+.venue-route-radar__connector {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding-left: 4px;
+  min-height: 16px;
+}
+
+.venue-route-radar__line {
+  width: 2px;
+  height: 16px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #aa8745 0,
+    #aa8745 3px,
+    transparent 3px,
+    transparent 6px
+  );
+}
+
+.venue-route-radar__distance-pill {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: rgba(100, 30, 50, 0.08);
+  border: 1px solid rgba(100, 30, 50, 0.25);
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #641e32;
+}
+
+/* Travel Mode Selector Pills */
+.venue-route-modes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 6px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(170, 135, 69, 0.2);
+}
+
+.venue-route-mode-btn {
+  padding: 5px 8px;
+  border-radius: 4px;
+  background: rgba(170, 135, 69, 0.08);
+  border: 1px solid rgba(170, 135, 69, 0.28);
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #574438;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.venue-route-mode-btn.is-active {
+  background: #641e32;
+  color: #fffdf8;
+  border-color: #4a1323;
+}
+
+.venue-card__error {
+  margin-top: 10px;
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  color: #b91c1c;
+  background: rgba(185, 28, 28, 0.07);
+  border: 1px solid rgba(185, 28, 28, 0.25);
+  padding: 6px 10px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+/* Embedded Interactive Map Preview */
+.venue-card__map-frame-wrap {
+  width: 100%;
+  margin-top: 14px;
+  border: 1px solid rgba(170, 135, 69, 0.5);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f6efe1;
+}
+
+.venue-card__map-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: rgba(170, 135, 69, 0.14);
+  border-bottom: 1px solid rgba(170, 135, 69, 0.3);
+}
+
+.venue-card__map-badge {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #573e0a;
+}
+
+.venue-card__map-close {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #641e32;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.venue-card__map-iframe {
+  width: 100%;
+  height: 210px;
+  border: 0;
+  display: block;
+}
+
 .venue-card__actions {
-  margin-top: 18px;
+  margin-top: 16px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.venue-card__nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   width: 100%;
 }
 
@@ -135,19 +354,19 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 44px;
-  padding: 0 18px;
+  min-height: 42px;
+  padding: 0 14px;
   border-radius: 4px;
   font-family: var(--font-serif);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   background: #641e32;
   color: #fffdf8;
   border: 1px solid #4a1323;
-  box-shadow: 0 2px 8px rgba(100, 30, 50, 0.28);
+  box-shadow: 0 2px 8px rgba(100, 30, 50, 0.25);
   cursor: pointer;
   transition: all 0.2s ease;
 }
@@ -155,6 +374,33 @@
 .venue-card__btn:hover {
   background: #7d263f;
   transform: translateY(-1px);
+}
+
+.venue-card__btn--locate {
+  background: linear-gradient(135deg, #7a5518 0%, #aa8745 50%, #694610 100%);
+  border-color: #573e0a;
+  color: #fffdf8;
+  box-shadow: 0 2px 8px rgba(122, 85, 24, 0.28);
+}
+
+.venue-card__btn--locate.is-located {
+  background: rgba(21, 128, 61, 0.12);
+  border-color: rgba(21, 128, 61, 0.45);
+  color: #15803d;
+  box-shadow: none;
+}
+
+.venue-card__btn--secondary,
+.venue-card__btn--outline {
+  background: rgba(170, 135, 69, 0.1);
+  color: #573e0a;
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  box-shadow: none;
+}
+
+.venue-card__btn--secondary:hover,
+.venue-card__btn--outline:hover {
+  background: rgba(170, 135, 69, 0.2);
 }
 
 .venue-card__btn--disabled {

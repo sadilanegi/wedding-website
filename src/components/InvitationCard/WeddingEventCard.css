@@ -159,6 +159,17 @@
   font-size: 14px;
 }
 
+.event-card__arrival-badge {
+  display: inline-block;
+  margin-top: 3px;
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #641e32;
+}
+
 .event-card__dress-pill {
   display: inline-block;
   margin-top: 2px;
