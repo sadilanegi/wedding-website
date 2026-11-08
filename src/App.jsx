@@ -1,51 +1,42 @@
-import { useState, useCallback } from 'react'
-import Envelope from './components/Envelope/Envelope'
+import { useEffect, useState } from 'react'
+import wedding from './data/weddingContent.json'
 import InvitationCard from './components/InvitationCard/InvitationCard'
-import Particles from './components/Particles/Particles'
+import VideoOpening from './components/VideoOpening/VideoOpening'
 
-/**
- * App.jsx — Wedding Invitation Experience for Prachi & Sumit
- * Mobile-First Architecture:
- * - The entire mobile screen looks like a physical luxury envelope
- * - Centered on mobile and desktop, covering the full mobile screen
- * - Screen 1: 3D Royal Vertical Envelope Opening with Sunlight Rays
- * - Screen 2: Full Scrollable Luxury Cream Invitation Card
- */
+const FADE_MS = 1100
+
+function prefersReducedMotion() {
+  return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+}
+
 function App() {
-  const [currentView, setCurrentView] = useState('envelope') // 'envelope' | 'invitation'
-  const [isBursting, setIsBursting] = useState(false)
+  const hasVideo = typeof wedding.general.videoUrl === 'string' && wedding.general.videoUrl.trim() !== ''
+  const [phase, setPhase] = useState(hasVideo ? 'video' : 'card')
 
-  const handleOpenComplete = useCallback(() => {
-    setCurrentView('invitation')
-  }, [])
+  useEffect(() => {
+    if (phase !== 'revealing') return undefined
+    const id = setTimeout(() => setPhase('card'), FADE_MS)
+    return () => clearTimeout(id)
+  }, [phase])
 
-  const handleReplay = useCallback(() => {
-    setCurrentView('envelope')
-    setIsBursting(false)
-  }, [])
+  const handleComplete = (smooth) => {
+    if (smooth && !prefersReducedMotion()) setPhase('revealing')
+    else setPhase('card')
+  }
 
-  const handleBurstChange = useCallback((bursting) => {
-    setIsBursting(Boolean(bursting))
-  }, [])
+  const showVideo = phase === 'video' || phase === 'revealing'
+  const showCard = phase === 'card' || phase === 'revealing'
 
   return (
     <div className="app-viewport-root">
-      {/* Golden Ambient and Burst Particles */}
-      <Particles triggerBurst={isBursting} />
-
-      {/* Centered Mobile Envelope & Card Stage */}
       <div className="app-mobile-stage">
-        {/* Screen 1: The Royal Opening Envelope Ceremony */}
-        {currentView === 'envelope' && (
-          <Envelope
-            onOpenComplete={handleOpenComplete}
-            onBurstChange={handleBurstChange}
-          />
+        {showVideo && (
+          <VideoOpening leaving={phase === 'revealing'} onComplete={handleComplete} />
         )}
-
-        {/* Screen 2: Full Scrollable Luxury Wedding Invitation Page */}
-        {currentView === 'invitation' && (
-          <InvitationCard onReplay={handleReplay} />
+        {showCard && (
+          <div className={`stage-card${phase === 'revealing' ? ' is-arriving' : ''}`}>
+            <InvitationCard />
+          </div>
         )}
       </div>
     </div>

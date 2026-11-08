@@ -1,0 +1,111 @@
+{
+  "couple": {
+    "bride": {
+      "firstName": "Prachi",
+      "lastName": "__",
+      "parents": "__"
+    },
+    "groom": {
+      "firstName": "Sumit",
+      "lastName": "__",
+      "parents": "__"
+    },
+    "monogram": "P & S",
+    "hashtag": "#PrachiWedsSumit"
+  },
+  "general": {
+    "heading": "Wedding Invitation",
+    "showInvocation": true,
+    "invocation": "॥ श्री गणेशाय नमः ॥",
+    "invocationSub": "Om Shri Ganeshaya Namah",
+    "invitationGreeting": "Together with their families",
+    "invitationPlea": "Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children",
+    "tagline": "Celebrating Love, Sacred Tradition & Joyous Beginnings",
+    "date": "__",
+    "place": "__",
+    "instructionTap": "Tap to open",
+    "videoUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794127296/9ed453103d9bbd1196b9d17bd4256d20_720w_online-video-cutter.com_xzvmqy.mp4",
+    "familyBlessing": "With best compliments from near and dear ones of both families"
+  },
+  "events": [
+    {
+      "id": "haldi",
+      "title": "Haldi Ceremony",
+      "tagline": "A morning of turmeric, sunshine, and laughter",
+      "date": "__",
+      "time": "__",
+      "venue": "__",
+      "address": "__",
+      "mapUrl": "https://maps.google.com/?q=__",
+      "dressCode": "Sunshine Yellow & Florals",
+      "accentColor": "#d97706",
+      "theme": "haldi"
+    },
+    {
+      "id": "mehendi",
+      "title": "Mehendi Ceremony",
+      "tagline": "Intricate henna motifs, folk beats, and festive cheer",
+      "date": "__",
+      "time": "__",
+      "venue": "__",
+      "address": "__",
+      "mapUrl": "https://maps.google.com/?q=__",
+      "dressCode": "Henna Greens & Pastels",
+      "accentColor": "#15803d",
+      "theme": "mehendi"
+    },
+    {
+      "id": "sangeet",
+      "title": "Sangeet Night",
+      "tagline": "An electrifying evening of music, dance, and glam",
+      "date": "__",
+      "time": "__",
+      "venue": "__",
+      "address": "__",
+      "mapUrl": "https://maps.google.com/?q=__",
+      "dressCode": "Glamour, Glitz & Royal Hues",
+      "accentColor": "#7e22ce",
+      "theme": "sangeet"
+    },
+    {
+      "id": "wedding",
+      "title": "Wedding Ceremony",
+      "tagline": "The sacred Vedic rituals and the seven holy pheras",
+      "date": "__",
+      "time": "__",
+      "venue": "__",
+      "address": "__",
+      "mapUrl": "https://maps.google.com/?q=__",
+      "dressCode": "Traditional Royal Ethnic / Vermillion & Gold",
+      "accentColor": "#b91c1c",
+      "theme": "wedding"
+    },
+    {
+      "id": "reception",
+      "title": "Grand Reception",
+      "tagline": "Dinner banquet, toasts, and blessings for the newlyweds",
+      "date": "__",
+      "time": "__",
+      "venue": "__",
+      "address": "__",
+      "mapUrl": "https://maps.google.com/?q=__",
+      "dressCode": "Black Tie / Indo-Western Haute Couture",
+      "accentColor": "#1e3a8a",
+      "theme": "reception"
+    }
+  ],
+  "venueSummary": {
+    "title": "Venue & Celebration Location",
+    "hall": "__",
+    "address": "__",
+    "city": "__",
+    "mapUrl": "https://maps.google.com/?q=__"
+  },
+  "rsvp": {
+    "note": "Please kindly grace the occasion and confirm your presence by __",
+    "contactPerson": "__",
+    "phone": "__",
+    "whatsappNumber": "__",
+    "whatsappMessage": "Hi Prachi & Sumit, I would love to confirm my attendance for your wedding celebrations!"
+  }
+}
