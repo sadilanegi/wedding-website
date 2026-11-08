@@ -3,9 +3,17 @@ import { getTargetWeddingDate, calculateCountdown } from '../../utils/countdown.
 import { RoyalDivider } from './Ornaments'
 import './WeddingCountdown.css'
 
+const DIAL_META = [
+  { key: 'days', label: 'Days', glyph: '☀' },
+  { key: 'hours', label: 'Hours', glyph: '☾' },
+  { key: 'minutes', label: 'Mins', glyph: '✦' },
+  { key: 'seconds', label: 'Secs', glyph: '❖' },
+]
+
 export default function WeddingCountdown({ weddingData }) {
   const targetDate = useMemo(() => getTargetWeddingDate(weddingData), [weddingData])
   const [countdown, setCountdown] = useState(() => calculateCountdown(targetDate))
+  const [rippleKey, setRippleKey] = useState(0)
 
   useEffect(() => {
     if (!targetDate) return undefined
@@ -20,60 +28,98 @@ export default function WeddingCountdown({ weddingData }) {
   }, [targetDate])
 
   const formatUnit = (num) => String(num).padStart(2, '0')
+  const isCounting = countdown.isAvailable && !countdown.isLive && !countdown.isConcluded
 
   return (
-    <section className="countdown-section" aria-label="Wedding celebration countdown">
+    <section
+      id="chapter-countdown"
+      className="countdown-section"
+      aria-label="Wedding celebration countdown"
+    >
       <RoyalDivider className="countdown-section__divider" />
 
-      <div className="countdown-card">
+      <div
+        className={`countdown-card ${rippleKey > 0 ? 'is-rippling' : ''}`}
+        onClick={() => setRippleKey((k) => k + 1)}
+        role="region"
+        aria-label="Auspicious Muhurta Timepiece"
+      >
+        {/* Background Rotating Celestial Surya Mandala */}
+        <svg
+          className="countdown-card__mandala"
+          viewBox="0 0 220 220"
+          fill="none"
+          aria-hidden="true"
+        >
+          <circle cx="110" cy="110" r="98" stroke="url(#gold-foil-grad)" strokeWidth="0.8" strokeDasharray="4 4" />
+          <circle cx="110" cy="110" r="76" stroke="url(#gold-foil-grad)" strokeWidth="0.7" />
+          {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
+            <line
+              key={deg}
+              x1="110"
+              y1="14"
+              x2="110"
+              y2="34"
+              stroke="url(#gold-foil-grad)"
+              strokeWidth="0.9"
+              transform={`rotate(${deg} 110 110)`}
+            />
+          ))}
+        </svg>
+
+        {/* Top Royal Arch Badge */}
         <header className="countdown-card__header">
-          <p className="countdown-card__kicker">Auspicious Countdown</p>
+          <div className="countdown-card__kicker-pill">
+            <span aria-hidden="true">✦</span>
+            <p className="countdown-card__kicker">Shubh Muhurta · Celestial Timepiece</p>
+            <span aria-hidden="true">✦</span>
+          </div>
           <h2 className="countdown-card__title">
             {countdown.isLive
               ? 'The Celebrations Have Begun!'
               : countdown.isConcluded
                 ? 'With Eternal Love & Gratitude'
-                : 'Counting Down The Moments'}
+                : 'Counting Down Every Sacred Moment'}
           </h2>
         </header>
 
-        {countdown.isAvailable && !countdown.isLive && !countdown.isConcluded ? (
-          <div className="countdown-dials" role="timer" aria-live="polite">
-            <div className="countdown-dial">
-              <div className="countdown-dial__rim">
-                <span className="countdown-dial__value">{formatUnit(countdown.days)}</span>
+        {/* 4 Engraved 3D Gold Timepiece Dials (Live Digits when Date Confirmed, Celestial Glyphs when Pending) */}
+        {!countdown.isLive && !countdown.isConcluded && (
+          <div
+            key={rippleKey}
+            className="countdown-dials"
+            role={isCounting ? 'timer' : 'group'}
+            aria-live="polite"
+          >
+            {DIAL_META.map((dial, idx) => (
+              <div key={dial.key} className="countdown-dials__group">
+                <div
+                  className="countdown-dial"
+                  style={{ '--dial-idx': idx }}
+                >
+                  <div className="countdown-dial__rim">
+                    <span className="countdown-dial__orbit" aria-hidden="true" />
+                    <span className="countdown-dial__value">
+                      {isCounting ? (
+                        formatUnit(countdown[dial.key])
+                      ) : (
+                        <span className="countdown-dial__glyph">{dial.glyph}</span>
+                      )}
+                    </span>
+                  </div>
+                  <span className="countdown-dial__label">{dial.label}</span>
+                </div>
+                {idx < DIAL_META.length - 1 && (
+                  <span className="countdown-dials__separator" aria-hidden="true">
+                    :
+                  </span>
+                )}
               </div>
-              <span className="countdown-dial__label">Days</span>
-            </div>
-
-            <span className="countdown-dials__separator" aria-hidden="true">:</span>
-
-            <div className="countdown-dial">
-              <div className="countdown-dial__rim">
-                <span className="countdown-dial__value">{formatUnit(countdown.hours)}</span>
-              </div>
-              <span className="countdown-dial__label">Hours</span>
-            </div>
-
-            <span className="countdown-dials__separator" aria-hidden="true">:</span>
-
-            <div className="countdown-dial">
-              <div className="countdown-dial__rim">
-                <span className="countdown-dial__value">{formatUnit(countdown.minutes)}</span>
-              </div>
-              <span className="countdown-dial__label">Mins</span>
-            </div>
-
-            <span className="countdown-dials__separator" aria-hidden="true">:</span>
-
-            <div className="countdown-dial">
-              <div className="countdown-dial__rim">
-                <span className="countdown-dial__value">{formatUnit(countdown.seconds)}</span>
-              </div>
-              <span className="countdown-dial__label">Secs</span>
-            </div>
+            ))}
           </div>
-        ) : countdown.isLive ? (
+        )}
+
+        {countdown.isLive ? (
           <div className="countdown-celebration">
             <p className="countdown-celebration__text">
               Today, Sumit &amp; Prachi unite in sacred marriage. Thank you for gracing our joyous celebration!
@@ -85,22 +131,19 @@ export default function WeddingCountdown({ weddingData }) {
               Thank you to all families and friends for your heartfelt blessings and warm presence.
             </p>
           </div>
-        ) : (
-          /* Graceful State when Wedding Date is '__' */
+        ) : !isCounting ? (
           <div className="countdown-pending">
             <div className="countdown-pending__astronomy">
-              <span className="countdown-pending__icon" aria-hidden="true">✦</span>
               <p className="countdown-pending__note">
                 The sacred muhurta is being finalized by family astrologers.
               </p>
               <p className="countdown-pending__sub">
-                Official countdown will commence as soon as the wedding date is unveiled.
+                ✦ Live second-by-second dials will ignite upon date confirmation ✦
               </p>
             </div>
           </div>
-        )}
+        ) : null}
       </div>
     </section>
   )
 }
-

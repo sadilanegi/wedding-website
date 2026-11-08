@@ -8,6 +8,7 @@ import RSVPSection from './RSVPSection'
 import InvitationFooter from './InvitationFooter'
 import AmbientParticles from './AmbientParticles'
 import { use3DCardTilt } from '../../utils/use3DCardTilt.js'
+import { useScrollReveal } from '../../utils/useScrollReveal.js'
 import './InvitationCard.css'
 
 export default function InvitationCard({
@@ -16,6 +17,7 @@ export default function InvitationCard({
 }) {
   const { couple, general, events, venueSummary, rsvp, features, website } = wedding
   const { containerRef, cardRef } = use3DCardTilt()
+  useScrollReveal(containerRef, introState !== 'couple')
   const showCountdown = features?.countdown !== false
 
   return (

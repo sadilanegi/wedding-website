@@ -1,9 +1,10 @@
 .rsvp-section {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  perspective: 950px;
 }
 
 .rsvp-section__head {
@@ -11,13 +12,30 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.rsvp-section__head.is-in-view {
+  animation: rsvpHeadIn 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rsvpHeadIn {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .rsvp-section__divider {
   width: 100%;
   max-width: 280px;
-  margin: 18px auto 14px;
+  margin: 12px auto 10px;
 }
 
 .rsvp-section__kicker {
@@ -39,28 +57,51 @@
 }
 
 .rsvp-card {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  max-width: 380px;
-  padding: 24px 20px 22px;
-  background: radial-gradient(circle at 50% 20%, #fffdfa 0%, #fcf7ec 70%, #f6ecdc 100%);
-  border: 1px solid rgba(170, 135, 69, 0.45);
-  border-radius: 6px;
+  max-width: 386px;
+  padding: 26px 20px 22px;
+  background: radial-gradient(circle at 50% 18%, #fffefa 0%, #fcf4e3 65%, #f1dfc0 100%);
+  border: 1.5px solid rgba(186, 142, 62, 0.62);
+  border-radius: 14px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
-    0 8px 24px rgba(70, 45, 15, 0.08);
+    inset 0 0 0 3px rgba(255, 250, 236, 0.92),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.32),
+    0 12px 30px rgba(70, 40, 15, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
 }
 
-.rsvp-card:hover {
+.rsvp-card.is-in-view {
+  animation: rsvpCard3DIn 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes rsvpCard3DIn {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 28px, 0) rotateX(12deg) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+  }
+}
+
+.rsvp-card.is-in-view:hover {
   transform: translateY(-3px) translateZ(14px);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
-    0 14px 32px rgba(70, 45, 15, 0.14);
+    inset 0 0 0 3px rgba(255, 250, 236, 0.96),
+    inset 0 0 0 4px rgba(186, 142, 62, 0.45),
+    0 16px 36px rgba(70, 45, 15, 0.16);
 }
 
 .rsvp-card__note {
@@ -183,6 +224,35 @@
   background: #641e32;
   color: #fffdf8;
   border-color: #4a1323;
+}
+
+.rsvp-composer__preview {
+  margin-top: 2px;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(255, 249, 232, 0.95) 0%, rgba(246, 231, 198, 0.9) 100%);
+  border: 1px solid rgba(186, 142, 62, 0.48);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.rsvp-composer__preview-badge {
+  font-family: var(--font-serif);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.rsvp-composer__preview-text {
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-style: italic;
+  font-weight: 600;
+  color: #641e32;
 }
 
 .rsvp-card__actions {

@@ -268,6 +268,27 @@
   border: 0;
 }
 
+/* --- Universal Royal Divider Scroll-Bloom Animation --- */
+.ornament-divider {
+  opacity: 1;
+  transform: scaleX(1) translateY(0);
+}
+
+.ornament-divider.is-in-view {
+  animation: dividerBloomIn 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes dividerBloomIn {
+  0% {
+    opacity: 0.25;
+    transform: scaleX(0.45) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scaleX(1) translateY(0);
+  }
+}
+
 /* --- Responsive Adjustments --- */
 @media (max-width: 380px) {
   .invite-card__content {

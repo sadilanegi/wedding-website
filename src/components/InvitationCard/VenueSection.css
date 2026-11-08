@@ -1,9 +1,10 @@
 .venue-section {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
+  perspective: 950px;
 }
 
 .venue-section__head {
@@ -11,13 +12,30 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.venue-section__head.is-in-view {
+  animation: venueHeadReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes venueHeadReveal {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 18px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .venue-section__divider {
   width: 100%;
   max-width: 280px;
-  margin: 18px auto 14px;
+  margin: 12px auto 10px;
 }
 
 .venue-section__kicker {
@@ -39,41 +57,111 @@
 }
 
 .venue-card {
+  position: relative;
+  overflow: hidden;
   width: 100%;
-  max-width: 380px;
-  padding: 24px 20px 22px;
-  background: radial-gradient(circle at 50% 20%, #fffdfa 0%, #fcf7ec 70%, #f6ecdc 100%);
-  border: 1px solid rgba(170, 135, 69, 0.45);
-  border-radius: 6px;
+  max-width: 386px;
+  padding: 26px 20px 22px;
+  background: radial-gradient(circle at 50% 18%, #fffefa 0%, #fcf4e3 65%, #f1dfc0 100%);
+  border: 1.5px solid rgba(186, 142, 62, 0.62);
+  border-radius: 14px;
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.9),
-    0 8px 24px rgba(70, 45, 15, 0.08);
+    inset 0 0 0 3px rgba(255, 250, 236, 0.92),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.32),
+    0 12px 30px rgba(70, 40, 15, 0.12);
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
   transform-style: preserve-3d;
-  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.28s ease;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
 }
 
-.venue-card:hover {
+.venue-card.is-in-view {
+  animation: venueCard3DIn 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes venueCard3DIn {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 28px, 0) rotateX(12deg) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+  }
+}
+
+.venue-card.is-in-view:hover {
   transform: translateY(-3px) translateZ(14px);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
-    0 14px 32px rgba(70, 45, 15, 0.14);
+    inset 0 0 0 3px rgba(255, 250, 236, 0.96),
+    inset 0 0 0 4px rgba(186, 142, 62, 0.45),
+    0 16px 36px rgba(70, 45, 15, 0.16);
 }
 
 .venue-card__header-icon {
-  width: 38px;
-  height: 38px;
+  position: relative;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
-  background: rgba(170, 135, 69, 0.12);
-  border: 1px solid rgba(170, 135, 69, 0.4);
+  background: radial-gradient(circle at 35% 35%, #fffdf8 0%, #f5e4c3 100%);
+  border: 1px solid rgba(186, 142, 62, 0.55);
+  box-shadow: 0 4px 12px rgba(70, 45, 15, 0.15);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #641e32;
   margin-bottom: 14px;
+}
+
+.venue-card__compass-svg {
+  animation: compassGentleSpin 18s ease-in-out infinite alternate;
+}
+
+@keyframes compassGentleSpin {
+  0% {
+    transform: rotate(-25deg);
+  }
+  50% {
+    transform: rotate(25deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+.venue-card__header-icon::after {
+  content: '';
+  position: absolute;
+  inset: -5px;
+  border-radius: 50%;
+  border: 1px solid rgba(186, 142, 62, 0.65);
+  animation: radarPinPulse 2.4s ease-out infinite;
+}
+
+@keyframes radarPinBounce {
+  0% {
+    transform: translateY(0) scale(1);
+  }
+  100% {
+    transform: translateY(-3px) scale(1.06);
+  }
+}
+
+@keyframes radarPinPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.75;
+  }
+  100% {
+    transform: scale(1.45);
+    opacity: 0;
+  }
 }
 
 .venue-card__content {
@@ -222,8 +310,9 @@
 }
 
 .venue-route-radar__line {
+  position: relative;
   width: 2px;
-  height: 16px;
+  height: 24px;
   background: repeating-linear-gradient(
     to bottom,
     #aa8745 0,
@@ -231,19 +320,53 @@
     transparent 3px,
     transparent 6px
   );
+  overflow: visible;
+}
+
+.venue-route-radar__traveler {
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff8dc 0%, #d4af37 60%, #7c1d34 100%);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.9);
+  animation: routeTravelerSlide 1.8s ease-in-out infinite;
+}
+
+@keyframes routeTravelerSlide {
+  0% {
+    transform: translateY(-2px) scale(0.75);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(9px) scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(18px) scale(0.75);
+    opacity: 0.4;
+  }
 }
 
 .venue-route-radar__distance-pill {
   display: inline-block;
-  padding: 2px 9px;
+  padding: 3px 10px;
   border-radius: 999px;
   background: rgba(100, 30, 50, 0.08);
   border: 1px solid rgba(100, 30, 50, 0.25);
   font-family: var(--font-serif);
-  font-size: 9px;
+  font-size: 8.5px;
   font-weight: 600;
   letter-spacing: 0.1em;
   color: #641e32;
+}
+
+.venue-route-radar__distance-pill--idle {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: rgba(170, 135, 69, 0.35);
+  color: #7a5518;
 }
 
 /* Travel Mode Selector Pills */

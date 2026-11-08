@@ -1,6 +1,7 @@
 import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { GaneshaCrest, RoyalDivider, MonogramSeal } from './Ornaments'
 import CoupleVarmalaStage from '../CoupleVarmala/CoupleVarmalaStage'
+import ScratchSaveTheDate from './ScratchSaveTheDate'
 import './InvitationHero.css'
 
 export default function InvitationHero({
@@ -12,9 +13,6 @@ export default function InvitationHero({
   const { bride, groom, monogram } = couple
   const hasBrideParents = isConfirmed(bride.parents)
   const hasGroomParents = isConfirmed(groom.parents)
-  const hasDate = isConfirmed(general.date)
-  const hasPlace = isConfirmed(general.place)
-  const hasGuestArrival = isConfirmed(general.guestArrivalTime)
 
   const groomFullName = isConfirmed(groom.lastName)
     ? `${groom.firstName} ${groom.lastName}`
@@ -123,25 +121,8 @@ export default function InvitationHero({
           <MonogramSeal monogram={monogram} />
         </div>
 
-        {/* Save the Date / Announcement Medallion */}
-        <div className="hero__date-medallion">
-          <div className="hero__medallion-border">
-            <p className="hero__medallion-badge">Save The Date</p>
-            {hasDate ? (
-              <p className="hero__medallion-date">{general.date}</p>
-            ) : (
-              <p className="hero__medallion-pending">Celebration Dates To Be Unveiled Soon</p>
-            )}
-            {hasPlace && (
-              <p className="hero__medallion-place">{general.place}</p>
-            )}
-            {hasGuestArrival && (
-              <p className="hero__medallion-arrival">
-                Guest Arrival: {general.guestArrivalTime}
-              </p>
-            )}
-          </div>
-        </div>
+        {/* Interactive 24K Gold Foil Scratch-to-Reveal Save The Date Medallion */}
+        <ScratchSaveTheDate general={general} />
       </div>
     </header>
   )

@@ -1,6 +1,6 @@
 .timeline-section {
   width: 100%;
-  margin-top: 10px;
+  margin-top: 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -11,13 +11,30 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  margin-bottom: 22px;
+  margin-bottom: 16px;
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.timeline-section__head.is-in-view {
+  animation: headSlideUpReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes headSlideUpReveal {
+  0% {
+    opacity: 0.2;
+    transform: translate3d(0, 20px, 0);
+  }
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
 }
 
 .timeline-section__divider {
   width: 100%;
   max-width: 280px;
-  margin: 18px auto 14px;
+  margin: 12px auto 10px;
 }
 
 .timeline-section__kicker {
@@ -49,9 +66,32 @@
 }
 
 .timeline-section__list {
+  position: relative;
   width: 100%;
   max-width: 390px;
   display: flex;
   flex-direction: column;
+  perspective: 1000px;
+}
+
+/* Glowing Golden Vertical Sacred Thread connecting all 5 Ceremonies */
+.timeline-section__list::before {
+  content: '';
+  position: absolute;
+  top: 18px;
+  bottom: 28px;
+  left: 50%;
+  width: 1.5px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(212, 175, 55, 0.55) 12%,
+    rgba(186, 142, 62, 0.65) 50%,
+    rgba(212, 175, 55, 0.55) 88%,
+    transparent 100%
+  );
+  z-index: 0;
+  pointer-events: none;
 }
 

@@ -356,3 +356,98 @@ export function PhoneIcon() {
     </svg>
   )
 }
+
+// Bespoke 24K Gold Medallion Icons for Inner Boxes (Replacing plain emojis)
+export function ScheduleMedallionIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12.5" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeDasharray="2 1.5" />
+      <rect x="7.5" y="8.5" width="13" height="12" rx="2" stroke="url(#gold-foil-grad)" strokeWidth="1.3" />
+      <line x1="7.5" y1="12.2" x2="20.5" y2="12.2" stroke="url(#gold-foil-grad)" strokeWidth="1.1" />
+      <line x1="11" y1="6.5" x2="11" y2="9.8" stroke="url(#gold-foil-grad)" strokeWidth="1.3" strokeLinecap="round" />
+      <line x1="17" y1="6.5" x2="17" y2="9.8" stroke="url(#gold-foil-grad)" strokeWidth="1.3" strokeLinecap="round" />
+      <circle cx="14" cy="16.2" r="1.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function PalaceVenueIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12.5" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeDasharray="2 1.5" />
+      <path
+        d="M14 6.5 C10.4 6.5 7.8 9.2 7.8 12.6 C7.8 16.8 14 21.8 14 21.8 C14 21.8 20.2 16.8 20.2 12.6 C20.2 9.2 17.6 6.5 14 6.5 Z"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="1.35"
+      />
+      <circle cx="14" cy="12.4" r="2.3" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function RoyalAttireIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12.5" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeDasharray="2 1.5" />
+      <path
+        d="M14 6.5 L16 11.8 L21.5 14 L16 16.2 L14 21.5 L12 16.2 L6.5 14 L12 11.8 Z"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="1.25"
+        fill="rgba(212, 175, 55, 0.14)"
+      />
+      <circle cx="14" cy="14" r="1.8" fill="currentColor" />
+    </svg>
+  )
+}
+
+export function SacredScrollIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true">
+      <circle cx="14" cy="14" r="12.5" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeDasharray="2 1.5" />
+      <rect x="8.5" y="7.5" width="11" height="13" rx="1.8" stroke="url(#gold-foil-grad)" strokeWidth="1.3" />
+      <line x1="11" y1="11.5" x2="17" y2="11.5" stroke="url(#gold-foil-grad)" strokeWidth="1.1" strokeLinecap="round" />
+      <line x1="11" y1="14.2" x2="17" y2="14.2" stroke="url(#gold-foil-grad)" strokeWidth="1.1" strokeLinecap="round" />
+      <line x1="11" y1="16.9" x2="15" y2="16.9" stroke="url(#gold-foil-grad)" strokeWidth="1.1" strokeLinecap="round" />
+    </svg>
+  )
+}
+
+export function CompassRoseIcon({ className = '' }) {
+  return (
+    <svg className={className} width="36" height="36" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <circle cx="24" cy="24" r="21" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeDasharray="3 2" />
+      <circle cx="24" cy="24" r="16" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+      <path d="M24 5 L27.2 20.8 L43 24 L27.2 27.2 L24 43 L20.8 27.2 L5 24 L20.8 20.8 Z" stroke="url(#gold-foil-grad)" strokeWidth="1.2" fill="rgba(212, 175, 55, 0.16)" />
+      <circle cx="24" cy="24" r="3.2" fill="#641e32" stroke="url(#gold-foil-grad)" strokeWidth="1" />
+    </svg>
+  )
+}
+
+export function DiyaFlameIcon({ lit = true }) {
+  return (
+    <svg width="26" height="26" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+      {/* Glowing Flame */}
+      {lit && (
+        <>
+          <path
+            d="M18 4 C21.5 9.5 23 13 21 16.5 C19.5 19 16.5 19 15 16.5 C13 13 14.5 9.5 18 4 Z"
+            fill="#f59e0b"
+          />
+          <path
+            d="M18 8 C19.8 11.2 20.5 13.5 19.5 15.5 C18.7 16.8 17.3 16.8 16.5 15.5 C15.5 13.5 16.2 11.2 18 8 Z"
+            fill="#fef08a"
+          />
+        </>
+      )}
+      {/* Ornate Brass Diya Lamp Bowl */}
+      <path
+        d="M7 20 H29 C28 26.5 23.5 30 18 30 C12.5 30 8 26.5 7 20 Z"
+        fill="url(#gold-foil-grad)"
+        stroke="#7a4f15"
+        strokeWidth="1"
+      />
+      <path d="M12 31.5 H24" stroke="url(#gold-foil-grad)" strokeWidth="1.6" strokeLinecap="round" />
+    </svg>
+  )
+}
+

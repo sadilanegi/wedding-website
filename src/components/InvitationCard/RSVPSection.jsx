@@ -138,6 +138,20 @@ export default function RSVPSection({ rsvp, couple }) {
                 </div>
               </div>
             )}
+
+          {/* Live Royal Dispatch Scroll Preview */}
+          <div className="rsvp-composer__preview" aria-live="polite">
+            <span className="rsvp-composer__preview-badge">✦ Royal Dispatch Preview ✦</span>
+            <p className="rsvp-composer__preview-text">
+              &ldquo;{guestName.trim() ? `${guestName.trim()} — ` : ''}
+              {attendance}
+              {!attendance.toLowerCase().includes('afar') &&
+              !attendance.toLowerCase().includes('unable')
+                ? ` (${guestCount} ${guestCount === '1' ? 'Guest' : 'Guests'})`
+                : ''}
+              &rdquo;
+            </p>
+          </div>
         </div>
 
         {/* WhatsApp & Direct Contact Actions */}

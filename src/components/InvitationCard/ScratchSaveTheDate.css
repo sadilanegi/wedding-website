@@ -1,0 +1,311 @@
+/* ============================================================================
+   ScratchSaveTheDate.css
+   Interactive 24K Gold Foil Scratch-to-Reveal Card for "Save The Date"
+   ============================================================================ */
+
+.scratch-medallion {
+  position: relative;
+  width: 100%;
+  max-width: 326px;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-style: preserve-3d;
+}
+
+.scratch-medallion__box {
+  position: relative;
+  width: 100%;
+  min-height: 138px;
+  padding: 18px 20px 16px;
+  overflow: hidden;
+  border-radius: 10px;
+  background: radial-gradient(
+    circle at 50% 35%,
+    #fffdf7 0%,
+    #fbf2df 65%,
+    #f2e2c2 100%
+  );
+  border: 1.5px solid rgba(186, 142, 62, 0.72);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 250, 236, 0.92),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.38),
+    0 10px 26px rgba(60, 35, 12, 0.14);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.scratch-medallion__box.is-revealed {
+  transform: translateZ(18px) scale(1.02);
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 250, 236, 0.95),
+    inset 0 0 0 4px rgba(196, 150, 62, 0.52),
+    0 14px 34px rgba(100, 30, 50, 0.18),
+    0 0 28px rgba(212, 175, 55, 0.35);
+}
+
+.scratch-medallion__prize {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+}
+
+.scratch-medallion__prize-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.scratch-medallion__prize-header .hero__medallion-badge {
+  margin-bottom: 0;
+}
+
+.scratch-medallion__star {
+  font-size: 9px;
+  color: #b88728;
+  animation: scratchStarTwinkle 2.2s ease-in-out infinite alternate;
+}
+
+@keyframes scratchStarTwinkle {
+  0% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+.scratch-medallion__date-text {
+  font-size: 22px;
+  background: linear-gradient(135deg, #641e32 0%, #9e2a45 50%, #521424 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.scratch-medallion__pending-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #641e32;
+}
+
+.scratch-medallion__reset-btn {
+  margin-top: 10px;
+  padding: 3px 11px;
+  border-radius: 999px;
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a5618;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.scratch-medallion__reset-btn:hover {
+  background: rgba(212, 175, 55, 0.28);
+  transform: translateY(-1px);
+}
+
+/* --- Top Interactive Gold Foil Layer --- */
+.scratch-medallion__foil-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  border-radius: inherit;
+  overflow: hidden;
+  transition:
+    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.65s ease;
+}
+
+.scratch-medallion__foil-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    115deg,
+    transparent 25%,
+    rgba(255, 253, 235, 0.55) 48%,
+    rgba(255, 255, 255, 0.78) 50%,
+    rgba(255, 253, 235, 0.55) 52%,
+    transparent 75%
+  );
+  background-size: 260% 100%;
+  animation: foilSweepGlint 3.4s ease-in-out infinite;
+}
+
+@keyframes foilSweepGlint {
+  0% {
+    background-position: 140% 0;
+  }
+  100% {
+    background-position: -60% 0;
+  }
+}
+
+.scratch-medallion__foil-wrap.is-dissolved {
+  opacity: 0;
+  transform: scale(1.06);
+  filter: blur(4px);
+  pointer-events: none;
+}
+
+.scratch-medallion__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+  touch-action: none;
+}
+
+.scratch-medallion__canvas:active {
+  cursor: grabbing;
+}
+
+/* Floating Animated Scratch Guide Indicator */
+.scratch-medallion__hint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.scratch-medallion__coin {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffbe6 0%, #f3d06b 55%, #9e6f14 100%);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 4px 12px rgba(60, 35, 8, 0.38),
+    0 0 14px rgba(255, 240, 175, 0.85);
+  color: #5c3806;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scratchCoinGlide 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes scratchCoinGlide {
+  0% {
+    transform: translate(-54px, 6px) rotate(-18deg) scale(0.95);
+  }
+  50% {
+    transform: translate(0px, -6px) rotate(0deg) scale(1.08);
+  }
+  100% {
+    transform: translate(54px, 6px) rotate(18deg) scale(0.95);
+  }
+}
+
+/* Live Gold Foil Sparks on Finger Drag */
+.scratch-medallion__sparks {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.scratch-medallion__spark {
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #ffffff 0%, #fde047 60%, #ca8a04 100%);
+  box-shadow: 0 0 8px rgba(253, 224, 71, 0.95);
+  animation: scratchSparkFly 520ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scratchSparkFly {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1.1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--dx, 12px), var(--dy, -18px)) scale(0.2);
+  }
+}
+
+/* Celebratory Confetti Burst on Reveal */
+.scratch-medallion__burst {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  z-index: 6;
+}
+
+.scratch-medallion__confetti {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  background: linear-gradient(135deg, #fff6cc 0%, #d4af37 55%, #991b1b 100%);
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.8);
+  animation: scratchConfettiBurst 880ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes scratchConfettiBurst {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+  }
+  80% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--tx, 40px), var(--ty, -40px)) scale(1.1) rotate(260deg);
+  }
+}
+
+.scratch-medallion__quick-reveal {
+  margin-top: 8px;
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8c672b;
+  opacity: 0.85;
+  cursor: pointer;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.scratch-medallion__quick-reveal:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scratch-medallion__foil-wrap::after,
+  .scratch-medallion__coin,
+  .scratch-medallion__star {
+    animation: none !important;
+  }
+}
+

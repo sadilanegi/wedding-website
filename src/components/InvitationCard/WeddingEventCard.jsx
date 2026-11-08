@@ -2,14 +2,34 @@ import { useState, useRef, useEffect } from 'react'
 import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { getDirectionsUrl, detectUserLocation } from '../../utils/googleMaps.js'
 import { createGoogleCalendarUrl, downloadIcsFile } from '../../utils/calendar.js'
-import { EventEmblem, MapPinIcon, CalendarIcon } from './Ornaments'
+import {
+  EventEmblem,
+  MapPinIcon,
+  CalendarIcon,
+  ScheduleMedallionIcon,
+  PalaceVenueIcon,
+  RoyalAttireIcon,
+  SacredScrollIcon,
+} from './Ornaments'
 import './WeddingEventCard.css'
+
+const THEME_LABELS = {
+  haldi: 'Sacred Turmeric & Marigold',
+  mehendi: 'Auspicious Henna Artistry',
+  sangeet: 'Musical Night of Joy',
+  wedding: 'Sacred Vedic Union',
+  reception: 'Royal Evening Gala',
+}
 
 export default function WeddingEventCard({ event, index, couple, venueSummary }) {
   const [showCalendarMenu, setShowCalendarMenu] = useState(false)
   const [icsDownloaded, setIcsDownloaded] = useState(false)
   const [locatingRoute, setLocatingRoute] = useState(false)
+  const [sparkleKey, setSparkleKey] = useState(0)
   const calMenuRef = useRef(null)
+
+  const theme = event.theme || 'wedding'
+  const themeSubtitle = THEME_LABELS[theme] || 'Auspicious Ceremony'
 
   // Close calendar menu on click outside or escape key
   useEffect(() => {
@@ -112,7 +132,6 @@ export default function WeddingEventCard({ event, index, couple, venueSummary })
       })
       window.open(liveUrl || directionsUrl, '_blank', 'noopener,noreferrer')
     } catch {
-      // Fallback to standard Google Maps directions URL if user declines GPS prompt
       window.open(directionsUrl, '_blank', 'noopener,noreferrer')
     } finally {
       setLocatingRoute(false)
@@ -121,96 +140,125 @@ export default function WeddingEventCard({ event, index, couple, venueSummary })
 
   return (
     <article
-      className={`event-card event-card--${event.theme || 'wedding'}`}
+      className={`event-card event-card--${theme}`}
       aria-label={`${event.title} details`}
     >
+      {/* Top 3D Timeline Node Medallion */}
+      <div className="event-card__node-badge" aria-hidden="true">
+        <span className="event-card__node-ring" />
+        <span className="event-card__node-num">0{index + 1}</span>
+      </div>
+
       <div className="event-card__inner">
-        {/* Top Header with Event Badge & Bespoke Emblem */}
-        <div className="event-card__top">
+        {/* Ambient Floating Theme Sparkles inside Card Header */}
+        <div key={sparkleKey} className="event-card__ambient" aria-hidden="true">
+          <span className="event-card__float-orb event-card__float-orb--1" />
+          <span className="event-card__float-orb event-card__float-orb--2" />
+          <span className="event-card__float-orb event-card__float-orb--3" />
+          <span className="event-card__float-orb event-card__float-orb--4" />
+        </div>
+
+        {/* Royal Pavilion Arch Header */}
+        <div
+          className="event-card__top"
+          onClick={() => setSparkleKey((k) => k + 1)}
+          title="Tap for ceremony sparkle"
+        >
           <div className="event-card__badge-wrap">
-            <span className="event-card__index">Celebration 0{index + 1}</span>
+            <div className="event-card__kicker-row">
+              <span className="event-card__index">Celebration 0{index + 1}</span>
+              <span className="event-card__dot" aria-hidden="true">•</span>
+              <span className="event-card__theme-sub">{themeSubtitle}</span>
+            </div>
             <h3 className="event-card__title">{event.title}</h3>
           </div>
+
           <div className="event-card__emblem-wrap">
-            <EventEmblem theme={event.theme} className="event-card__emblem" />
+            <span className="event-card__emblem-halo" aria-hidden="true" />
+            <EventEmblem theme={theme} className="event-card__emblem" />
           </div>
         </div>
 
-        {/* Tagline / Significance */}
+        {/* Tagline / Significance Banner */}
         {isConfirmed(event.tagline) && (
-          <p className="event-card__tagline">{event.tagline}</p>
+          <p className="event-card__tagline">
+            <span className="event-card__quote-mark" aria-hidden="true">&ldquo;</span>
+            {event.tagline}
+            <span className="event-card__quote-mark" aria-hidden="true">&rdquo;</span>
+          </p>
         )}
 
-        {/* Schedule & Location Metadata */}
+        {/* Schedule & Location Metadata with Bespoke 24K Gold Medallion Icons */}
         <div className="event-card__details">
-          {hasSchedule ? (
-            <div className="event-card__detail-row">
-              <span className="event-card__icon" aria-hidden="true">🗓</span>
-              <div className="event-card__meta">
-                <span className="event-card__meta-label">Schedule</span>
-                <span className="event-card__meta-value">
-                  {isConfirmed(event.date) ? event.date : 'Date to be announced'}
-                  {formattedTime && ` · ${formattedTime}`}
-                </span>
-                {hasGuestArrival && (
-                  <span className="event-card__arrival-badge">
-                    Guest Arrival: {event.guestArrivalTime}
+          <div className="event-card__detail-row">
+            <span className="event-card__icon-medallion" aria-hidden="true">
+              <ScheduleMedallionIcon />
+            </span>
+            <div className="event-card__meta">
+              <span className="event-card__meta-label">Auspicious Schedule</span>
+              {hasSchedule ? (
+                <>
+                  <span className="event-card__meta-value">
+                    {isConfirmed(event.date) ? event.date : 'Date to be announced'}
+                    {formattedTime && ` · ${formattedTime}`}
                   </span>
-                )}
-              </div>
-            </div>
-          ) : (
-            <div className="event-card__detail-row">
-              <span className="event-card__icon" aria-hidden="true">🗓</span>
-              <div className="event-card__meta">
-                <span className="event-card__meta-label">Schedule</span>
+                  {hasGuestArrival && (
+                    <span className="event-card__arrival-badge">
+                      Guest Arrival: {event.guestArrivalTime}
+                    </span>
+                  )}
+                </>
+              ) : (
                 <span className="event-card__meta-value event-card__meta-value--pending">
                   Auspicious timing to be announced
                 </span>
-              </div>
+              )}
             </div>
-          )}
+          </div>
 
-          {hasVenue ? (
-            <div className="event-card__detail-row">
-              <span className="event-card__icon" aria-hidden="true">📍</span>
-              <div className="event-card__meta">
-                <span className="event-card__meta-label">Venue</span>
+          <div className="event-card__detail-row">
+            <span className="event-card__icon-medallion" aria-hidden="true">
+              <PalaceVenueIcon />
+            </span>
+            <div className="event-card__meta">
+              <span className="event-card__meta-label">Royal Venue</span>
+              {hasVenue ? (
                 <span className="event-card__meta-value">
                   {resolvedVenue}
                   {resolvedVenue && resolvedAddress && ' — '}
                   {resolvedAddress}
                   {resolvedCity && !resolvedAddress.includes(resolvedCity) && `, ${resolvedCity}`}
                 </span>
-              </div>
-            </div>
-          ) : (
-            <div className="event-card__detail-row">
-              <span className="event-card__icon" aria-hidden="true">📍</span>
-              <div className="event-card__meta">
-                <span className="event-card__meta-label">Venue</span>
+              ) : (
                 <span className="event-card__meta-value event-card__meta-value--pending">
                   Location details to be unveiled
                 </span>
-              </div>
+              )}
             </div>
-          )}
+          </div>
 
           {hasDressCode && (
             <div className="event-card__detail-row event-card__detail-row--dress">
-              <span className="event-card__icon" aria-hidden="true">✨</span>
+              <span className="event-card__icon-medallion" aria-hidden="true">
+                <RoyalAttireIcon />
+              </span>
               <div className="event-card__meta">
-                <span className="event-card__meta-label">Attire Suggestion</span>
-                <span className="event-card__dress-pill">{event.dressCode}</span>
+                <span className="event-card__meta-label">Attire Palette</span>
+                <span className="event-card__dress-pill">
+                  <span className="event-card__dress-dot" aria-hidden="true" />
+                  {event.dressCode}
+                </span>
               </div>
             </div>
           )}
 
           {hasInstructions && (
             <div className="event-card__detail-row event-card__detail-row--instructions">
-              <span className="event-card__icon" aria-hidden="true">📜</span>
+              <span className="event-card__icon-medallion" aria-hidden="true">
+                <SacredScrollIcon />
+              </span>
               <div className="event-card__meta">
-                <span className="event-card__meta-label">Guest Note</span>
+                <span className="event-card__meta-label">Royal Hospitality Note</span>
                 <span className="event-card__meta-value">{event.instructions}</span>
               </div>
             </div>
@@ -293,4 +341,3 @@ export default function WeddingEventCard({ event, index, couple, venueSummary })
     </article>
   )
 }
-

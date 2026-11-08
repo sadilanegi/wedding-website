@@ -8,7 +8,7 @@ import {
   calculateRelativePosition,
   detectUserLocation,
 } from '../../utils/googleMaps.js'
-import { RoyalDivider, MapPinIcon } from './Ornaments'
+import { RoyalDivider, MapPinIcon, CompassRoseIcon } from './Ornaments'
 import './VenueSection.css'
 
 export default function VenueSection({ venueSummary, events = [] }) {
@@ -144,7 +144,7 @@ export default function VenueSection({ venueSummary, events = [] }) {
 
       <div className="venue-card">
         <div className="venue-card__header-icon" aria-hidden="true">
-          <MapPinIcon />
+          <CompassRoseIcon className="venue-card__compass-svg" />
         </div>
 
         {hasAnyDetails ? (
@@ -191,10 +191,16 @@ export default function VenueSection({ venueSummary, events = [] }) {
             </div>
 
             <div className="venue-route-radar__connector" aria-hidden="true">
-              <span className="venue-route-radar__line" />
-              {relativeStats && (
+              <span className="venue-route-radar__line">
+                <span className="venue-route-radar__traveler" />
+              </span>
+              {relativeStats ? (
                 <span className="venue-route-radar__distance-pill">
                   {relativeStats.distanceKm} km · {relativeStats.compass} · {relativeStats.estTimeText}
+                </span>
+              ) : (
+                <span className="venue-route-radar__distance-pill venue-route-radar__distance-pill--idle">
+                  ✦ Live GPS Route &amp; Distance Calculator ✦
                 </span>
               )}
             </div>
