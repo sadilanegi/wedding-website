@@ -61,17 +61,16 @@ export default function CoupleVarmalaStage({
     return () => window.removeEventListener('resize', computeIntroTransform)
   }, [])
 
-  // Precompute falling red rose petals & mogra jasmine blossoms
+  // Precompute falling red rose petals & mogra jasmine blossoms (12 during intro, 6 settled for 60fps mobile perf)
   const petals = useMemo(() => {
-    const count = 24
+    const count = isIntro || isRevealing ? 12 : 6
     return Array.from({ length: count }, (_, i) => {
       const isJasmine = i % 3 === 0
-      const left = 4 + ((i * 17) % 92)
-      const delay = (i * 0.21) % 3.2
-      const duration = 3.5 + (i % 5) * 0.65
-      const size = isJasmine ? 7 + (i % 3) * 2 : 10 + (i % 4) * 3
-      const sway = (i % 2 === 0 ? 1 : -1) * (14 + (i % 4) * 6)
-      const depth = 20 + (i % 4) * 12
+      const left = 6 + ((i * 19) % 88)
+      const delay = (i * 0.28) % 3.0
+      const duration = 3.8 + (i % 4) * 0.65
+      const size = isJasmine ? 7 + (i % 2) * 2 : 10 + (i % 3) * 2.5
+      const sway = (i % 2 === 0 ? 1 : -1) * (12 + (i % 3) * 6)
 
       return {
         id: i,
@@ -81,10 +80,9 @@ export default function CoupleVarmalaStage({
         duration: `${duration.toFixed(2)}s`,
         size: `${size}px`,
         sway: `${sway}px`,
-        depth: `${depth}px`,
       }
     })
-  }, [])
+  }, [isIntro, isRevealing])
 
   const handleStageTap = () => {
     if (isIntro && onSkipOrContinue) {

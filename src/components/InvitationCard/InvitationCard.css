@@ -1,6 +1,7 @@
 /* ==========================================================================
    Ultra-Premium Physical Wedding Invitation Card — Sumit & Prachi
    Handcrafted 350 GSM Cotton Rag Paper with 24K Hot-Foil Gold Stamping
+   Optimized for 60/120fps Compositor-Driven Mobile Touch Scrolling
    ========================================================================== */
 
 .invite-stage {
@@ -10,16 +11,15 @@
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
   /* Authentic Continuous 350 GSM Cotton Rag Paper */
   background-color: #fcf8ee;
-  background: 
+  background:
     radial-gradient(ellipse at 50% 8%, #ffffff 0%, #faf3e6 40%, #f4ebd8 80%, #ebdcc5 100%);
   color: #23160e;
   scrollbar-width: thin;
   scrollbar-color: #aa8745 transparent;
   display: block;
-  perspective: 1200px;
-  perspective-origin: 50% 40%;
 }
 
 .invite-stage--couple {
@@ -42,7 +42,7 @@
       rgba(110, 42, 35, 0.94) 100%
     );
   opacity: 0;
-  transition: opacity 1500ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 1400ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .invite-stage--couple .invite-stage__couple-veil {
@@ -58,13 +58,13 @@
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) 300ms,
-    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 300ms;
+    opacity 950ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
+    transform 950ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
 }
 
 .invite-stage--couple .invite-card__chapters-below {
   opacity: 0;
-  transform: translate3d(0, 24px, 0);
+  transform: translate3d(0, 20px, 0);
   pointer-events: none;
   transition: none;
 }
@@ -87,7 +87,7 @@
   background: rgba(170, 135, 69, 0.7);
 }
 
-/* --- The Physical Card Folio --- */
+/* --- The Physical Card Folio (Flat scroll container for zero mobile scroll jank) --- */
 .invite-card {
   position: relative;
   z-index: 5;
@@ -97,102 +97,21 @@
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  transform-style: preserve-3d;
-  transform-origin: center calc(var(--scroll-y, 0px) + 40vh);
-  transform: rotateX(var(--card-rx, 0deg)) rotateY(var(--card-ry, 0deg));
-  will-change: transform;
 }
 
-.invite-stage--couple .invite-card {
-  transform: none;
+/* --- Lightweight Specular Sheen & Texture Overlays (No expensive blend-modes or SVG feTurbulence) --- */
+.invite-card__specular-sheen,
+.invite-card__texture-grain,
+.invite-card__light-glint {
+  display: none;
 }
 
-.invite-stage--revealing .invite-card {
-  transition: transform 1200ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-/* --- Dynamic Specular Gold Foil & Sunbeam Reflection Sheen --- */
-.invite-card__specular-sheen {
+.invite-card__texture-vignette {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 4;
-  border-radius: inherit;
-  background:
-    radial-gradient(
-      circle 320px at var(--sheen-x, 50%) var(--sheen-y, 35%),
-      rgba(255, 252, 235, 0.55) 0%,
-      rgba(224, 186, 95, 0.25) 38%,
-      transparent 72%
-    ),
-    linear-gradient(
-      125deg,
-      transparent calc(var(--sheen-x, 50%) - 28%),
-      rgba(255, 248, 214, 0.28) var(--sheen-x, 50%),
-      transparent calc(var(--sheen-x, 50%) + 28%)
-    );
-  mix-blend-mode: color-dodge;
-  opacity: 0.9;
-}
-
-/* --- Cotton Paper Fiber Texture (Procedural Inline SVG Noise) --- */
-.invite-card__texture-grain {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
   z-index: 1;
-  opacity: 0.045;
-  mix-blend-mode: multiply;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  background-size: 140px 140px;
-}
-
-/* --- Realistic Paper Vignette & Edge Shading --- */
-.invite-card__texture-vignette {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 1;
-  box-shadow:
-    inset 0 0 45px rgba(138, 102, 53, 0.08),
-    inset 0 0 85px rgba(90, 60, 25, 0.06);
-}
-
-/* --- Ambient Golden Sheen Sweep on Initial Revelation --- */
-.invite-card__light-glint {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 2;
-  background: linear-gradient(
-    115deg,
-    transparent 20%,
-    rgba(255, 248, 220, 0.28) 45%,
-    rgba(255, 255, 255, 0.45) 50%,
-    rgba(255, 248, 220, 0.28) 55%,
-    transparent 80%
-  );
-  background-size: 300% 300%;
-  opacity: 0;
-  animation: cardLightGlint 3.2s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
-}
-
-@keyframes cardLightGlint {
-  0% {
-    opacity: 0;
-    background-position: 100% 0%;
-  }
-  20% {
-    opacity: 1;
-  }
-  80% {
-    opacity: 0.6;
-    background-position: 0% 100%;
-  }
-  100% {
-    opacity: 0;
-    background-position: 0% 100%;
-  }
+  box-shadow: inset 0 0 36px rgba(138, 102, 53, 0.06);
 }
 
 /* --- Continuous Card Frame Hairlines --- */
@@ -206,7 +125,7 @@
     inset 0 0 0 3px rgba(247, 237, 219, 0.6),
     inset 0 0 0 4px rgba(170, 135, 69, 0.25);
   opacity: 1;
-  transition: opacity 1300ms cubic-bezier(0.22, 1, 0.36, 1) 180ms;
+  transition: opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1) 180ms;
 }
 
 .invite-stage--couple .invite-card__frame {
@@ -252,7 +171,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform-style: preserve-3d;
 }
 
 /* Screen reader utility */
@@ -268,25 +186,19 @@
   border: 0;
 }
 
-/* --- Universal Royal Divider Scroll-Bloom Animation --- */
+/* --- Universal Royal Divider Smooth Scroll-Transition (Never visible before animating) --- */
 .ornament-divider {
-  opacity: 1;
-  transform: scaleX(1) translateY(0);
+  opacity: 0;
+  transform: translate3d(0, 10px, 0) scaleX(0.85);
+  transition:
+    opacity 500ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+.hero .ornament-divider,
 .ornament-divider.is-in-view {
-  animation: dividerBloomIn 850ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes dividerBloomIn {
-  0% {
-    opacity: 0.25;
-    transform: scaleX(0.45) translateY(6px);
-  }
-  100% {
-    opacity: 1;
-    transform: scaleX(1) translateY(0);
-  }
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scaleX(1);
 }
 
 /* --- Responsive Adjustments --- */
@@ -308,11 +220,9 @@
 
 /* --- Prefers Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  .invite-card__light-glint,
-  .invite-card__specular-sheen {
-    display: none;
-  }
-  .event-card {
+  .ornament-divider {
+    opacity: 1 !important;
+    transform: none !important;
     transition: none !important;
   }
 }

@@ -47,6 +47,7 @@
   z-index: 6;
   transform: translate3d(0, 0px, 0px) scale(1);
   transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: auto;
 }
 
 /* ----------------------------------------------------------------------------
@@ -59,13 +60,7 @@
   align-items: center;
   justify-content: center;
   pointer-events: none;
-  transform-style: preserve-3d;
-  transform: translate3d(
-    calc(var(--gyro-x, 0) * -10px),
-    calc(var(--gyro-y, 0) * -8px),
-    -18px
-  );
-  transition: transform 0.12s ease-out;
+  transform: translate3d(0, 0, -12px);
 }
 
 .varmala-stage__sunburst {
@@ -75,23 +70,10 @@
   border-radius: 50%;
   background: radial-gradient(
     circle,
-    rgba(255, 248, 214, 0.94) 0%,
-    rgba(238, 198, 104, 0.44) 45%,
+    rgba(255, 248, 214, 0.92) 0%,
+    rgba(238, 198, 104, 0.42) 45%,
     rgba(212, 175, 55, 0) 72%
   );
-  filter: blur(4px);
-  animation: varmalaSunPulse 4s ease-in-out infinite alternate;
-}
-
-@keyframes varmalaSunPulse {
-  0% {
-    transform: scale(0.94);
-    opacity: 0.78;
-  }
-  100% {
-    transform: scale(1.08);
-    opacity: 1;
-  }
 }
 
 .varmala-stage__chakra {
@@ -99,8 +81,7 @@
   width: 210px;
   height: 210px;
   top: 14%;
-  animation: varmalaChakraSpin 42s linear infinite;
-  filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.35));
+  animation: varmalaChakraSpin 48s linear infinite;
 }
 
 @keyframes varmalaChakraSpin {
@@ -116,7 +97,6 @@
   width: 92%;
   max-width: 300px;
   height: 96%;
-  filter: drop-shadow(0 8px 20px rgba(85, 48, 12, 0.18));
 }
 
 /* Gently swinging floral toran strings inside the arch */
@@ -229,20 +209,12 @@
   width: 290px;
   height: 276px;
   z-index: 4;
-  transform-style: preserve-3d;
-  transform: translate3d(
-    calc(var(--gyro-x, 0) * 7px),
-    calc(var(--gyro-y, 0) * 5px),
-    28px
-  );
-  transition: transform 0.1s ease-out;
+  transform: translate3d(0, 0, 20px);
 }
 
 .varmala-stage__char {
   position: absolute;
   bottom: 6px;
-  transform-style: preserve-3d;
-  will-change: transform, opacity;
 }
 
 /* Groom (Sumit) — Left side facing Right, holding Varmala at his right edge */
@@ -250,9 +222,7 @@
   left: 19%;
   height: 95%;
   z-index: 3;
-  animation:
-    groomPopWalkIn 1.25s cubic-bezier(0.2, 0.95, 0.32, 1.04) 0.08s both,
-    coupleGentleFloatGroom 4.2s ease-in-out 1.4s infinite alternate;
+  animation: groomPopWalkIn 1.2s cubic-bezier(0.2, 0.95, 0.32, 1.04) 0.08s both;
 }
 
 /* Bride (Prachi) — Right side facing Left, holding Varmala at her left edge */
@@ -260,9 +230,7 @@
   left: 36.5%;
   height: 91.5%;
   z-index: 4;
-  animation:
-    bridePopWalkIn 1.25s cubic-bezier(0.2, 0.95, 0.32, 1.04) 0.16s both,
-    coupleGentleFloatBride 4.2s ease-in-out 1.6s infinite alternate;
+  animation: bridePopWalkIn 1.2s cubic-bezier(0.2, 0.95, 0.32, 1.04) 0.16s both;
 }
 
 .varmala-stage__char picture {
@@ -276,15 +244,7 @@
   width: auto;
   object-fit: contain;
   pointer-events: none;
-  /* Dynamic 3D shadow that shifts with gyroscope tilt + warm golden rim glow */
-  filter:
-    drop-shadow(
-      calc(var(--card-ry-num, 0) * -1.1px)
-      calc(8px + var(--card-rx-num, 0) * 0.9px)
-      14px
-      rgba(52, 24, 12, 0.34)
-    )
-    drop-shadow(0 0 8px rgba(255, 236, 179, 0.32));
+  filter: drop-shadow(0 6px 12px rgba(52, 24, 12, 0.28));
 }
 
 /* 3D Pop-Out & Walk-Together Keyframes */
@@ -365,46 +325,48 @@
   overflow: hidden;
   pointer-events: none;
   z-index: 8;
-  transform: translateZ(42px);
+  transform: translateZ(30px);
 }
 
 .varmala-petal {
   position: absolute;
   top: -18px;
   opacity: 0;
-  will-change: transform, opacity;
-  animation: varmalaPetalFall var(--petal-duration, 4s) ease-in-out var(--petal-delay, 0s) infinite;
+  animation: varmalaPetalFall var(--petal-duration, 4s) ease-in-out var(--petal-delay, 0s) 2;
+}
+
+.varmala-stage--is-intro .varmala-petal,
+.varmala-stage--is-morphing .varmala-petal {
+  animation-iteration-count: infinite;
 }
 
 .varmala-petal--rose {
   background: radial-gradient(circle at 35% 30%, #ef4444 0%, #b91c1c 65%, #7f1d1d 100%);
   border-radius: 65% 35% 70% 30% / 60% 40% 60% 40%;
-  box-shadow: 0 2px 5px rgba(127, 29, 29, 0.28);
 }
 
 .varmala-petal--jasmine {
   background: radial-gradient(circle at 40% 35%, #ffffff 0%, #fef9c3 70%, #fde047 100%);
   border-radius: 50% 50% 45% 55%;
-  box-shadow: 0 0 6px rgba(254, 240, 138, 0.75);
 }
 
 @keyframes varmalaPetalFall {
   0% {
     opacity: 0;
-    transform: translate3d(0, -16px, var(--petal-depth, 24px)) rotate(0deg) scale(0.75);
+    transform: translate3d(0, -16px, 0) rotate(0deg) scale(0.75);
   }
   15% {
     opacity: 0.92;
   }
   50% {
-    transform: translate3d(var(--petal-sway, 16px), 175px, var(--petal-depth, 24px)) rotate(165deg) scale(1);
+    transform: translate3d(var(--petal-sway, 16px), 175px, 0) rotate(165deg) scale(1);
   }
   85% {
     opacity: 0.82;
   }
   100% {
     opacity: 0;
-    transform: translate3d(calc(var(--petal-sway, 16px) * -0.6), 350px, var(--petal-depth, 24px)) rotate(340deg) scale(0.8);
+    transform: translate3d(calc(var(--petal-sway, 16px) * -0.6), 350px, 0) rotate(340deg) scale(0.8);
   }
 }
 

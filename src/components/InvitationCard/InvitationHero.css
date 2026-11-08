@@ -6,7 +6,6 @@
   position: relative;
   width: 100%;
   padding-bottom: 6px;
-  transform-style: preserve-3d;
 }
 
 .hero__upper-reveal,
@@ -15,28 +14,27 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  transform-style: preserve-3d;
   opacity: 1;
   transform: translate3d(0, 0, 0);
   transition:
-    opacity 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms,
-    transform 1200ms cubic-bezier(0.22, 1, 0.36, 1) 200ms;
+    opacity 1100ms cubic-bezier(0.22, 1, 0.36, 1) 180ms,
+    transform 1100ms cubic-bezier(0.22, 1, 0.36, 1) 180ms;
 }
 
 .hero__lower-reveal {
-  transition-delay: 260ms;
+  transition-delay: 240ms;
 }
 
 .invite-stage--couple .hero__upper-reveal {
   opacity: 0;
-  transform: translate3d(0, -16px, 0);
+  transform: translate3d(0, -14px, 0);
   pointer-events: none;
   transition: none;
 }
 
 .invite-stage--couple .hero__lower-reveal {
   opacity: 0;
-  transform: translate3d(0, 22px, 0);
+  transform: translate3d(0, 18px, 0);
   pointer-events: none;
   transition: none;
 }
@@ -47,13 +45,11 @@
   flex-direction: column;
   align-items: center;
   margin-top: 4px;
-  transform-style: preserve-3d;
 }
 
 .hero__ganesha {
   filter: drop-shadow(0 2px 4px rgba(70, 45, 15, 0.25));
   margin-bottom: 8px;
-  transform: translateZ(16px);
 }
 
 .hero__shloka {
@@ -123,41 +119,23 @@
   width: 100%;
   margin: 14px 0 16px;
   padding: 12px 0;
-  transform-style: preserve-3d;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Gyroscope-Reactive Sacred Mandala Halo in Deep 3D Layer */
+/* Sacred Mandala Halo */
 .hero__sacred-halo {
   position: absolute;
   width: 230px;
   height: 230px;
   pointer-events: none;
   z-index: 0;
-  transform: translate3d(
-    calc(var(--gyro-x, 0) * -14px),
-    calc(var(--gyro-y, 0) * -14px),
-    -12px
-  );
-  transition: transform 0.1s ease-out;
 }
 
 .hero__halo-svg {
   width: 100%;
   height: 100%;
-  animation: sacredHaloSpin 48s linear infinite;
-  filter: drop-shadow(0 0 12px rgba(212, 175, 55, 0.22));
-}
-
-@keyframes sacredHaloSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
 
 .hero__names {
@@ -167,12 +145,6 @@
   flex-direction: column;
   align-items: center;
   margin: 0;
-  transform-style: preserve-3d;
-  transform: translate3d(
-    calc(var(--gyro-x, 0) * 6px),
-    calc(var(--gyro-y, 0) * 5px),
-    24px
-  );
 }
 
 .hero__name {
@@ -181,7 +153,7 @@
   font-weight: 600;
   line-height: 1.05;
   letter-spacing: 0.03em;
-  /* 24K Hot-Foil Metallic Stamping Effect with Live Gyroscope Shimmer */
+  /* 24K Hot-Foil Metallic Stamping Effect */
   background: linear-gradient(
     125deg,
     #5a3a0e 0%,
@@ -193,18 +165,11 @@
     #e5bf62 92%,
     #8c621b 100%
   );
-  background-size: 240% 240%;
+  background-size: 200% 200%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  /* Dynamic 3D foil deboss & specular shadow */
-  filter: drop-shadow(
-    calc(var(--card-ry-num, 0) * -0.9px)
-    calc(2px + var(--card-rx-num, 0) * 0.9px)
-    4px
-    rgba(60, 35, 10, 0.35)
-  );
-  transition: filter 0.08s ease-out;
+  filter: drop-shadow(0 2px 3px rgba(60, 35, 10, 0.28));
 }
 
 .hero__name--groom {
@@ -305,16 +270,10 @@
   border-radius: 50%;
   padding: 3px;
   background: linear-gradient(135deg, #aa8745 0%, #fdf2c5 50%, #7a5518 100%);
-  transform-style: preserve-3d;
-  transform: translateZ(32px);
-  box-shadow: 
-    calc(var(--card-ry-num, 0) * -0.8px)
-    calc(6px + var(--card-rx-num, 0) * 0.8px)
-    18px
-    rgba(70, 45, 15, 0.28),
+  box-shadow:
+    0 6px 16px rgba(70, 45, 15, 0.24),
     inset 0 1px 2px rgba(255, 255, 255, 0.8),
     inset 0 -1px 2px rgba(60, 35, 10, 0.4);
-  transition: box-shadow 0.08s ease-out;
 }
 
 .monogram-seal__inner {

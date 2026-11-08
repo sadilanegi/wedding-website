@@ -11,7 +11,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  transform-style: preserve-3d;
 }
 
 .scratch-medallion__box {
@@ -20,6 +19,7 @@
   min-height: 138px;
   padding: 18px 20px 16px;
   overflow: hidden;
+  contain: layout paint;
   border-radius: 10px;
   background: radial-gradient(
     circle at 50% 35%,
@@ -36,17 +36,16 @@
   align-items: center;
   justify-content: center;
   transition:
-    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scratch-medallion__box.is-revealed {
-  transform: translateZ(18px) scale(1.02);
+  transform: scale(1.015);
   box-shadow:
     inset 0 0 0 3px rgba(255, 250, 236, 0.95),
     inset 0 0 0 4px rgba(196, 150, 62, 0.52),
-    0 14px 34px rgba(100, 30, 50, 0.18),
-    0 0 28px rgba(212, 175, 55, 0.35);
+    0 14px 34px rgba(100, 30, 50, 0.18);
 }
 
 .scratch-medallion__prize {
@@ -74,18 +73,6 @@
 .scratch-medallion__star {
   font-size: 9px;
   color: #b88728;
-  animation: scratchStarTwinkle 2.2s ease-in-out infinite alternate;
-}
-
-@keyframes scratchStarTwinkle {
-  0% {
-    opacity: 0.45;
-    transform: scale(0.85);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
 }
 
 .scratch-medallion__date-text {
@@ -130,42 +117,46 @@
   border-radius: inherit;
   overflow: hidden;
   transition:
-    opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
-    filter 0.65s ease;
+    opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scratch-medallion__foil-wrap::after {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: -100%;
+  width: 80%;
   pointer-events: none;
   background: linear-gradient(
-    115deg,
-    transparent 25%,
-    rgba(255, 253, 235, 0.55) 48%,
-    rgba(255, 255, 255, 0.78) 50%,
-    rgba(255, 253, 235, 0.55) 52%,
-    transparent 75%
+    105deg,
+    transparent 10%,
+    rgba(255, 253, 235, 0.48) 45%,
+    rgba(255, 255, 255, 0.72) 50%,
+    rgba(255, 253, 235, 0.48) 55%,
+    transparent 90%
   );
-  background-size: 260% 100%;
-  animation: foilSweepGlint 3.4s ease-in-out infinite;
+  animation: foilSweepGlint 3.6s ease-in-out infinite;
 }
 
 @keyframes foilSweepGlint {
   0% {
-    background-position: 140% 0;
+    transform: translate3d(-40%, 0, 0);
   }
   100% {
-    background-position: -60% 0;
+    transform: translate3d(280%, 0, 0);
   }
 }
 
 .scratch-medallion__foil-wrap.is-dissolved {
   opacity: 0;
-  transform: scale(1.06);
-  filter: blur(4px);
+  transform: scale(1.04);
   pointer-events: none;
+}
+
+.scratch-medallion__foil-wrap.is-dissolved::after {
+  animation: none;
 }
 
 .scratch-medallion__canvas {

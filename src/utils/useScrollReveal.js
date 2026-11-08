@@ -5,72 +5,92 @@ const REVEAL_SELECTOR =
 
 /**
  * useScrollReveal.js
- * Rock-solid viewport + scroll-container observer that triggers `.is-in-view`
- * across all sections, cards, and dividers inside `.invite-stage`.
+ * High-performance, zero-jank scroll reveal observer.
+ * - Pre-triggers 100px ahead of the bottom viewport edge so cards smoothly
+ *   glide into place as the user scrolls down (never visible before animating,
+ *   never snapping back).
+ * - Unobserves elements immediately once revealed and detaches its RAF-throttled
+ *   scroll listener as soon as all sections are revealed.
  */
 export function useScrollReveal(containerRef, active = true) {
   useEffect(() => {
     const rootEl = containerRef?.current
     if (!rootEl || !active) return undefined
 
-    const checkVisibleElements = () => {
-      const vh = window.innerHeight || document.documentElement.clientHeight || 800
-      const targets = rootEl.querySelectorAll(REVEAL_SELECTOR)
-      targets.forEach((el) => {
-        if (el.classList.contains('is-in-view')) return
-        const rect = el.getBoundingClientRect()
-        if (rect.top < vh * 0.94 && rect.bottom > -40) {
-          el.classList.add('is-in-view')
-        }
-      })
+    const pending = new Set(rootEl.querySelectorAll(REVEAL_SELECTOR))
+    let rafId = null
+    let io = null
+
+    // Always ensure the first section below Hero (Countdown) is immediately revealed
+    const firstCountdown = rootEl.querySelector('.countdown-section')
+    if (firstCountdown) {
+      firstCountdown.classList.add('is-in-view')
+      pending.delete(firstCountdown)
     }
 
-    // Immediately mark all currently visible elements
-    checkVisibleElements()
-    const timer1 = setTimeout(checkVisibleElements, 120)
-    const timer2 = setTimeout(checkVisibleElements, 500)
+    const revealElement = (el) => {
+      if (!el.classList.contains('is-in-view')) {
+        el.classList.add('is-in-view')
+      }
+      pending.delete(el)
+      if (io) io.unobserve(el)
+    }
 
-    rootEl.addEventListener('scroll', checkVisibleElements, { passive: true })
-    window.addEventListener('resize', checkVisibleElements, { passive: true })
+    const checkVisibleElements = () => {
+      rafId = null
+      if (pending.size === 0) return
 
-    // IntersectionObserver with viewport root (avoids 3D perspective root clipping bugs)
-    let io = null
+      const vh = window.innerHeight || document.documentElement.clientHeight || 800
+      const triggerBottom = vh + 90
+
+      pending.forEach((el) => {
+        const rect = el.getBoundingClientRect()
+        if (rect.top < triggerBottom && rect.bottom > -60) {
+          revealElement(el)
+        }
+      })
+
+      if (pending.size === 0) {
+        rootEl.removeEventListener('scroll', onScroll)
+      }
+    }
+
+    const onScroll = () => {
+      if (rafId !== null || pending.size === 0) return
+      rafId = requestAnimationFrame(checkVisibleElements)
+    }
+
     if (typeof IntersectionObserver !== 'undefined') {
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
             if (entry.isIntersecting) {
-              entry.target.classList.add('is-in-view')
+              revealElement(entry.target)
             }
           })
         },
         {
           root: null,
-          threshold: 0.08,
+          rootMargin: '0px 0px 100px 0px',
+          threshold: 0.01,
         }
       )
-      rootEl.querySelectorAll(REVEAL_SELECTOR).forEach((el) => io.observe(el))
+      pending.forEach((el) => io.observe(el))
     }
 
-    // Also watch for DOM / HMR updates so newly mounted cards are never missed
-    let mo = null
-    if (typeof MutationObserver !== 'undefined') {
-      mo = new MutationObserver(() => {
-        checkVisibleElements()
-        if (io) {
-          rootEl.querySelectorAll(REVEAL_SELECTOR).forEach((el) => io.observe(el))
-        }
-      })
-      mo.observe(rootEl, { childList: true, subtree: true })
-    }
+    // Initial synchronous pass + post-layout pass
+    checkVisibleElements()
+    const timer1 = setTimeout(checkVisibleElements, 150)
+
+    rootEl.addEventListener('scroll', onScroll, { passive: true })
+    window.addEventListener('resize', onScroll, { passive: true })
 
     return () => {
+      if (rafId !== null) cancelAnimationFrame(rafId)
       clearTimeout(timer1)
-      clearTimeout(timer2)
-      rootEl.removeEventListener('scroll', checkVisibleElements)
-      window.removeEventListener('resize', checkVisibleElements)
+      rootEl.removeEventListener('scroll', onScroll)
+      window.removeEventListener('resize', onScroll)
       if (io) io.disconnect()
-      if (mo) mo.disconnect()
     }
   }, [containerRef, active])
 }

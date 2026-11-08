@@ -21,51 +21,27 @@
     inset 0 0 0 3px rgba(255, 251, 240, 0.92),
     inset 0 0 0 4px rgba(170, 135, 69, 0.28),
     0 12px 28px rgba(60, 35, 12, 0.1);
-  transform-style: preserve-3d;
-  opacity: 1;
-  transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
+  opacity: 0;
+  transform: translate3d(0, 22px, 0) scale(0.985);
   transition:
-    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
     box-shadow 0.3s ease;
 }
 
 .event-card.is-in-view {
-  animation: eventCardUnfurlOdd 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
-.event-card:nth-child(even).is-in-view {
-  animation: eventCardUnfurlEven 880ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes eventCardUnfurlOdd {
-  0% {
-    opacity: 0.2;
-    transform: translate3d(-24px, 28px, 0) rotateY(9deg) rotateX(5deg) scale(0.95);
+@media (hover: hover) and (pointer: fine) {
+  .event-card.is-in-view:hover {
+    transform: translate3d(0, -3px, 0);
+    box-shadow:
+      inset 0 0 0 3px rgba(255, 251, 240, 0.96),
+      inset 0 0 0 4px color-mix(in srgb, var(--event-accent, #aa8745) 45%, transparent),
+      0 18px 38px rgba(70, 40, 15, 0.16);
   }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
-  }
-}
-
-@keyframes eventCardUnfurlEven {
-  0% {
-    opacity: 0.2;
-    transform: translate3d(24px, 28px, 0) rotateY(-9deg) rotateX(5deg) scale(0.95);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) rotateY(0deg) rotateX(0deg) scale(1);
-  }
-}
-
-.event-card.is-in-view:hover {
-  transform: translateY(-4px) translateZ(16px);
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 251, 240, 0.96),
-    inset 0 0 0 4px color-mix(in srgb, var(--event-accent, #aa8745) 45%, transparent),
-    0 18px 38px rgba(70, 40, 15, 0.16),
-    0 0 26px color-mix(in srgb, var(--event-accent, #aa8745) 22%, transparent);
 }
 
 /* Theme Palettes for the 5 Sacred Functions */
@@ -144,19 +120,7 @@
   inset: -4px;
   border-radius: 50%;
   border: 1px solid var(--event-accent, #aa8745);
-  opacity: 0.55;
-  animation: nodePulseRing 2.6s ease-out infinite;
-}
-
-@keyframes nodePulseRing {
-  0% {
-    transform: scale(0.92);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1.42);
-    opacity: 0;
-  }
+  opacity: 0.45;
 }
 
 .event-card__node-num {
@@ -177,50 +141,14 @@
 .event-card__inner {
   position: relative;
   overflow: hidden;
+  contain: layout paint;
   border-radius: inherit;
   padding: 26px 18px 20px;
   display: flex;
   flex-direction: column;
 }
 
-/* Shimmer Glint Sweep when Event Card Enters View */
-.event-card__inner::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(
-    115deg,
-    transparent 22%,
-    rgba(255, 248, 220, 0.55) 48%,
-    rgba(255, 255, 255, 0.82) 50%,
-    rgba(255, 248, 220, 0.55) 52%,
-    transparent 78%
-  );
-  background-size: 250% 100%;
-  background-position: 140% 0;
-  opacity: 0;
-}
-
-.event-card.is-in-view .event-card__inner::after {
-  animation: eventCardGlint 1.65s cubic-bezier(0.22, 1, 0.36, 1) 0.25s forwards;
-}
-
-@keyframes eventCardGlint {
-  0% {
-    opacity: 0;
-    background-position: 130% 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-    background-position: -50% 0;
-  }
-}
-
-/* Ambient Floating Theme Sparkle Orbs in Card Header */
+/* Ambient Theme Sparkle Orbs in Card Header */
 .event-card__ambient {
   position: absolute;
   top: 0;
@@ -238,25 +166,13 @@
   height: 6px;
   border-radius: 50%;
   background: radial-gradient(circle, #fff8dc 0%, var(--event-accent, #d4af37) 100%);
-  opacity: 0.45;
-  animation: orbFloatUp 4.2s ease-in-out infinite alternate;
+  opacity: 0.42;
 }
 
-.event-card__float-orb--1 { top: 24px; left: 14%; animation-delay: 0s; }
-.event-card__float-orb--2 { top: 48px; left: 42%; width: 5px; height: 5px; animation-delay: -1.2s; }
-.event-card__float-orb--3 { top: 18px; right: 26%; width: 7px; height: 7px; animation-delay: -2.4s; }
-.event-card__float-orb--4 { top: 56px; right: 10%; width: 4px; height: 4px; animation-delay: -0.7s; }
-
-@keyframes orbFloatUp {
-  0% {
-    transform: translateY(0) scale(0.85);
-    opacity: 0.25;
-  }
-  100% {
-    transform: translateY(-12px) scale(1.25);
-    opacity: 0.65;
-  }
-}
+.event-card__float-orb--1 { top: 24px; left: 14%; }
+.event-card__float-orb--2 { top: 48px; left: 42%; width: 5px; height: 5px; }
+.event-card__float-orb--3 { top: 18px; right: 26%; width: 7px; height: 7px; }
+.event-card__float-orb--4 { top: 56px; right: 10%; width: 4px; height: 4px; }
 
 /* --- Top Header with Badge & Bespoke 3D Emblem --- */
 .event-card__top {
@@ -266,7 +182,6 @@
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-  cursor: pointer;
 }
 
 .event-card__badge-wrap {
@@ -323,8 +238,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transform: translateZ(16px);
-  animation: emblemGentleFloat 3.6s ease-in-out infinite alternate;
 }
 
 .event-card__emblem-halo {
@@ -333,25 +246,6 @@
   border-radius: 50%;
   background: radial-gradient(circle, var(--event-glow, rgba(212, 175, 55, 0.25)) 0%, transparent 72%);
   border: 1px dashed color-mix(in srgb, var(--event-accent, #aa8745) 45%, transparent);
-  animation: emblemHaloSpin 18s linear infinite;
-}
-
-@keyframes emblemHaloSpin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes emblemGentleFloat {
-  0% {
-    transform: translateZ(14px) translateY(0) scale(0.97);
-  }
-  100% {
-    transform: translateZ(20px) translateY(-3px) scale(1.05);
-  }
 }
 
 .event-card__emblem {
@@ -359,7 +253,6 @@
   z-index: 1;
   width: 44px;
   height: 44px;
-  filter: drop-shadow(0 3px 6px rgba(70, 45, 15, 0.18));
 }
 
 /* --- Tagline Banner --- */
@@ -403,29 +296,7 @@
   align-items: flex-start;
   gap: 11px;
   text-align: left;
-  opacity: 1;
-  transform: translateX(0);
 }
-
-.event-card.is-in-view .event-card__detail-row {
-  animation: detailRowSlideIn 620ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes detailRowSlideIn {
-  0% {
-    opacity: 0.15;
-    transform: translateX(-12px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.event-card.is-in-view .event-card__detail-row:nth-child(1) { animation-delay: 120ms; }
-.event-card.is-in-view .event-card__detail-row:nth-child(2) { animation-delay: 210ms; }
-.event-card.is-in-view .event-card__detail-row:nth-child(3) { animation-delay: 300ms; }
-.event-card.is-in-view .event-card__detail-row:nth-child(4) { animation-delay: 390ms; }
 
 .event-card__icon-medallion {
   width: 30px;

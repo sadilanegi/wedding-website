@@ -12,23 +12,16 @@
   align-items: center;
   text-align: center;
   margin-bottom: 16px;
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .timeline-section__head.is-in-view {
-  animation: headSlideUpReveal 800ms cubic-bezier(0.22, 1, 0.36, 1) both;
-}
-
-@keyframes headSlideUpReveal {
-  0% {
-    opacity: 0.2;
-    transform: translate3d(0, 20px, 0);
-  }
-  100% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
 }
 
 .timeline-section__divider {

@@ -3,34 +3,25 @@ import './AmbientParticles.css'
 
 /**
  * AmbientParticles.jsx
- * Restrained, lightweight 3D floating gold dust & bokeh flecks.
- * Creates cinematic depth of field around the luxury invitation card.
- * Hardware-accelerated with CSS transforms. Disabled on reduced motion.
+ * Lightweight floating gold dust flecks (pure transform/opacity, zero blur filters).
  */
-export default function AmbientParticles({ count = 18 }) {
-  // Precompute stable particle parameters so they don't re-render
+export default function AmbientParticles({ count = 8 }) {
   const particles = useMemo(() => {
     return Array.from({ length: count }, (_, i) => {
-      const size = 3 + (i % 4) * 1.5 // 3px to 7.5px
-      const left = 5 + ((i * 19) % 90) // 5% to 95%
-      const top = 4 + ((i * 23) % 92) // 4% to 96%
-      const depth = -20 + (i % 5) * 15 // -20px to +40px Z-depth
-      const shift = 8 + (i % 5) * 6 // 8px to 32px gyro parallax shift
-      const duration = 7 + (i % 6) * 1.8 // 7s to 16s
-      const delay = (i % 5) * -1.6 // staggered negative delay for instant flow
-      const blur = i % 3 === 0 ? 1.5 : 0.4 // depth of field bokeh
-      const opacity = 0.28 + (i % 4) * 0.15 // 0.28 to 0.73
+      const size = 3 + (i % 3) * 1.5
+      const left = 8 + ((i * 23) % 84)
+      const top = 6 + ((i * 29) % 88)
+      const duration = 9 + (i % 4) * 2
+      const delay = (i % 4) * -2
+      const opacity = 0.25 + (i % 3) * 0.14
 
       return {
         id: i,
         size,
         left: `${left}%`,
         top: `${top}%`,
-        depth: `${depth}px`,
-        shift: `${shift}px`,
-        duration: `${duration.toFixed(1)}s`,
-        delay: `${delay.toFixed(1)}s`,
-        blur: `${blur}px`,
+        duration: `${duration}s`,
+        delay: `${delay}s`,
         opacity,
       }
     })
@@ -48,9 +39,6 @@ export default function AmbientParticles({ count = 18 }) {
             left: p.left,
             top: p.top,
             opacity: p.opacity,
-            filter: `blur(${p.blur})`,
-            '--p-depth': p.depth,
-            '--p-shift': p.shift,
             '--p-duration': p.duration,
             '--p-delay': p.delay,
           }}
@@ -59,4 +47,3 @@ export default function AmbientParticles({ count = 18 }) {
     </div>
   )
 }
-
