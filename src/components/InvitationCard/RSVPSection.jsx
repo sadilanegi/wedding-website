@@ -146,7 +146,7 @@ export default function RSVPSection({ rsvp, couple: _couple }) {
                   type="text"
                   required
                   className="rsvp-composer__input"
-                  placeholder="e.g. Sharma Family / Rajesh Sharma"
+                  placeholder="e.g. Sharma Family / Negi Family"
                   value={guestName}
                   onChange={(e) => setGuestName(e.target.value)}
                 />
