@@ -1,5 +1,5 @@
 import { isConfirmed } from '../../utils/weddingHelpers.js'
-import { GaneshaCrest, KrishnaBansuriCrest, RoyalDivider, MonogramSeal } from './Ornaments'
+import { GaneshaCrest, RoyalDivider, MonogramSeal } from './Ornaments'
 import CoupleVarmalaStage from '../CoupleVarmala/CoupleVarmalaStage'
 import ScratchSaveTheDate from './ScratchSaveTheDate'
 import './InvitationHero.css'
@@ -25,18 +25,10 @@ export default function InvitationHero({
   return (
     <header className="hero" aria-label="Wedding announcement">
       <div className="hero__upper-reveal">
-        {/* Sacred Invocation (Lord Ganesha & Lord Krishna) */}
+        {/* Sacred Invocation (Lord Ganesha) */}
         {general.showInvocation && (
           <div className="hero__invocation-wrap">
-            <div className="hero__crests-row">
-              <GaneshaCrest className="hero__ganesha" />
-              <div className="hero__crest-om-flourish" aria-hidden="true">
-                <span className="hero__crest-dot" />
-                <span className="hero__crest-glyph">ॐ</span>
-                <span className="hero__crest-dot" />
-              </div>
-              <KrishnaBansuriCrest className="hero__krishna" />
-            </div>
+            <GaneshaCrest className="hero__ganesha" />
             <p className="hero__shloka" lang="sa">
               {general.invocation}
             </p>

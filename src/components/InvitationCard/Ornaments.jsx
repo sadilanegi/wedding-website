@@ -271,6 +271,118 @@ export function PeacockFeatherIcon({ className = 'icon-peacock-feather', size = 
   )
 }
 
+// Triple Flowing Peacock Feather Drape for Event Portrait Banners
+export function FlowingPeacockFeatherDrape({ className = 'photo-peacock-drape' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 160 140"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <defs>
+        <filter id="drape-shadow" x="-20%" y="-20%" width="150%" height="150%">
+          <feDropShadow dx="1" dy="2" stdDeviation="2.5" floodColor="#081c15" floodOpacity="0.45" />
+        </filter>
+      </defs>
+
+      <g filter="url(#drape-shadow)">
+        {/* Feather 3: Smallest Bottom Down-Plume */}
+        <g className="photo-peacock-feather photo-peacock-feather--small" transform="rotate(18 10 10)">
+          <path d="M4 6 C16 26 28 44 42 62" stroke="url(#gold-foil-grad)" strokeWidth="1.1" strokeLinecap="round" />
+          <path
+            d="M42 60 C46 54 44 46 38 42 C32 46 32 54 42 60 Z"
+            fill="url(#peacock-feather-grad)"
+            opacity="0.85"
+          />
+          <ellipse cx="38" cy="50" rx="3.5" ry="4.5" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.6" />
+          <circle cx="38" cy="50" r="1.4" fill="#0f172a" />
+        </g>
+
+        {/* Feather 2: Medium Graceful Secondary Feather */}
+        <g className="photo-peacock-feather photo-peacock-feather--medium" transform="rotate(32 10 8)">
+          <path d="M6 4 C24 32 46 64 72 92" stroke="url(#gold-foil-grad)" strokeWidth="1.4" strokeLinecap="round" />
+          <path
+            d="M72 90 C84 80 82 66 70 58 C58 66 58 80 72 90 Z"
+            fill="url(#peacock-feather-grad)"
+            opacity="0.92"
+          />
+          <path
+            d="M72 88 C78 76 84 68 76 60 M72 88 C66 76 60 68 68 60"
+            stroke="url(#gold-foil-grad)"
+            strokeWidth="0.7"
+            opacity="0.7"
+          />
+          <ellipse cx="70" cy="72" rx="6.5" ry="8.5" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+          <path d="M70 68 C72 68 74 70 74 72 C74 75 70 77 70 77 C70 77 66 75 66 72 C66 70 68 68 70 68 Z" fill="#0f172a" />
+          <circle cx="70" cy="72" r="1.8" fill="#38bdf8" />
+          <circle cx="70" cy="72" r="0.8" fill="#ffffff" />
+        </g>
+
+        {/* Feather 1: Majestic Primary Peacock Feather sweeping down-right */}
+        <g className="photo-peacock-feather photo-peacock-feather--large" transform="rotate(46 10 6)">
+          <path d="M8 2 C32 38 65 80 106 116" stroke="url(#gold-foil-grad)" strokeWidth="1.8" strokeLinecap="round" />
+          <path
+            d="M106 114 C122 100 120 82 102 72 C86 82 86 100 106 114 Z"
+            fill="url(#peacock-feather-grad)"
+          />
+          <path
+            d="M106 112 C114 96 122 86 110 76 M106 112 C98 96 90 86 102 76"
+            stroke="url(#gold-foil-grad)"
+            strokeWidth="0.9"
+            opacity="0.8"
+          />
+          <ellipse cx="102" cy="90" rx="9.5" ry="12" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="1.1" />
+          <path
+            d="M102 84 C105 84 108 87 108 90 C108 94 102 97 102 97 C102 97 96 94 96 90 C96 87 99 84 102 84 Z"
+            fill="#0f172a"
+            stroke="url(#gold-foil-grad)"
+            strokeWidth="0.6"
+          />
+          <circle cx="102" cy="90" r="2.8" fill="#38bdf8" />
+          <circle cx="102" cy="90" r="1.2" fill="#ffffff" />
+        </g>
+
+        {/* Delicate Golden Starlight Sparkles */}
+        <circle cx="120" cy="92" r="1.5" fill="#fff9e6" />
+        <circle cx="132" cy="114" r="1.2" fill="#d4af37" />
+        <circle cx="98" cy="126" r="1" fill="#fff9e6" />
+      </g>
+    </svg>
+  )
+}
+
+// Authentic Pichwai Royal Temple Watermark for Event Cards
+export function PichwaiCardWatermark({ className = 'card-pichwai-watermark' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 240 180"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g stroke="url(#gold-foil-grad)" strokeWidth="0.8" opacity="0.18">
+        <path d="M190 140 C194 130 204 124 212 124 C218 124 224 128 226 134 C226 142 216 150 204 154 L196 158" strokeLinecap="round" />
+        <path d="M214 124 C216 112 212 98 198 90 C206 98 208 108 208 116" strokeLinecap="round" />
+        <path d="M220 124 C224 114 222 102 214 94 C220 102 222 110 220 118" strokeLinecap="round" />
+        <path d="M198 144 C202 148 208 150 214 148" strokeDasharray="2 2" />
+        <circle cx="206" cy="154" r="2.5" />
+        <path d="M40 150 C34 138 32 126 40 114 C48 126 46 138 40 150 Z" />
+        <path d="M40 134 C30 135 20 142 22 152 C30 154 36 148 40 134 Z" />
+        <path d="M40 134 C50 135 60 142 58 152 C50 154 44 148 40 134 Z" />
+        <path d="M10 160 C30 156 50 164 70 160 C90 156 110 164 130 160 C150 156 170 164 190 160 C210 156 230 164 240 160" />
+        <path d="M20 168 C40 165 60 171 80 168 C100 165 120 171 140 168 C160 165 180 171 200 168 C220 165 235 170 240 168" strokeDasharray="3 3" />
+        <path d="M10 20 C60 12 120 14 180 26 C210 32 230 44 240 60" strokeDasharray="4 3" />
+        <circle cx="90" cy="18" r="4" />
+        <circle cx="140" cy="22" r="5" />
+        <circle cx="180" cy="30" r="4" />
+      </g>
+    </svg>
+  )
+}
+
 // Mughal Architectural Corner Flourish
 export function CornerFlourish({ position = 'top-left' }) {
   const transforms = {

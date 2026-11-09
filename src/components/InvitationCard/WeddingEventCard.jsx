@@ -7,6 +7,8 @@ import {
   ScheduleMedallionIcon,
   RoyalAttireIcon,
   SacredScrollIcon,
+  FlowingPeacockFeatherDrape,
+  PichwaiCardWatermark,
 } from './Ornaments'
 import './WeddingEventCard.css'
 
@@ -95,6 +97,9 @@ export default function WeddingEventCard({ event, index, couple }) {
       </div>
 
       <div className="event-card__inner">
+        {/* Authentic Rajasthani Pichwai Watermark */}
+        <PichwaiCardWatermark className="event-card__pichwai-bg" />
+
         {/* Top Portrait Arch Banner (Displays couple image if provided, or luxury ceremonial arch slot) */}
         <div className="event-card__portrait-banner">
           {hasImage ? (
@@ -110,6 +115,8 @@ export default function WeddingEventCard({ event, index, couple }) {
               </picture>
               <div className="event-card__photo-overlay" aria-hidden="true" />
               <div className="event-card__photo-arch-border" aria-hidden="true" />
+              {/* Flowing Triple Peacock Feather Cascade draped from top-left */}
+              <FlowingPeacockFeatherDrape className="event-card__photo-peacock-drape" />
               <span className="event-card__photo-badge">
                 ✦ {event.title} ✦
               </span>

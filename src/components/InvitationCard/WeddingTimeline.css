@@ -30,6 +30,46 @@
   margin: 12px auto 10px;
 }
 
+/* Lord Krishna & Radha Crown Medallion for Celebrations */
+.timeline-section__krishna-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 4px 0 14px;
+}
+
+.timeline-section__krishna-crest {
+  filter: drop-shadow(0 3px 8px rgba(13, 148, 136, 0.28));
+  width: 92px;
+  height: 74px;
+  transition: transform 0.4s ease;
+}
+
+.timeline-section__krishna-crest:hover {
+  transform: scale(1.05);
+}
+
+.timeline-section__radhe-shloka {
+  font-family: var(--font-devanagari, 'Noto Serif Devanagari', serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #0f766e;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+}
+
+.timeline-section__radhe-sub {
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8c672b;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
 .timeline-section__kicker {
   font-family: var(--font-serif);
   font-size: 10px;

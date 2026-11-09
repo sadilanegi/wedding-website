@@ -186,8 +186,8 @@ function App() {
           </button>
         )}
 
-        {/* Floating Celestial Pushpa-Varsha & Mor-Pankh Blessing Button (Bottom-Right) */}
-        {showAudioToggle && <BrajBlessingShower />}
+        {/* Continuous Universal Ambient Flower & Peacock Feather Shower */}
+        {showCard && <BrajBlessingShower />}
 
         {showVideo && (
           <VideoOpening

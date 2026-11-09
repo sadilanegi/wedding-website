@@ -206,6 +206,106 @@
   pointer-events: none;
 }
 
+/* Flowing Triple Peacock Feather Cascade draped from top-left across portrait */
+.event-card__photo-peacock-drape {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 138px;
+  height: 120px;
+  pointer-events: none;
+  z-index: 3;
+  filter: drop-shadow(0 4px 8px rgba(10, 30, 20, 0.42));
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Living Peacock Feather Animations (Breeze of Vrindavan) */
+.photo-peacock-feather {
+  transform-origin: 10px 8px;
+  will-change: transform;
+}
+
+.photo-peacock-feather--large {
+  animation: peacockFeatherSwayLarge 5.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
+}
+
+.photo-peacock-feather--medium {
+  animation: peacockFeatherSwayMedium 4.6s cubic-bezier(0.42, 0, 0.58, 1) 0.7s infinite alternate;
+}
+
+.photo-peacock-feather--small {
+  animation: peacockFeatherSwaySmall 3.8s cubic-bezier(0.4, 0, 0.6, 1) 1.4s infinite alternate;
+}
+
+@keyframes peacockFeatherSwayLarge {
+  0% {
+    transform: rotate(44deg) scale(0.985);
+  }
+  50% {
+    transform: rotate(49.5deg) translate3d(1.5px, 2px, 0) scale(1.02);
+  }
+  100% {
+    transform: rotate(45.5deg) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes peacockFeatherSwayMedium {
+  0% {
+    transform: rotate(30deg) scale(0.99);
+  }
+  50% {
+    transform: rotate(35.5deg) translate3d(1.8px, 1.5px, 0) scale(1.025);
+  }
+  100% {
+    transform: rotate(31.5deg) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes peacockFeatherSwaySmall {
+  0% {
+    transform: rotate(16deg) scale(0.98);
+  }
+  50% {
+    transform: rotate(21.5deg) translate3d(1.2px, 1.2px, 0) scale(1.03);
+  }
+  100% {
+    transform: rotate(17.5deg) translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .photo-peacock-feather--large,
+  .photo-peacock-feather--medium,
+  .photo-peacock-feather--small {
+    animation: none !important;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .event-card:hover .event-card__photo-peacock-drape {
+    transform: translate3d(2px, 2px, 0) scale(1.04);
+  }
+}
+
+/* Authentic Nathdwara Pichwai Temple Watermark in Event Card Background */
+.event-card__pichwai-bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 220px;
+  height: 165px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.16;
+  transition: opacity 0.4s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .event-card:hover .event-card__pichwai-bg {
+    opacity: 0.28;
+  }
+}
+
 .event-card__photo-badge {
   position: absolute;
   bottom: 10px;

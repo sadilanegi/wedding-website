@@ -1,192 +1,165 @@
-import { useState, useCallback, useRef, useEffect } from 'react'
-import { PeacockFeatherIcon } from './Ornaments'
+import { useMemo } from 'react'
 import './BrajBlessingShower.css'
 
-const SPIRITUAL_BLESSINGS = [
-  '॥ राधे राधे • Divine Love & Eternal Bliss! ॥',
-  '॥ जय श्री कृष्ण • May Lord Krishna Bless Sumit & Prachi! ॥',
-  '॥ सदा सौभाग्यवती भव • Bound by Sacred Vows! ॥',
-  '॥ ॐ नमो भगवते वासुदेवाय • Joy, Harmony & Grace! ॥',
-  '॥ दिव्य प्रेम & अखंड सौभाग्य • An Auspicious Beginning! ॥',
+/**
+ * BrajBlessingShower.jsx
+ * Continuous, ambient, universal shower of sharp sacred flowers & peacock feathers.
+ * Runs at 60fps compositor-only with zero buttons and light, elegant density.
+ */
+
+const AMBIENT_ITEMS = [
+  // 1. Peacock Feathers (Crisp vector with iridescent peacock eye and gold quill)
+  { type: 'peacock', left: '8%', duration: '9.2s', delay: '-1.5s', sway: '38px', scale: 0.88, rot: 15 },
+  { type: 'peacock', left: '38%', duration: '11.0s', delay: '-6.2s', sway: '-42px', scale: 0.96, rot: -20 },
+  { type: 'peacock', left: '68%', duration: '10.2s', delay: '-3.8s', sway: '35px', scale: 0.92, rot: 25 },
+  { type: 'peacock', left: '88%', duration: '11.8s', delay: '-8.5s', sway: '-30px', scale: 0.82, rot: -15 },
+
+  // 2. Sacred Lotus Petals (Crisp gradient pink/magenta petals)
+  { type: 'lotus', left: '16%', duration: '8.4s', delay: '-4.2s', sway: '-28px', scale: 0.9, rot: 40 },
+  { type: 'lotus', left: '48%', duration: '9.8s', delay: '-0.8s', sway: '32px', scale: 0.95, rot: -30 },
+  { type: 'lotus', left: '78%', duration: '8.8s', delay: '-7.0s', sway: '-24px', scale: 0.85, rot: 50 },
+
+  // 3. Golden Marigold Petals (Auspicious Genda Phool saffron/amber blooms)
+  { type: 'marigold', left: '26%', duration: '7.8s', delay: '-2.4s', sway: '26px', scale: 0.82, rot: -45 },
+  { type: 'marigold', left: '58%', duration: '8.6s', delay: '-5.1s', sway: '-34px', scale: 0.88, rot: 35 },
+  { type: 'marigold', left: '92%', duration: '9.0s', delay: '-9.2s', sway: '22px', scale: 0.78, rot: -25 },
+
+  // 4. 24K Gold Starlight Flecks
+  { type: 'gold', left: '22%', duration: '7.2s', delay: '-3.1s', sway: '18px', scale: 0.75, rot: 60 },
+  { type: 'gold', left: '74%', duration: '7.5s', delay: '-7.8s', sway: '-20px', scale: 0.8, rot: -60 },
 ]
 
-const PARTICLE_TYPES = ['peacock', 'lotus', 'gold', 'marigold']
-
-export default function BrajBlessingShower({ introState = 'card' }) {
-  const [particles, setParticles] = useState([])
-  const [blessingMessage, setBlessingMessage] = useState(null)
-  const [blessingCount, setBlessingCount] = useState(108) // Auspicious 108 starting count
-  const [isPressing, setIsPressing] = useState(false)
-  const msgTimeoutRef = useRef(null)
-
-  // Clear timeout on unmount
-  useEffect(() => {
-    return () => {
-      if (msgTimeoutRef.current) clearTimeout(msgTimeoutRef.current)
-    }
-  }, [])
-
-  const triggerShower = useCallback(() => {
-    // Mobile haptic pulse
-    if (typeof navigator !== 'undefined' && navigator.vibrate) {
-      try {
-        navigator.vibrate([30, 40, 30])
-      } catch {
-        // ignore
-      }
-    }
-
-    setBlessingCount((prev) => prev + 1)
-    setIsPressing(true)
-    setTimeout(() => setIsPressing(false), 240)
-
-    // Random spiritual blessing message
-    const randomMsg = SPIRITUAL_BLESSINGS[Math.floor(Math.random() * SPIRITUAL_BLESSINGS.length)]
-    setBlessingMessage(randomMsg)
-    if (msgTimeoutRef.current) clearTimeout(msgTimeoutRef.current)
-    msgTimeoutRef.current = setTimeout(() => {
-      setBlessingMessage(null)
-    }, 2800)
-
-    // Spawn 28-34 celestial particles across viewport width
-    const now = Date.now()
-    const newParticles = Array.from({ length: 32 }, (_, i) => {
-      const type = PARTICLE_TYPES[i % PARTICLE_TYPES.length]
-      const startX = 3 + Math.random() * 94 // 3% to 97% across width
-      const swayX = (Math.random() - 0.5) * 120 // -60px to +60px sway
-      const duration = 2.4 + Math.random() * 1.8 // 2.4s to 4.2s fall time
-      const delay = Math.random() * 0.45 // staggered release
-      const scale = 0.7 + Math.random() * 0.65
-      const rotation = Math.random() * 360
-
-      return {
-        id: `${now}-${i}`,
-        type,
-        startX: `${startX}vw`,
-        swayX: `${swayX}px`,
-        duration: `${duration.toFixed(2)}s`,
-        delay: `${delay.toFixed(2)}s`,
-        scale,
-        rotation,
-      }
-    })
-
-    setParticles((prev) => [...prev, ...newParticles])
-
-    // Clean up particles after they finish falling
-    setTimeout(() => {
-      setParticles((prev) => prev.filter((p) => !p.id.startsWith(String(now))))
-    }, 4800)
-  }, [])
-
-  if (introState === 'couple') return null
+export default function BrajBlessingShower() {
+  const items = useMemo(() => AMBIENT_ITEMS, [])
 
   return (
-    <>
-      {/* Floating Pushpa-Varsha & Mor-Pankh Trigger Button */}
-      <div className="braj-shower-dock">
-        <button
-          type="button"
-          className={`braj-shower-btn ${isPressing ? 'is-active' : ''}`}
-          onClick={triggerShower}
-          aria-label="Shower divine Radha-Krishna flower and peacock feather blessings on the couple"
-          title="Tap to shower Radha-Krishna blessings"
+    <div className="braj-ambient-shower" aria-hidden="true">
+      {items.map((item, idx) => (
+        <div
+          key={idx}
+          className={`braj-ambient-item braj-ambient-item--${item.type}`}
+          style={{
+            left: item.left,
+            '--sway-x': item.sway,
+            '--duration': item.duration,
+            '--delay': item.delay,
+            '--scale': item.scale,
+            '--rot-base': `${item.rot}deg`,
+          }}
         >
-          <span className="braj-shower-btn__aura" aria-hidden="true" />
-          <span className="braj-shower-btn__icon" aria-hidden="true">
-            <PeacockFeatherIcon size={22} />
-          </span>
-          <span className="braj-shower-btn__content">
-            <span className="braj-shower-btn__title">✦ राधे राधे ✦</span>
-            <span className="braj-shower-btn__sub">Pushpa Varsha</span>
-          </span>
-          <span className="braj-shower-btn__badge" aria-hidden="true">
-            {blessingCount}
-          </span>
-        </button>
-      </div>
-
-      {/* Floating Blessing Toast Notification */}
-      {blessingMessage && (
-        <div className="braj-shower-toast" role="status" aria-live="polite">
-          <div className="braj-shower-toast__inner">
-            <span className="braj-shower-toast__feather" aria-hidden="true">🪶</span>
-            <p className="braj-shower-toast__text">{blessingMessage}</p>
-            <span className="braj-shower-toast__lotus" aria-hidden="true">🪷</span>
-          </div>
-        </div>
-      )}
-
-      {/* Fullscreen Falling Petals & Peacock Feathers Layer */}
-      {particles.length > 0 && (
-        <div className="braj-shower-stage" aria-hidden="true">
-          {particles.map((p) => (
-            <div
-              key={p.id}
-              className={`braj-particle braj-particle--${p.type}`}
-              style={{
-                left: p.startX,
-                '--sway-x': p.swayX,
-                '--duration': p.duration,
-                '--delay': p.delay,
-                '--scale': p.scale,
-                '--rotation': `${p.rotation}deg`,
-              }}
+          {item.type === 'peacock' && (
+            <svg
+              className="braj-sharp-svg"
+              viewBox="0 0 36 50"
+              width="26"
+              height="36"
+              fill="none"
+              shapeRendering="geometricPrecision"
             >
-              {p.type === 'peacock' && (
-                <svg viewBox="0 0 36 48" width="28" height="38" fill="none">
-                  <path d="M18 4 C24 8 28 16 26 26 C24 34 20 40 16 46" stroke="#c59835" strokeWidth="1.2" />
-                  <path
-                    d="M18 6 C26 8 30 16 28 24 C24 30 18 34 14 36 C10 30 12 24 14 18 C16 12 16 8 18 6 Z"
-                    fill="url(#peacock-feather-grad)"
-                  />
-                  <ellipse cx="20" cy="18" rx="6" ry="8" fill="url(#peacock-eye-radial)" stroke="#ffd700" strokeWidth="0.8" />
-                  <circle cx="20" cy="18" r="2.5" fill="#0f172a" />
-                  <circle cx="20" cy="18" r="1" fill="#38bdf8" />
-                </svg>
-              )}
+              {/* Sharp Golden Quill */}
+              <path
+                d="M18 4 C24 10 27 20 25 32 C23 40 18 45 14 48"
+                stroke="url(#gold-foil-grad)"
+                strokeWidth="1.3"
+                strokeLinecap="round"
+              />
+              {/* Sharp Iridescent Peacock Feather Silhouette */}
+              <path
+                d="M18 6 C26 8 31 16 28 25 C24 32 18 36 13 37 C9 31 11 23 13 17 C15 11 16 7 18 6 Z"
+                fill="url(#peacock-feather-grad)"
+              />
+              {/* Fine Barb Filaments */}
+              <path
+                d="M18 8 C23 12 27 16 26 22 M18 16 C23 20 25 24 22 28 M18 8 C14 12 11 16 12 21 M18 16 C14 20 12 24 14 27"
+                stroke="url(#gold-foil-grad)"
+                strokeWidth="0.65"
+                opacity="0.8"
+              />
+              {/* Vibrant Peacock Eye */}
+              <ellipse
+                cx="20"
+                cy="19"
+                rx="6"
+                ry="8"
+                fill="url(#peacock-eye-radial)"
+                stroke="url(#gold-foil-grad)"
+                strokeWidth="0.8"
+              />
+              <path
+                d="M20 15 C22 15 24 17 24 19 C24 22 20 24 20 24 C20 24 16 22 16 19 C16 17 18 15 20 15 Z"
+                fill="#0f172a"
+              />
+              <circle cx="20" cy="19" r="1.8" fill="#38bdf8" />
+              <circle cx="20" cy="19" r="0.8" fill="#ffffff" />
+            </svg>
+          )}
 
-              {p.type === 'lotus' && (
-                <svg viewBox="0 0 32 32" width="22" height="22" fill="none">
-                  <path
-                    d="M16 2 C10 10 8 20 16 28 C24 20 22 10 16 2 Z"
-                    fill="url(#lotus-pink-grad)"
-                    opacity="0.92"
-                  />
-                  <path
-                    d="M16 14 C11 15 6 21 8 26 C12 28 15 23 16 14 Z"
-                    fill="url(#lotus-pink-grad)"
-                    opacity="0.8"
-                  />
-                  <path
-                    d="M16 14 C21 15 26 21 24 26 C20 28 17 23 16 14 Z"
-                    fill="url(#lotus-pink-grad)"
-                    opacity="0.8"
-                  />
-                </svg>
-              )}
+          {item.type === 'lotus' && (
+            <svg
+              className="braj-sharp-svg"
+              viewBox="0 0 32 32"
+              width="20"
+              height="20"
+              fill="none"
+              shapeRendering="geometricPrecision"
+            >
+              {/* Center Sacred Petal */}
+              <path
+                d="M16 2 C10 10 9 20 16 29 C23 20 22 10 16 2 Z"
+                fill="url(#lotus-pink-grad)"
+                stroke="url(#gold-foil-grad)"
+                strokeWidth="0.6"
+              />
+              {/* Left & Right Petal Wings */}
+              <path
+                d="M16 14 C11 15 6 21 8 27 C12 29 15 24 16 14 Z"
+                fill="url(#lotus-pink-grad)"
+                opacity="0.85"
+              />
+              <path
+                d="M16 14 C21 15 26 21 24 27 C20 29 17 24 16 14 Z"
+                fill="url(#lotus-pink-grad)"
+                opacity="0.85"
+              />
+              {/* Petal Vein Accent */}
+              <path d="M16 6 V26" stroke="#ffffff" strokeWidth="0.5" opacity="0.6" />
+            </svg>
+          )}
 
-              {p.type === 'marigold' && (
-                <svg viewBox="0 0 28 28" width="18" height="18" fill="none">
-                  <circle cx="14" cy="14" r="10" fill="#f59e0b" opacity="0.9" />
-                  <circle cx="14" cy="14" r="6" fill="#d97706" />
-                  <circle cx="14" cy="14" r="2.5" fill="#fef3c7" />
-                </svg>
-              )}
+          {item.type === 'marigold' && (
+            <svg
+              className="braj-sharp-svg"
+              viewBox="0 0 28 28"
+              width="17"
+              height="17"
+              fill="none"
+              shapeRendering="geometricPrecision"
+            >
+              {/* Radiating Marigold Petals */}
+              <circle cx="14" cy="14" r="11" fill="#f59e0b" />
+              <circle cx="14" cy="14" r="7.5" fill="#d97706" />
+              <circle cx="14" cy="14" r="3.5" fill="#fef3c7" stroke="#b45309" strokeWidth="0.5" />
+            </svg>
+          )}
 
-              {p.type === 'gold' && (
-                <svg viewBox="0 0 20 20" width="14" height="14" fill="none">
-                  <path
-                    d="M10 0 L12 7 L19 10 L12 13 L10 20 L8 13 L1 10 L8 7 Z"
-                    fill="url(#gold-foil-grad)"
-                  />
-                </svg>
-              )}
-            </div>
-          ))}
+          {item.type === 'gold' && (
+            <svg
+              className="braj-sharp-svg"
+              viewBox="0 0 20 20"
+              width="13"
+              height="13"
+              fill="none"
+              shapeRendering="geometricPrecision"
+            >
+              <path
+                d="M10 0 L12.5 7.5 L20 10 L12.5 12.5 L10 20 L7.5 12.5 L0 10 L7.5 7.5 Z"
+                fill="url(#gold-foil-grad)"
+              />
+              <circle cx="10" cy="10" r="1.5" fill="#ffffff" />
+            </svg>
+          )}
         </div>
-      )}
-    </>
+      ))}
+    </div>
   )
 }
-
