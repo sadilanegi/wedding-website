@@ -78,6 +78,19 @@
   margin: 18px auto;
 }
 
+/* Sacred Krishna Mangalacharan */
+.hero__krishna-shloka {
+  font-family: var(--font-devanagari);
+  font-size: 13px;
+  line-height: 1.55;
+  color: #0d5c75;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  max-width: 36ch;
+  margin: -6px auto 12px auto;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
 /* --- Kicker & Greeting --- */
 .hero__kicker-group {
   display: flex;
@@ -124,52 +137,25 @@
   justify-content: center;
 }
 
-/* Sacred Mandala Halo */
-.hero__sacred-halo {
-  position: absolute;
-  width: 230px;
-  height: 230px;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.hero__halo-svg {
-  width: 100%;
-  height: 100%;
-}
-
+/* --- Names & Centerpiece --- */
 .hero__names {
   position: relative;
   z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0;
+  margin: 12px 0 6px;
 }
 
 .hero__name {
   font-family: var(--font-display);
-  font-size: clamp(44px, 13vw, 70px);
-  font-weight: 600;
+  font-size: clamp(48px, 13vw, 74px);
+  font-weight: 700;
   line-height: 1.05;
-  letter-spacing: 0.03em;
-  /* 24K Hot-Foil Metallic Stamping Effect */
-  background: linear-gradient(
-    125deg,
-    #5a3a0e 0%,
-    #996e23 18%,
-    #edd485 34%,
-    #fff9e6 45%,
-    #caa042 58%,
-    #6f4812 78%,
-    #e5bf62 92%,
-    #8c621b 100%
-  );
-  background-size: 200% 200%;
-  background-position: var(--foil-x, 50%) var(--foil-y, 50%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 3px rgba(60, 35, 10, 0.28));
+  letter-spacing: 0.02em;
+  color: #541525;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.95);
+  filter: drop-shadow(0 2px 4px rgba(70, 30, 15, 0.16));
 }
 
 .hero__name--groom {
@@ -203,10 +189,10 @@
 
 .hero__amp-glyph {
   font-family: var(--font-script);
-  font-size: 38px;
+  font-size: 42px;
   line-height: 1;
-  color: #641e32;
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.8);
+  color: #8c672b;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
 }
 
 /* --- Heritage / Parent Lines --- */
@@ -251,10 +237,11 @@
   max-width: 34ch;
   margin-top: 10px;
   font-family: var(--font-display);
-  font-size: 14.5px;
+  font-size: 15px;
   font-style: italic;
+  font-weight: 500;
   line-height: 1.5;
-  color: #78846b;
+  color: #4a3427;
 }
 
 /* --- Monogram Medallion --- */

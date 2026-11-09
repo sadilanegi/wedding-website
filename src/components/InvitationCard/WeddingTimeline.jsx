@@ -1,4 +1,4 @@
-import { RoyalDivider, KrishnaBansuriCrest } from './Ornaments'
+import { RoyalDivider, KrishnaBansuriCrest, KamdhenuBlessingPair } from './Ornaments'
 import WeddingEventCard from './WeddingEventCard'
 import './WeddingTimeline.css'
 
@@ -12,9 +12,12 @@ export default function WeddingTimeline({ events, couple, venueSummary }) {
       <div className="timeline-section__head">
         <RoyalDivider className="timeline-section__divider" />
 
-        {/* Lord Krishna Divine Bansuri & Mor Pankh Crest Crowning the Celebrations */}
+        {/* Lord Krishna Divine Bansuri & Mor Pankh Crest flanked by Pichwai Kamdhenu Cows */}
         <div className="timeline-section__krishna-banner" aria-hidden="true">
-          <KrishnaBansuriCrest className="timeline-section__krishna-crest" />
+          <div className="timeline-section__crest-wrapper">
+            <KamdhenuBlessingPair className="timeline-section__kamdhenu" />
+            <KrishnaBansuriCrest className="timeline-section__krishna-crest" />
+          </div>
           <p className="timeline-section__radhe-shloka" lang="sa">
             ॥ श्री राधाकृष्णाभ्यां नमः ॥
           </p>

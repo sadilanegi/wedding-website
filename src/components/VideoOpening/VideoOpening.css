@@ -49,31 +49,6 @@
   justify-content: center;
 }
 
-.video-open__seal-halo {
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  background: radial-gradient(
-    circle,
-    rgba(20, 184, 166, 0.42) 0%,
-    rgba(212, 175, 55, 0.35) 45%,
-    transparent 74%
-  );
-  animation: seal-halo-pulse 2.8s ease-in-out infinite alternate;
-  pointer-events: none;
-}
-
-@keyframes seal-halo-pulse {
-  0% {
-    transform: scale(0.94);
-    opacity: 0.45;
-  }
-  100% {
-    transform: scale(1.15);
-    opacity: 0.95;
-  }
-}
-
 .video-open__seal {
   width: min(36vw, 156px);
   height: auto;

@@ -1,5 +1,5 @@
 import wedding from '../../data/weddingContent.json'
-import { SvgGoldDefs, CornerFlourish } from './Ornaments'
+import { SvgGoldDefs, CornerFlourish, PichwaiKadambaToran, PichwaiFullCardWatermark } from './Ornaments'
 import InvitationHero from './InvitationHero'
 import WeddingCountdown from './WeddingCountdown'
 import WeddingTimeline from './WeddingTimeline'
@@ -35,6 +35,9 @@ export default function InvitationCard({
 
       {/* The Physical Luxury Handcrafted Card with Interactive 3D Depth */}
       <article ref={cardRef} className="invite-card">
+        {/* Full-Bleed Authentic Pichwai Temple Tapestry Watermark across Cotton Rag Canvas */}
+        <PichwaiFullCardWatermark className="invite-card__pichwai-watermark" />
+
         {/* Procedural Cotton Paper Texture Layers */}
         <div className="invite-card__texture-grain" aria-hidden="true" />
         <div className="invite-card__texture-vignette" aria-hidden="true" />
@@ -46,6 +49,10 @@ export default function InvitationCard({
 
         {/* 3D Paper Bevel & Outer Inset Frame */}
         <div className="invite-card__frame" aria-hidden="true">
+          {/* Pichwai Kadamba & Golden Temple Bell Hanging Toran */}
+          <PichwaiKadambaToran className="invite-card__toran" />
+
+          {/* Pichwai Mayur Corner Flourishes */}
           <CornerFlourish position="top-left" />
           <CornerFlourish position="top-right" />
           <CornerFlourish position="bottom-left" />

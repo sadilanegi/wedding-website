@@ -5,7 +5,6 @@ import {
   EventEmblem,
   CalendarIcon,
   ScheduleMedallionIcon,
-  RoyalAttireIcon,
   SacredScrollIcon,
   FlowingPeacockFeatherDrape,
   PichwaiCardWatermark,
@@ -69,7 +68,6 @@ export default function WeddingEventCard({ event, index, couple }) {
 
   const googleCalUrl = createGoogleCalendarUrl({ event, couple })
   const hasSchedule = isConfirmed(event.date) || Boolean(formattedTime) || hasGuestArrival
-  const hasDressCode = isConfirmed(event.dressCode)
   const hasInstructions = isConfirmed(event.instructions)
 
   const handleDownloadIcs = () => {
@@ -217,22 +215,6 @@ export default function WeddingEventCard({ event, index, couple }) {
                 )}
               </div>
             </div>
-
-            {/* Attire Palette */}
-            {hasDressCode && (
-              <div className="event-card__detail-row event-card__detail-row--dress">
-                <span className="event-card__icon-medallion" aria-hidden="true">
-                  <RoyalAttireIcon />
-                </span>
-                <div className="event-card__meta">
-                  <span className="event-card__meta-label">Attire Palette</span>
-                  <span className="event-card__dress-pill">
-                    <span className="event-card__dress-dot" aria-hidden="true" />
-                    {event.dressCode}
-                  </span>
-                </div>
-              </div>
-            )}
 
             {/* Royal Hospitality Note */}
             {hasInstructions && (

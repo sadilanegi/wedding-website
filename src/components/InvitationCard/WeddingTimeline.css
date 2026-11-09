@@ -37,6 +37,30 @@
   align-items: center;
   justify-content: center;
   margin: 4px 0 14px;
+  width: 100%;
+}
+
+.timeline-section__crest-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 270px;
+}
+
+.timeline-section__kamdhenu {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  pointer-events: none;
+}
+
+.kamdhenu-cow {
+  filter: drop-shadow(0 2px 5px rgba(60, 40, 10, 0.22));
+  opacity: 0.88;
 }
 
 .timeline-section__krishna-crest {
@@ -44,6 +68,8 @@
   width: 92px;
   height: 74px;
   transition: transform 0.4s ease;
+  position: relative;
+  z-index: 2;
 }
 
 .timeline-section__krishna-crest:hover {

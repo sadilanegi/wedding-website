@@ -66,39 +66,200 @@ export function SvgGoldDefs() {
   )
 }
 
-// Sacred Ganesha & Lotus Invocation Crest
+// Sacred Lord Ganesha Invocation Crest (Traditional Indian Wedding Iconography)
 export function GaneshaCrest({ className = 'ornament-ganesha' }) {
   return (
     <svg
       className={className}
       viewBox="0 0 120 120"
-      width="68"
-      height="68"
+      width="78"
+      height="78"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
-      aria-hidden="true"
+      aria-label="Lord Ganesha Sacred Crest"
     >
-      <circle cx="60" cy="60" r="54" stroke="url(#gold-foil-grad)" strokeWidth="1.4" strokeDasharray="3 2" />
-      <circle cx="60" cy="60" r="48" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
-      {/* Ornate Lotus Base */}
-      <path
-        d="M60 88 C48 80 40 76 38 68 C45 70 53 74 60 80 C67 74 75 70 82 68 C80 76 72 80 60 88 Z"
-        fill="url(#gold-foil-grad)"
-        opacity="0.9"
-      />
-      {/* Traditional Sacred Ganesha / Om Motif */}
-      <path
-        d="M58 24 C64 24 69 28 69 34 C69 41 60 45 60 50 C60 55 64 58 68 58 C72 58 74 55 75 52 M53 36 C50 33 45 33 43 36 C40 39 40 45 44 49 C49 53 55 58 55 65 C55 72 48 76 41 74 M63 36 C66 33 72 33 75 36 M59 19 C59 19 60 22 62 22 C64 22 64 19 64 19"
-        stroke="url(#gold-foil-grad)"
-        strokeWidth="2.4"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-      {/* Auspicious Tilak & Accents */}
-      <circle cx="60" cy="18" r="2" fill="url(#gold-foil-grad)" />
-      <circle cx="60" cy="95" r="2.2" fill="url(#gold-foil-grad)" />
-      <circle cx="25" cy="60" r="2.2" fill="url(#gold-foil-grad)" />
-      <circle cx="95" cy="60" r="2.2" fill="url(#gold-foil-grad)" />
+      {/* Outer Sacred Radiant Rim with Beaded Halo */}
+      <circle cx="60" cy="60" r="56" stroke="url(#gold-foil-grad)" strokeWidth="1.2" strokeDasharray="2.5 2" />
+      <circle cx="60" cy="60" r="50" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+      <circle cx="60" cy="60" r="47" stroke="url(#gold-foil-grad)" strokeWidth="0.4" strokeDasharray="1.5 2" opacity="0.6" />
+
+      {/* Auspicious Cardinal Dots */}
+      <circle cx="60" cy="6" r="1.5" fill="url(#gold-foil-grad)" />
+      <circle cx="114" cy="60" r="1.5" fill="url(#gold-foil-grad)" />
+      <circle cx="60" cy="114" r="1.5" fill="url(#gold-foil-grad)" />
+      <circle cx="6" cy="60" r="1.5" fill="url(#gold-foil-grad)" />
+
+      {/* 1. Ornate Royal Mukut (Three-Tiered Crown) */}
+      <g id="ganesha-mukut">
+        {/* Crown Peak Kalgi & Jewel */}
+        <path d="M60 12 L62 17 H58 Z" fill="url(#gold-foil-grad)" />
+        <circle cx="60" cy="18" r="1.6" fill="#b91c1c" />
+        {/* Top Tier */}
+        <path
+          d="M55 24 L57 19 H63 L65 24 Z"
+          fill="url(#gold-foil-grad)"
+          stroke="#542c0c"
+          strokeWidth="0.4"
+        />
+        {/* Middle Tier */}
+        <path
+          d="M51 30 L53 24 H67 L69 30 Z"
+          fill="url(#gold-foil-grad)"
+          stroke="#542c0c"
+          strokeWidth="0.4"
+        />
+        {/* Crown Base Rim across forehead */}
+        <path
+          d="M44 36 C52 32 68 32 76 36 L74 30 C66 28 54 28 46 30 Z"
+          fill="url(#gold-foil-grad)"
+          stroke="#542c0c"
+          strokeWidth="0.5"
+        />
+        <circle cx="60" cy="33" r="1.4" fill="#b91c1c" />
+      </g>
+
+      {/* 2. Large Elephant Ears (Supakarna - Left & Right) */}
+      <g id="ganesha-ears" stroke="url(#gold-foil-grad)" strokeLinecap="round">
+        {/* Left Fan Ear */}
+        <path
+          d="M45 36 C30 32 20 40 21 52 C22 64 32 68 44 65"
+          strokeWidth="1.6"
+          fill="rgba(254, 240, 185, 0.12)"
+        />
+        <path
+          d="M40 42 C30 40 26 46 27 52 C28 58 34 60 41 58"
+          strokeWidth="0.8"
+          strokeDasharray="2 1.5"
+          opacity="0.8"
+        />
+        {/* Left Earring Drop (Kundal) */}
+        <circle cx="27" cy="62" r="1.4" fill="url(#gold-foil-grad)" stroke="none" />
+
+        {/* Right Fan Ear */}
+        <path
+          d="M75 36 C90 32 100 40 99 52 C98 64 88 68 76 65"
+          strokeWidth="1.6"
+          fill="rgba(254, 240, 185, 0.12)"
+        />
+        <path
+          d="M80 42 C90 40 94 46 93 52 C92 58 86 60 79 58"
+          strokeWidth="0.8"
+          strokeDasharray="2 1.5"
+          opacity="0.8"
+        />
+        {/* Right Earring Drop (Kundal) */}
+        <circle cx="93" cy="62" r="1.4" fill="url(#gold-foil-grad)" stroke="none" />
+      </g>
+
+      {/* 3. Sacred Head & Forehead (Kumbha) with Auspicious Tilak */}
+      <g id="ganesha-forehead">
+        {/* Forehead Brow Arches */}
+        <path
+          d="M45 36 C49 42 52 45 60 45 C68 45 71 42 75 36"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="1.2"
+          fill="none"
+        />
+        {/* Sacred Trishul / Urdhva-Pundra Tilak */}
+        <path d="M57 36 V43 M63 36 V43" stroke="url(#gold-foil-grad)" strokeWidth="1" strokeLinecap="round" />
+        <path d="M60 34 V45" stroke="#b91c1c" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="60" cy="46" r="1.5" fill="#b91c1c" />
+      </g>
+
+      {/* 4. Benevolent Expressive Eyes */}
+      <g id="ganesha-eyes">
+        {/* Left Eye */}
+        <path
+          d="M46 47 C49 45 53 45 55 48 C53 50 49 50 46 47 Z"
+          fill="url(#gold-foil-grad)"
+        />
+        <circle cx="51" cy="47.5" r="0.9" fill="#2b1509" />
+
+        {/* Right Eye */}
+        <path
+          d="M74 47 C71 45 67 45 65 48 C67 50 71 50 74 47 Z"
+          fill="url(#gold-foil-grad)"
+        />
+        <circle cx="69" cy="47.5" r="0.9" fill="#2b1509" />
+      </g>
+
+      {/* 5. Tusks (Ekadanta - Unbroken Right, Broken Left) */}
+      <g id="ganesha-tusks">
+        {/* Right Whole Tusk */}
+        <path
+          d="M66 56 C71 57 73 63 71 66 C69 66 67 61 65 57 Z"
+          fill="#fffdf5"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.7"
+        />
+        {/* Left Broken Tusk */}
+        <path
+          d="M54 56 C50 57 49 60 50 62 C51 62 53 59 55 57 Z"
+          fill="#fffdf5"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.7"
+        />
+      </g>
+
+      {/* 6. Sacred Graceful Trunk (Vakratunda) curving left */}
+      <g id="ganesha-trunk">
+        {/* Trunk Contour with Vamamukhi curve to the left holding Laddoo */}
+        <path
+          d="M55 49 C57 56 57 65 54 73 C52 78 44 80 39 74 C36 70 38 64 43 64 C47 64 48 68 45 70 C43 71 41 70 41 68"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="2.4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M65 49 C64 56 63 66 59 74 C57 79 50 83 41 81"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="1.2"
+          strokeLinecap="round"
+        />
+        {/* Trunk Rings / Creases (Rekhas) */}
+        <line x1="57" y1="56" x2="63" y2="56" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+        <line x1="56" y1="62" x2="62" y2="62" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+        <line x1="55" y1="68" x2="60" y2="68" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+
+        {/* Sacred Golden Modak / Laddoo in the trunk coil */}
+        <circle cx="43" cy="64" r="3.2" fill="url(#gold-foil-grad)" stroke="#92400e" strokeWidth="0.5" />
+        <circle cx="43" cy="62.5" r="0.9" fill="#fff8dd" />
+      </g>
+
+      {/* 7. Padmasana (Sacred Blooming Lotus Base) */}
+      <g id="ganesha-lotus-base">
+        {/* Center Petal */}
+        <path
+          d="M60 84 C54 76 50 86 60 96 C70 86 66 76 60 84 Z"
+          fill="url(#gold-foil-grad)"
+          stroke="#694406"
+          strokeWidth="0.5"
+        />
+        {/* Left Petal */}
+        <path
+          d="M56 86 C46 80 38 88 48 97 C56 97 56 89 56 86 Z"
+          fill="url(#gold-foil-grad)"
+          opacity="0.9"
+        />
+        {/* Right Petal */}
+        <path
+          d="M64 86 C74 80 82 88 72 97 C64 97 64 89 64 86 Z"
+          fill="url(#gold-foil-grad)"
+          opacity="0.9"
+        />
+        {/* Outer Lotus Wings */}
+        <path
+          d="M48 90 C38 86 32 94 42 101 C48 101 49 94 48 90 Z"
+          fill="url(#gold-foil-grad)"
+          opacity="0.75"
+        />
+        <path
+          d="M72 90 C82 86 88 94 78 101 C72 101 71 94 72 90 Z"
+          fill="url(#gold-foil-grad)"
+          opacity="0.75"
+        />
+      </g>
     </svg>
   )
 }
@@ -383,7 +544,7 @@ export function PichwaiCardWatermark({ className = 'card-pichwai-watermark' }) {
   )
 }
 
-// Mughal Architectural Corner Flourish
+// Pichwai Royal Corner Flourish with Dancing Peacock & Blooming Lotus
 export function CornerFlourish({ position = 'top-left' }) {
   const transforms = {
     'top-left': 'none',
@@ -396,82 +557,137 @@ export function CornerFlourish({ position = 'top-left' }) {
     <svg
       className={`ornament-corner ornament-corner--${position}`}
       style={{ transform: transforms[position] }}
-      viewBox="0 0 70 70"
-      width="52"
-      height="52"
+      viewBox="0 0 80 80"
+      width="62"
+      height="62"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       aria-hidden="true"
     >
       {/* Outer corner frame line */}
-      <path d="M4 66 V18 C4 10 10 4 18 4 H66" stroke="url(#gold-foil-grad)" strokeWidth="1.2" />
+      <path d="M4 76 V22 C4 12 12 4 22 4 H76" stroke="url(#gold-foil-grad)" strokeWidth="1.3" />
       {/* Inset hairline */}
-      <path d="M10 66 V20 C10 14 14 10 20 10 H66" stroke="url(#gold-foil-grad)" strokeWidth="0.7" strokeDasharray="2 2" />
-      {/* Ornate Indian Paisley / Vine Tendril */}
+      <path d="M10 76 V24 C10 16 16 10 24 10 H76" stroke="url(#gold-foil-grad)" strokeWidth="0.7" strokeDasharray="2.5 2.5" />
+
+      {/* Pichwai Peacock (Mayur) Body & Graceful S-Curved Neck */}
       <path
-        d="M18 18 C24 12 34 14 36 22 C37 28 32 33 26 31 C22 29 22 23 26 21 C28 20 31 22 30 24"
+        d="M26 26 C22 22 23 16 28 14 C33 12 37 15 36 21 C35 27 28 32 30 40 C32 46 38 48 44 46"
         stroke="url(#gold-foil-grad)"
         strokeWidth="1.2"
         strokeLinecap="round"
       />
+      {/* Peacock Crown / Kalgi */}
+      <path d="M28 14 L30 8 M27 14 L26 8 M29 14 L33 9" stroke="url(#gold-foil-grad)" strokeWidth="0.8" strokeLinecap="round" />
+      <circle cx="30" cy="7.5" r="1" fill="#38bdf8" />
+      <circle cx="26" cy="7.5" r="0.9" fill="#38bdf8" />
+      <circle cx="33" cy="8.5" r="0.9" fill="#38bdf8" />
+
+      {/* Peacock Eye / Plume on Shoulder */}
+      <ellipse cx="32" cy="28" rx="3.5" ry="4.5" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.6" />
+      <circle cx="32" cy="28" r="1.3" fill="#0f172a" />
+      <circle cx="32" cy="28" r="0.6" fill="#38bdf8" />
+
+      {/* Sacred Blooming Lotus Petal at base */}
       <path
-        d="M20 38 C23 34 28 34 32 37 C36 40 37 46 34 50"
+        d="M18 42 C12 36 12 28 18 20 C24 28 24 36 18 42 Z"
+        fill="url(#lotus-pink-grad)"
         stroke="url(#gold-foil-grad)"
-        strokeWidth="1"
+        strokeWidth="0.7"
+        opacity="0.85"
+      />
+      <path
+        d="M44 18 C36 12 28 12 20 18 C28 24 36 24 44 18 Z"
+        fill="url(#lotus-pink-grad)"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.7"
+        opacity="0.85"
+      />
+
+      {/* Flowing Kadamba Vine Tendril */}
+      <path
+        d="M20 54 C24 48 30 46 36 49 C42 52 44 58 40 64 C36 70 28 70 24 66"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.9"
         strokeLinecap="round"
       />
       <path
-        d="M38 20 C34 23 34 28 37 32 C40 36 46 37 50 34"
+        d="M54 20 C48 24 46 30 49 36 C52 42 58 44 64 40 C70 36 70 28 66 24"
         stroke="url(#gold-foil-grad)"
-        strokeWidth="1"
+        strokeWidth="0.9"
         strokeLinecap="round"
       />
-      {/* Corner Pearl Accent */}
-      <circle cx="10" cy="10" r="2.2" fill="url(#gold-foil-grad)" />
-      <circle cx="20" cy="6" r="1.2" fill="url(#gold-foil-grad)" />
-      <circle cx="6" cy="20" r="1.2" fill="url(#gold-foil-grad)" />
+
+      {/* Corner Pearl Accents */}
+      <circle cx="10" cy="10" r="2.4" fill="url(#gold-foil-grad)" />
+      <circle cx="22" cy="6" r="1.3" fill="url(#gold-foil-grad)" />
+      <circle cx="6" cy="22" r="1.3" fill="url(#gold-foil-grad)" />
+      <circle cx="48" cy="48" r="1.4" fill="#fff9e6" />
     </svg>
   )
 }
 
-// Royal Indian Filigree Section Divider with Lotus Centerpiece
+// Royal Indian Filigree Section Divider with Lotus Centerpiece (Pichwai Radha-Krishna Theme)
 export function RoyalDivider({ className = 'ornament-divider' }) {
   return (
     <div className={className} aria-hidden="true">
       <svg
-        viewBox="0 0 280 24"
+        viewBox="0 0 320 30"
         width="100%"
-        height="24"
+        height="30"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="xMidYMid meet"
       >
-        {/* Left trail */}
-        <line x1="20" y1="12" x2="115" y2="12" stroke="url(#gold-linear-subtle)" strokeWidth="1" />
-        <circle cx="118" cy="12" r="1.5" fill="url(#gold-foil-grad)" />
-        <circle cx="100" cy="12" r="1" fill="url(#gold-foil-grad)" />
-        
-        {/* Center Lotus Motif */}
-        <path
-          d="M140 4 C137 9 135 15 140 20 C145 15 143 9 140 4 Z"
-          fill="url(#gold-foil-grad)"
-        />
-        <path
-          d="M140 14 C134 11 127 12 125 17 C130 18 136 17 140 14 Z"
-          fill="url(#gold-foil-grad)"
-          opacity="0.85"
-        />
-        <path
-          d="M140 14 C146 11 153 12 155 17 C150 18 144 17 140 14 Z"
-          fill="url(#gold-foil-grad)"
-          opacity="0.85"
-        />
-        <circle cx="140" cy="12" r="2" fill="#fff8dd" />
+        {/* Left Golden Yamuna River Wave & Trail */}
+        <line x1="16" y1="15" x2="105" y2="15" stroke="url(#gold-linear-subtle)" strokeWidth="1" />
+        <path d="M70 15 C80 11 90 19 100 15" stroke="url(#gold-foil-grad)" strokeWidth="0.8" opacity="0.6" />
+        <circle cx="108" cy="15" r="1.5" fill="url(#gold-foil-grad)" />
+        <circle cx="95" cy="15" r="1.1" fill="url(#gold-foil-grad)" />
 
-        {/* Right trail */}
-        <circle cx="162" cy="12" r="1.5" fill="url(#gold-foil-grad)" />
-        <circle cx="180" cy="12" r="1" fill="url(#gold-foil-grad)" />
-        <line x1="165" y1="12" x2="260" y2="12" stroke="url(#gold-linear-subtle)" strokeWidth="1" />
+        {/* Left Sacred Blooming Lotus */}
+        <g id="div-lotus-left" transform="translate(112, 5) scale(0.65)">
+          <path d="M16 2 C10 10 9 20 16 29 C23 20 22 10 16 2 Z" fill="url(#lotus-pink-grad)" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+          <path d="M16 14 C11 15 6 21 8 27 C12 29 15 24 16 14 Z" fill="url(#lotus-pink-grad)" opacity="0.85" />
+          <path d="M16 14 C21 15 26 21 24 27 C20 29 17 24 16 14 Z" fill="url(#lotus-pink-grad)" opacity="0.85" />
+        </g>
+
+        {/* Centerpiece: Lord Krishna's Golden Bansuri with Peacock Feather & Silk Tassel */}
+        <g id="div-center-bansuri" transform="translate(138, 3)">
+          {/* Miniature Golden Bansuri */}
+          <rect x="0" y="11" width="44" height="4.2" rx="2.1" fill="url(#gold-foil-grad)" stroke="#52320d" strokeWidth="0.5" />
+          {/* Flute Ferrules & Holes */}
+          <rect x="2" y="10.5" width="2" height="5.2" fill="#fff8dd" />
+          <rect x="40" y="10.5" width="2" height="5.2" fill="#fff8dd" />
+          <circle cx="16" cy="13.1" r="0.9" fill="#2d1607" />
+          <circle cx="21" cy="13.1" r="0.9" fill="#2d1607" />
+          <circle cx="26" cy="13.1" r="0.9" fill="#2d1607" />
+          <circle cx="31" cy="13.1" r="0.9" fill="#2d1607" />
+
+          {/* Crown Peacock Feather tilted delicately above flute */}
+          <g transform="translate(14, -2) scale(0.68)">
+            <path d="M10 16 C10 10 14 6 18 1" stroke="url(#gold-foil-grad)" strokeWidth="1.2" strokeLinecap="round" />
+            <path d="M18 1 C24 3 28 8 26 14 C24 18 20 20 16 22 C12 20 12 16 14 12 C15 8 16 4 18 1 Z" fill="url(#peacock-feather-grad)" />
+            <ellipse cx="20" cy="9" rx="3.5" ry="4.5" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.6" />
+            <circle cx="20" cy="9" r="1.3" fill="#0f172a" />
+            <circle cx="20" cy="9" r="0.6" fill="#38bdf8" />
+          </g>
+
+          {/* Silk Hanging Tassel / Pearls below flute */}
+          <path d="M22 15 V21 M20 21 L22 23 L24 21 Z" stroke="url(#gold-foil-grad)" strokeWidth="0.8" fill="url(#lotus-pink-grad)" />
+        </g>
+
+        {/* Right Sacred Blooming Lotus */}
+        <g id="div-lotus-right" transform="translate(186, 5) scale(0.65)">
+          <path d="M16 2 C10 10 9 20 16 29 C23 20 22 10 16 2 Z" fill="url(#lotus-pink-grad)" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+          <path d="M16 14 C11 15 6 21 8 27 C12 29 15 24 16 14 Z" fill="url(#lotus-pink-grad)" opacity="0.85" />
+          <path d="M16 14 C21 15 26 21 24 27 C20 29 17 24 16 14 Z" fill="url(#lotus-pink-grad)" opacity="0.85" />
+        </g>
+
+        {/* Right Golden Yamuna River Wave & Trail */}
+        <circle cx="212" cy="15" r="1.5" fill="url(#gold-foil-grad)" />
+        <circle cx="225" cy="15" r="1.1" fill="url(#gold-foil-grad)" />
+        <path d="M220 15 C230 11 240 19 250 15" stroke="url(#gold-foil-grad)" strokeWidth="0.8" opacity="0.6" />
+        <line x1="215" y1="15" x2="304" y2="15" stroke="url(#gold-linear-subtle)" strokeWidth="1" />
       </svg>
     </div>
   )
@@ -759,4 +975,251 @@ export function DiyaFlameIcon({ lit = true }) {
     </svg>
   )
 }
+
+// Pichwai Kadamba & Temple Bell Toran crowning the Card Frame
+export function PichwaiKadambaToran({ className = 'card-kadamba-toran' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 360 44"
+      width="100%"
+      height="44"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Top Kadamba Garland Curve */}
+      <path
+        d="M0 6 Q 90 20 180 6 Q 270 20 360 6"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="1.3"
+      />
+      <path
+        d="M0 10 Q 90 24 180 10 Q 270 24 360 10"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.7"
+        strokeDasharray="2.5 2.5"
+        opacity="0.8"
+      />
+
+      {/* Hanging Golden Temple Bells (Ghungroo) with Clappers */}
+      {[36, 76, 120, 180, 240, 284, 324].map((x, idx) => (
+        <g key={idx} transform={`translate(${x - 8}, 10)`}>
+          <line x1="8" y1="0" x2="8" y2="9" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+          <circle cx="8" cy="1" r="1.1" fill="#fff8dd" />
+          <path
+            d="M4 17 C4 12 6 9 8 9 C10 9 12 12 12 17 Z"
+            fill="url(#gold-foil-grad)"
+          />
+          <ellipse cx="8" cy="17" rx="4.8" ry="1.3" fill="url(#gold-foil-grad)" stroke="#452709" strokeWidth="0.4" />
+          <circle cx="8" cy="20.5" r="1.3" fill="#fff8dd" stroke="url(#gold-foil-grad)" strokeWidth="0.5" />
+        </g>
+      ))}
+
+      {/* Hanging Sacred Lotus Buds between bells */}
+      {[56, 98, 150, 210, 262, 304].map((x, idx) => (
+        <g key={idx} transform={`translate(${x - 5}, 12)`}>
+          <line x1="5" y1="0" x2="5" y2="6" stroke="url(#gold-foil-grad)" strokeWidth="0.7" />
+          <path
+            d="M5 6 C2 9 2 13 5 16 C8 13 8 9 5 6 Z"
+            fill="url(#lotus-pink-grad)"
+            stroke="url(#gold-foil-grad)"
+            strokeWidth="0.5"
+          />
+        </g>
+      ))}
+
+      {/* Center Sacred Mor-Pankh Medallion */}
+      <g transform="translate(170, 0)">
+        <ellipse cx="10" cy="8" rx="6.5" ry="8" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.9" />
+        <circle cx="10" cy="8" r="2" fill="#0f172a" />
+        <circle cx="10" cy="8" r="0.9" fill="#38bdf8" />
+      </g>
+    </svg>
+  )
+}
+
+// Vrindavan Raas Mandap Celestial Halo behind the Couple
+export function VrindavanRaasHalo({ className = 'hero__halo-svg' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 280 280"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Outer Radiance Concentric Rims */}
+      <circle cx="140" cy="140" r="134" stroke="url(#gold-foil-grad)" strokeWidth="0.8" strokeDasharray="3 4" opacity="0.65" />
+      <circle cx="140" cy="140" r="126" stroke="url(#gold-foil-grad)" strokeWidth="0.6" opacity="0.45" />
+
+      {/* 24 Radiating Pichwai Lotus Petals */}
+      {Array.from({ length: 24 }).map((_, i) => {
+        const deg = i * 15
+        return (
+          <g key={deg} transform={`rotate(${deg} 140 140)`}>
+            <path
+              d="M140 10 C146 34 146 54 140 72 C134 54 134 34 140 10 Z"
+              stroke="url(#gold-foil-grad)"
+              strokeWidth="0.75"
+              fill="url(#lotus-pink-grad)"
+              opacity="0.38"
+            />
+            <line x1="140" y1="6" x2="140" y2="26" stroke="url(#gold-foil-grad)" strokeWidth="0.8" opacity="0.8" />
+            <circle cx="140" cy="5" r="1.3" fill="#fff9e6" />
+          </g>
+        )
+      })}
+
+      {/* Middle Lotus Ring */}
+      <circle cx="140" cy="140" r="92" stroke="url(#gold-foil-grad)" strokeWidth="0.9" opacity="0.55" />
+      <circle cx="140" cy="140" r="76" stroke="url(#gold-foil-grad)" strokeWidth="0.6" strokeDasharray="2 3" opacity="0.4" />
+
+      {/* 12 Peacock Feather Eyes in Sacred Celestial Orbit */}
+      {Array.from({ length: 12 }).map((_, i) => {
+        const deg = i * 30
+        return (
+          <g key={`eye-${deg}`} transform={`rotate(${deg} 140 140)`}>
+            <ellipse cx="140" cy="84" rx="4.5" ry="6" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.6" />
+            <circle cx="140" cy="84" r="1.4" fill="#0f172a" />
+            <circle cx="140" cy="84" r="0.7" fill="#38bdf8" />
+          </g>
+        )
+      })}
+
+      {/* Innermost Sunburst Ring */}
+      <circle cx="140" cy="140" r="54" stroke="url(#gold-foil-grad)" strokeWidth="0.7" opacity="0.4" />
+    </svg>
+  )
+}
+
+// Full-Bleed Pichwai Sacred Temple Tapestry Watermark across Card Canvas
+export function PichwaiFullCardWatermark({ className = 'card-pichwai-canvas' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 380 960"
+      preserveAspectRatio="none"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <g stroke="url(#gold-foil-grad)" strokeWidth="0.8" opacity="0.13">
+        {/* Top: Kadamba Tree Foliage & Temple Bells Canopy */}
+        <path d="M20 40 C60 20 120 25 190 15 C260 25 320 20 360 40" strokeWidth="1.2" />
+        <circle cx="80" cy="55" r="14" strokeDasharray="3 2" />
+        <circle cx="190" cy="45" r="18" strokeDasharray="3 2" />
+        <circle cx="300" cy="55" r="14" strokeDasharray="3 2" />
+        <path d="M190 63 V85 M170 85 H210" strokeDasharray="2 2" />
+
+        {/* Upper Center: Sacred Kamdhenu Cow 1 (Left Facing Inward) */}
+        <g id="watermark-cow-left" transform="translate(18, 290) scale(0.72)">
+          {/* Cow Head, Horns & Ears */}
+          <path d="M70 42 C64 36 50 34 42 40 C36 46 34 56 38 64 C42 70 52 74 62 70 C70 66 76 56 74 46" strokeLinecap="round" />
+          <path d="M50 36 C46 24 38 16 32 12 M56 36 C60 24 68 16 74 12" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M38 44 C26 44 20 50 22 56 M66 44 C78 44 84 50 82 56" strokeLinecap="round" />
+          {/* Eye with auspicious teardrop */}
+          <ellipse cx="48" cy="52" rx="3.5" ry="4.5" />
+          <circle cx="48" cy="52" r="1.5" />
+          {/* Body, Hump, Garland & Ornate Saddle Cloth */}
+          <path d="M70 60 C80 50 96 46 112 50 C128 54 140 68 152 78 C164 88 180 92 194 90 C206 88 214 80 216 68" strokeLinecap="round" />
+          <path d="M62 70 C68 86 78 104 90 120 L96 170 M140 100 L146 170 M180 92 L184 170 M206 88 L210 170" strokeWidth="1.2" strokeLinecap="round" />
+          {/* Floral Garland on Neck */}
+          <path d="M54 68 C64 80 74 88 88 92" strokeDasharray="3 2" strokeWidth="1.5" />
+          <circle cx="68" cy="80" r="3" />
+          <circle cx="78" cy="86" r="3.5" />
+          {/* Tail */}
+          <path d="M216 68 C224 88 226 114 220 136 C218 142 222 146 226 142" strokeLinecap="round" />
+        </g>
+
+        {/* Upper Center: Sacred Kamdhenu Cow 2 (Right Facing Inward) */}
+        <g id="watermark-cow-right" transform="translate(362, 290) scale(-0.72, 0.72)">
+          <path d="M70 42 C64 36 50 34 42 40 C36 46 34 56 38 64 C42 70 52 74 62 70 C70 66 76 56 74 46" strokeLinecap="round" />
+          <path d="M50 36 C46 24 38 16 32 12 M56 36 C60 24 68 16 74 12" strokeWidth="1.4" strokeLinecap="round" />
+          <path d="M38 44 C26 44 20 50 22 56 M66 44 C78 44 84 50 82 56" strokeLinecap="round" />
+          <ellipse cx="48" cy="52" rx="3.5" ry="4.5" />
+          <circle cx="48" cy="52" r="1.5" />
+          <path d="M70 60 C80 50 96 46 112 50 C128 54 140 68 152 78 C164 88 180 92 194 90 C206 88 214 80 216 68" strokeLinecap="round" />
+          <path d="M62 70 C68 86 78 104 90 120 L96 170 M140 100 L146 170 M180 92 L184 170 M206 88 L210 170" strokeWidth="1.2" strokeLinecap="round" />
+          <path d="M54 68 C64 80 74 88 88 92" strokeDasharray="3 2" strokeWidth="1.5" />
+          <circle cx="68" cy="80" r="3" />
+          <circle cx="78" cy="86" r="3.5" />
+          <path d="M216 68 C224 88 226 114 220 136 C218 142 222 146 226 142" strokeLinecap="round" />
+        </g>
+
+        {/* Lower Mid: Sacred Kamal Talav (Yamuna Lotus Pond) */}
+        <g id="watermark-lotus-pond" transform="translate(30, 560)">
+          {/* Lotus 1 */}
+          <path d="M60 40 C50 24 50 10 60 0 C70 10 70 24 60 40 Z" />
+          <path d="M60 20 C46 14 36 22 40 34 C50 36 56 28 60 20 Z" />
+          <path d="M60 20 C74 14 84 22 80 34 C70 36 64 28 60 20 Z" />
+          {/* Lotus Pad */}
+          <ellipse cx="60" cy="46" rx="28" ry="8" strokeDasharray="4 2" />
+
+          {/* Center Grand Lotus */}
+          <path d="M160 36 C148 18 148 2 160 -8 C172 2 172 18 160 36 Z" strokeWidth="1.2" />
+          <path d="M160 14 C142 6 128 16 134 30 C146 32 154 22 160 14 Z" />
+          <path d="M160 14 C178 6 192 16 186 30 C174 32 166 22 160 14 Z" />
+          <ellipse cx="160" cy="44" rx="36" ry="10" strokeDasharray="4 2" />
+
+          {/* Lotus 3 */}
+          <path d="M260 40 C250 24 250 10 260 0 C270 10 270 24 260 40 Z" />
+          <path d="M260 20 C246 14 236 22 240 34 C250 36 256 28 260 20 Z" />
+          <path d="M260 20 C274 14 284 22 280 34 C270 36 264 28 260 20 Z" />
+          <ellipse cx="260" cy="46" rx="28" ry="8" strokeDasharray="4 2" />
+
+          {/* Water Ripples */}
+          <path d="M0 64 Q 40 56 80 64 Q 120 72 160 64 Q 200 56 240 64 Q 280 72 320 64" strokeDasharray="4 4" />
+          <path d="M20 74 Q 60 68 100 74 Q 140 80 180 74 Q 220 68 260 74 Q 300 80 340 74" strokeDasharray="3 3" />
+        </g>
+
+        {/* Bottom: Nathdwara Arch & Dancing Mayur (Peacock) Flourishes */}
+        <g id="watermark-peacocks-bottom" transform="translate(30, 800)">
+          {/* Left Peacock */}
+          <path d="M40 90 C36 74 42 60 54 50 C62 44 68 34 66 24 C64 16 56 14 50 18" strokeLinecap="round" />
+          <circle cx="50" cy="18" r="2.2" />
+          <path d="M54 50 C44 54 36 64 34 78 C32 94 40 106 50 110" strokeDasharray="2 3" />
+          {/* Right Peacock */}
+          <path d="M280 90 C284 74 278 60 266 50 C258 44 252 34 254 24 C256 16 264 14 270 18" strokeLinecap="round" />
+          <circle cx="270" cy="18" r="2.2" />
+          <path d="M266 50 C276 54 284 64 286 78 C288 94 280 106 270 110" strokeDasharray="2 3" />
+        </g>
+      </g>
+    </svg>
+  )
+}
+
+// Auspicious Pichwai Twin Kamdhenu Cows blessing Chapter 3 Header
+export function KamdhenuBlessingPair({ className = 'timeline-kamdhenu-pair' }) {
+  return (
+    <div className={className} aria-hidden="true">
+      {/* Left Cow Facing Inward */}
+      <svg className="kamdhenu-cow kamdhenu-cow--left" viewBox="0 0 100 68" width="58" height="40" fill="none">
+        <g stroke="url(#gold-foil-grad)" strokeWidth="1" strokeLinecap="round">
+          <path d="M38 22 C34 18 24 16 20 20 C16 24 14 30 18 36 C22 40 28 42 34 40 C40 38 42 30 40 24" />
+          <path d="M26 18 C24 10 18 4 14 2 M30 18 C32 10 38 4 42 2" strokeWidth="1.3" />
+          <ellipse cx="24" cy="28" rx="2.2" ry="2.8" fill="url(#peacock-eye-radial)" stroke="none" />
+          <path d="M38 34 C44 28 54 26 64 28 C74 30 82 38 88 44" />
+          <path d="M34 40 C38 50 42 58 46 66 M60 42 L62 66 M76 44 L78 66 M88 44 L89 66" strokeWidth="1.1" />
+          <path d="M28 38 C34 44 42 48 50 50" strokeDasharray="2 2" strokeWidth="1.4" />
+          <circle cx="38" cy="44" r="1.8" fill="#d97706" />
+        </g>
+      </svg>
+
+      {/* Right Cow Facing Inward */}
+      <svg className="kamdhenu-cow kamdhenu-cow--right" viewBox="0 0 100 68" width="58" height="40" fill="none">
+        <g stroke="url(#gold-foil-grad)" strokeWidth="1" strokeLinecap="round" transform="translate(100, 0) scale(-1, 1)">
+          <path d="M38 22 C34 18 24 16 20 20 C16 24 14 30 18 36 C22 40 28 42 34 40 C40 38 42 30 40 24" />
+          <path d="M26 18 C24 10 18 4 14 2 M30 18 C32 10 38 4 42 2" strokeWidth="1.3" />
+          <ellipse cx="24" cy="28" rx="2.2" ry="2.8" fill="url(#peacock-eye-radial)" stroke="none" />
+          <path d="M38 34 C44 28 54 26 64 28 C74 30 82 38 88 44" />
+          <path d="M34 40 C38 50 42 58 46 66 M60 42 L62 66 M76 44 L78 66 M88 44 L89 66" strokeWidth="1.1" />
+          <path d="M28 38 C34 44 42 48 50 50" strokeDasharray="2 2" strokeWidth="1.4" />
+          <circle cx="38" cy="44" r="1.8" fill="#d97706" />
+        </g>
+      </svg>
+    </div>
+  )
+}
+
 

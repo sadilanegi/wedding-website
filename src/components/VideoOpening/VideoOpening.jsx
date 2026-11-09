@@ -56,7 +56,6 @@ export default function VideoOpening({ onComplete, onSealClick, leaving = false 
           onClick={play}
         >
           <span className="video-open__seal-wrapper">
-            <span className="video-open__seal-halo" aria-hidden="true" />
             <img
               className="video-open__seal"
               src="/gold-wax-seal.png"

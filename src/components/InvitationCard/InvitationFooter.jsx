@@ -102,6 +102,12 @@ export default function InvitationFooter({ couple, general, website }) {
         )}
       </div>
 
+      {/* Sacred Krishna Closing Blessing */}
+      <div className="footer-section__krishna-closing" aria-hidden="true">
+        <p className="footer-section__radhe-callout" lang="sa">॥ राधे राधे ॥</p>
+        <p className="footer-section__radhe-sub">May Shri Radha-Krishna bless this eternal union</p>
+      </div>
+
       <div className="footer-section__monogram">
         <MonogramSeal monogram={couple.monogram} />
       </div>
