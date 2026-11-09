@@ -165,13 +165,21 @@ async function ensureDocumentFontsReady() {
 async function ensureImagesLoaded(node) {
   const images = Array.from(node.querySelectorAll('img'))
   await Promise.all(
-    images.map((img) => {
-      if (img.complete && img.naturalWidth > 0) return Promise.resolve()
-      return new Promise((resolve) => {
-        img.onload = () => resolve()
-        img.onerror = () => resolve()
-        setTimeout(resolve, 3500)
-      })
+    images.map(async (img) => {
+      if (!img.complete || img.naturalWidth === 0) {
+        await new Promise((resolve) => {
+          img.onload = () => resolve()
+          img.onerror = () => resolve()
+          setTimeout(resolve, 3500)
+        })
+      }
+      if (typeof img.decode === 'function') {
+        try {
+          await img.decode()
+        } catch {
+          // non-fatal
+        }
+      }
     })
   )
 }
