@@ -25,6 +25,12 @@ export default async function handler(request, context) {
     sideParam === 'ladkiwale' ||
     sideParam === 'bride_side'
 
+  const isGroom =
+    sideParam === 'groom' ||
+    sideParam === 'sumit' ||
+    sideParam === 'ladkewale' ||
+    sideParam === 'groom_side'
+
   // Fetch the static index.html from Netlify CDN
   const response = await context.next()
   const contentType = response.headers.get('content-type') || ''
@@ -45,7 +51,7 @@ export default async function handler(request, context) {
     const brideImage = `${origin}/og/wedding-preview-bride.jpg`
     const brideUrl = `${origin}/?side=bride`
     const brideAlt =
-      'Prachi Weds Sumit — Royal Wedding Invitation featuring Prachi and Sumit'
+      'Prachi Weds Sumit — Royal Wedding Celebration featuring Prachi & Sumit'
 
     // Document Title
     html = html.replace(/<title>[^<]*<\/title>/i, `<title>${brideTitle}</title>`)
@@ -111,6 +117,69 @@ export default async function handler(request, context) {
       /<meta\s+name="twitter:image:alt"\s+content="[^"]*"\s*\/?>/i,
       `<meta name="twitter:image:alt" content="${brideAlt}" />`
     )
+  } else if (isGroom) {
+    const groomTitle = 'Sumit Weds Prachi'
+    const groomDesc =
+      'Together with their families, Sumit & Prachi request the honour of your gracious presence and blessings at their auspicious wedding celebrations. Celebrating love, sacred tradition, and joyous beginnings.'
+    const groomImage = `${origin}/og/wedding-preview-groom.jpg`
+    const groomUrl = `${origin}/?side=groom`
+    const groomAlt =
+      'Sumit Weds Prachi — Royal Wedding Celebration featuring Sumit & Prachi'
+
+    // Canonical & OG URLs
+    html = html.replace(/<title>[^<]*<\/title>/i, `<title>${groomTitle}</title>`)
+    html = html.replace(
+      /<meta\s+name="description"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="description" content="${groomDesc}" />`
+    )
+    html = html.replace(
+      /<link\s+rel="canonical"\s+href="[^"]*"\s*\/?>/i,
+      `<link rel="canonical" href="${groomUrl}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:title"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:title" content="${groomTitle}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:description"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:description" content="${groomDesc}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:url"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:url" content="${groomUrl}" />`
+    )
+    html = html.replace(
+      /<meta\s+name="twitter:title"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="twitter:title" content="${groomTitle}" />`
+    )
+    html = html.replace(
+      /<meta\s+name="twitter:description"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="twitter:description" content="${groomDesc}" />`
+    )
+    html = html.replace(
+      /<meta\s+name="twitter:url"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="twitter:url" content="${groomUrl}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:image"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:image" content="${groomImage}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:image:secure_url"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:image:secure_url" content="${groomImage}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:image:alt"\s+content="[^"]*"\s*\/?>/i,
+      `<meta property="og:image:alt" content="${groomAlt}" />`
+    )
+    html = html.replace(
+      /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="twitter:image" content="${groomImage}" />`
+    )
+    html = html.replace(
+      /<meta\s+name="twitter:image:alt"\s+content="[^"]*"\s*\/?>/i,
+      `<meta name="twitter:image:alt" content="${groomAlt}" />`
+    )
   }
 
   return new Response(html, {
@@ -118,3 +187,4 @@ export default async function handler(request, context) {
     headers: response.headers,
   })
 }
+
