@@ -70,24 +70,6 @@
       "theme": "mehendi"
     },
     {
-      "id": "sangeet",
-      "title": "Sangeet Night",
-      "tagline": "An electrifying evening of music, dance, and glam",
-      "date": "__",
-      "time": "__",
-      "guestArrivalTime": "__",
-      "startTime": "__",
-      "endTime": "__",
-      "venue": "__",
-      "venueOverride": "__",
-      "address": "__",
-      "mapUrl": "__",
-      "dressCode": "Glamour, Glitz & Royal Hues",
-      "instructions": "__",
-      "accentColor": "#7e22ce",
-      "theme": "sangeet"
-    },
-    {
       "id": "wedding",
       "title": "Wedding Ceremony",
       "tagline": "The sacred Vedic rituals and the seven holy pheras",
