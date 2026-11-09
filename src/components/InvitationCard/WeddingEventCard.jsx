@@ -99,12 +99,15 @@ export default function WeddingEventCard({ event, index, couple }) {
         <div className="event-card__portrait-banner">
           {hasImage ? (
             <div className="event-card__photo-frame">
-              <img
-                src={event.image}
-                alt={`${coupleNames} — ${event.title}`}
-                className="event-card__photo"
-                loading="lazy"
-              />
+              <picture>
+                <source srcSet={event.image.replace(/\.jpg$/, '.webp')} type="image/webp" />
+                <img
+                  src={event.image}
+                  alt={`${coupleNames} — ${event.title}`}
+                  className="event-card__photo"
+                  loading="lazy"
+                />
+              </picture>
               <div className="event-card__photo-overlay" aria-hidden="true" />
               <div className="event-card__photo-arch-border" aria-hidden="true" />
               <span className="event-card__photo-badge">
