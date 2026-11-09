@@ -8,6 +8,7 @@ import VenueSection from './VenueSection'
 import RSVPSection from './RSVPSection'
 import InvitationFooter from './InvitationFooter'
 import AmbientParticles from './AmbientParticles'
+import PersonalizedCardModal from '../InvitationDownload/PersonalizedCardModal'
 import { use3DCardTilt } from '../../utils/use3DCardTilt.js'
 import { useScrollReveal } from '../../utils/useScrollReveal.js'
 import './InvitationCard.css'
@@ -24,6 +25,7 @@ export default function InvitationCard({
   // Progressive Unlocking: Festivities are revealed after the 24K gold foil scratch ritual
   const [isFestivitiesUnlocked, setIsFestivitiesUnlocked] = useState(false)
   const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false)
   const userInteractedRef = useRef(false)
   const autoScrollHeroTimerRef = useRef(null)
 
@@ -188,15 +190,23 @@ export default function InvitationCard({
             {/* Chapter 5: Warm Personal RSVP */}
             <RSVPSection rsvp={rsvp} couple={couple} />
 
-            {/* Chapter 6: Closing Blessings & Monogram */}
+            {/* Chapter 6: Closing Blessings & Download */}
             <InvitationFooter
               couple={couple}
               general={general}
               website={website}
+              onOpenDownloadModal={() => setIsDownloadModalOpen(true)}
             />
           </div>
         </div>
       </article>
+
+      {/* Personalized Card Download & Offline Navigation Modal */}
+      <PersonalizedCardModal
+        isOpen={isDownloadModalOpen}
+        onClose={() => setIsDownloadModalOpen(false)}
+        weddingData={wedding}
+      />
 
       {/* Floating Royal Scroll Guide to Lead Guests to the 24K Gold Scratch Card */}
       {introState === 'card' && !isFestivitiesUnlocked && (

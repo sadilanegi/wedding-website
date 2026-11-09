@@ -90,8 +90,55 @@
   color: #8c672b;
 }
 
-.footer-section__share-wrap {
-  margin-top: 16px;
+.footer-section__actions-wrap {
+  margin-top: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.footer-section__download-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 9px 22px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #641e32 0%, #83243d 50%, #521424 100%);
+  border: 1px solid rgba(212, 175, 55, 0.75);
+  box-shadow:
+    0 4px 14px rgba(80, 20, 35, 0.22),
+    0 0 14px rgba(212, 175, 55, 0.2),
+    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+  font-family: var(--font-serif);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #fffaf0;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: all 0.22s var(--ease-cinematic);
+}
+
+.footer-section__download-btn:hover {
+  transform: translateY(-1.5px);
+  background: linear-gradient(135deg, #74233a 0%, #942b47 50%, #5e182a 100%);
+  box-shadow:
+    0 6px 18px rgba(80, 20, 35, 0.3),
+    0 0 20px rgba(212, 175, 55, 0.35);
+}
+
+.footer-section__download-btn:active {
+  transform: translateY(1px);
+}
+
+.footer-section__btn-icon {
+  font-size: 13px;
 }
 
 .footer-section__share-btn {
@@ -99,14 +146,14 @@
   align-items: center;
   justify-content: center;
   gap: 7px;
-  padding: 9px 20px;
+  padding: 8px 18px;
   border-radius: 999px;
-  background: rgba(170, 135, 69, 0.14);
-  border: 1px solid rgba(170, 135, 69, 0.52);
+  background: rgba(170, 135, 69, 0.12);
+  border: 1px solid rgba(170, 135, 69, 0.45);
   font-family: var(--font-serif);
   font-size: 9.5px;
   font-weight: 600;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   color: #573e0a;
   cursor: pointer;
@@ -114,9 +161,9 @@
 }
 
 .footer-section__share-btn:hover {
-  background: rgba(170, 135, 69, 0.24);
+  background: rgba(170, 135, 69, 0.22);
   border-color: #aa8745;
-  transform: translateY(-1.5px);
+  transform: translateY(-1px);
 }
 
 .footer-section__tribute {

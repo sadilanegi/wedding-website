@@ -12,7 +12,7 @@
       "parents": "__"
     },
     "monogram": "S & P",
-    "hashtag": "#SumitWedsPrachi"
+    "hashtag": "#SUPRA"
   },
 
   "general": {
@@ -148,6 +148,7 @@
   },
 
   "rsvp": {
+    "googleSheetsScriptUrl": "https://script.google.com/macros/s/AKfycbzdEgFX7GV99_xW3h-7-JBWoJwh0_nmT3gE8OMRSz6riF7nC7f4oy1SnUMskOntf9ZK/exec",
     "note": "Please kindly grace the occasion and confirm your presence by __",
     "contactPerson": "__",
     "phone": "__",

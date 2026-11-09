@@ -89,6 +89,13 @@
   }
 }
 
+.rsvp-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .rsvp-card__note {
   font-family: var(--font-display);
   font-size: 16.5px;
@@ -151,11 +158,33 @@
   font-size: 15px;
   color: #23160e;
   outline: none;
-  transition: border-color 0.2s ease;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .rsvp-composer__input:focus {
   border-color: #641e32;
+  box-shadow: 0 0 0 2px rgba(100, 30, 50, 0.12);
+}
+
+.rsvp-composer__textarea {
+  width: 100%;
+  min-height: 70px;
+  padding: 8px 11px;
+  border-radius: 4px;
+  border: 1px solid rgba(170, 135, 69, 0.45);
+  background: #ffffff;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  line-height: 1.45;
+  color: #23160e;
+  outline: none;
+  resize: vertical;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rsvp-composer__textarea:focus {
+  border-color: #641e32;
+  box-shadow: 0 0 0 2px rgba(100, 30, 50, 0.12);
 }
 
 .rsvp-composer__pills {
@@ -240,8 +269,20 @@
   color: #641e32;
 }
 
+.rsvp-card__error {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(185, 28, 28, 0.08);
+  border: 1px solid rgba(185, 28, 28, 0.35);
+  font-family: var(--font-serif);
+  font-size: 11px;
+  color: #991b1b;
+  text-align: center;
+}
+
 .rsvp-card__actions {
-  margin-top: 20px;
+  margin-top: 18px;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -255,7 +296,7 @@
   justify-content: center;
   gap: 8px;
   width: 100%;
-  min-height: 46px;
+  min-height: 48px;
   padding: 0 20px;
   border-radius: 999px;
   font-family: var(--font-serif);
@@ -265,31 +306,53 @@
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.22s ease;
 }
 
-.rsvp-card__btn--whatsapp {
-  background: #15803d;
-  color: #ffffff;
-  border: 1px solid #0f5d2c;
-  box-shadow: 0 3px 10px rgba(21, 128, 61, 0.28);
+.rsvp-card__btn--submit {
+  background: linear-gradient(135deg, #641e32 0%, #7e233d 50%, #4a1323 100%);
+  color: #fff9e6;
+  border: 1px solid rgba(229, 187, 107, 0.65);
+  box-shadow:
+    0 4px 14px rgba(74, 19, 35, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
 
-.rsvp-card__btn--whatsapp:hover {
-  background: #166534;
-  transform: translateY(-1px);
+.rsvp-card__btn--submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #74223a 0%, #8c2844 50%, #581629 100%);
+  transform: translateY(-1.5px);
+  box-shadow:
+    0 6px 18px rgba(74, 19, 35, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
 }
 
-.rsvp-card__btn--disabled {
-  background: rgba(150, 140, 130, 0.12);
-  color: #8c7e75;
-  border: 1px dashed rgba(150, 140, 130, 0.35);
-  cursor: not-allowed;
-  box-shadow: none;
+.rsvp-card__btn--submit:active:not(:disabled) {
+  transform: translateY(0);
 }
 
-.rsvp-card__pending-wrap {
-  width: 100%;
+.rsvp-card__btn--submit:disabled {
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.rsvp-btn-gem {
+  color: #e5bb6b;
+  font-size: 11px;
+}
+
+.rsvp-spinner {
+  width: 15px;
+  height: 15px;
+  border: 2px solid rgba(255, 249, 230, 0.3);
+  border-top-color: #fff9e6;
+  border-radius: 50%;
+  animation: rsvp-spin 0.75s linear infinite;
+}
+
+@keyframes rsvp-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .rsvp-card__phone-wrap {
@@ -319,3 +382,115 @@
   text-underline-offset: 3px;
 }
 
+/* --- Royal Confirmation Success State --- */
+.rsvp-success-card {
+  width: 100%;
+  padding: 18px 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  animation: rsvp-fade-in 0.4s ease-out;
+}
+
+@keyframes rsvp-fade-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.rsvp-success-card__crest {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff9e6 0%, #f7e6bc 70%, #d8ad4f 100%);
+  border: 1.5px solid #ba8e3e;
+  box-shadow: 0 4px 12px rgba(138, 97, 27, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.rsvp-success-card__lotus {
+  font-size: 24px;
+}
+
+.rsvp-success-card__kicker {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.rsvp-success-card__title {
+  margin-top: 6px;
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  color: #641e32;
+}
+
+.rsvp-success-card__body {
+  margin-top: 8px;
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  line-height: 1.55;
+  color: #3a2a20;
+}
+
+.rsvp-success-card__quote {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(186, 142, 62, 0.4);
+  border-radius: 8px;
+  width: 100%;
+}
+
+.rsvp-success-card__quote-badge {
+  font-family: var(--font-serif);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8c672b;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.rsvp-success-card__quote p {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 14px;
+  color: #641e32;
+  line-height: 1.45;
+}
+
+.rsvp-success-card__btn-reset {
+  margin-top: 18px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: transparent;
+  border: 1px solid rgba(100, 30, 50, 0.35);
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #641e32;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.rsvp-success-card__btn-reset:hover {
+  background: rgba(100, 30, 50, 0.08);
+  border-color: #641e32;
+}

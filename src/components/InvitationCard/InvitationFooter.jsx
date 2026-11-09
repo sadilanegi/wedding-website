@@ -3,7 +3,12 @@ import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { RoyalDivider, WhatsAppIcon } from './Ornaments'
 import './InvitationFooter.css'
 
-export default function InvitationFooter({ couple, general, website }) {
+export default function InvitationFooter({
+  couple,
+  general,
+  website,
+  onOpenDownloadModal,
+}) {
   const [sharedFeedback, setSharedFeedback] = useState(false)
 
   const hasBlessing = isConfirmed(general?.familyBlessing)
@@ -61,7 +66,16 @@ export default function InvitationFooter({ couple, general, website }) {
         <p className="footer-section__hashtag">{couple.hashtag}</p>
       )}
 
-      <div className="footer-section__share-wrap">
+      <div className="footer-section__actions-wrap">
+        <button
+          type="button"
+          className="footer-section__download-btn"
+          onClick={onOpenDownloadModal}
+        >
+          <span className="footer-section__btn-icon" aria-hidden="true">📥</span>
+          <span>Download Personalized Card (JPG / PDF)</span>
+        </button>
+
         <button
           type="button"
           className="footer-section__share-btn"
