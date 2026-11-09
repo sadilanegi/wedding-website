@@ -48,7 +48,7 @@ export default async function handler(request, context) {
     const brideTitle = 'Prachi Weds Sumit'
     const brideDesc =
       'Together with their families, Prachi & Sumit request the honour of your gracious presence and blessings at their auspicious wedding celebrations. Celebrating love, sacred tradition, and joyous beginnings.'
-    const brideImage = `${origin}/og/wedding-preview-bride.jpg`
+    const brideImage = `${origin}/og/wedding-preview-bride.jpg?v=2`
     const brideUrl = `${origin}/?side=bride`
     const brideAlt =
       'Prachi Weds Sumit — Royal Wedding Celebration featuring Prachi & Sumit'
@@ -95,6 +95,14 @@ export default async function handler(request, context) {
       /<meta\s+property="og:image:alt"\s+content="[^"]*"\s*\/?>/i,
       `<meta property="og:image:alt" content="${brideAlt}" />`
     )
+    html = html.replace(
+      /<meta\s+property="og:image:width"\s+content="[^"]*"\s*\/?>/i,
+      '<meta property="og:image:width" content="935" />'
+    )
+    html = html.replace(
+      /<meta\s+property="og:image:height"\s+content="[^"]*"\s*\/?>/i,
+      '<meta property="og:image:height" content="1024" />'
+    )
 
     // Twitter / X
     html = html.replace(
@@ -121,7 +129,7 @@ export default async function handler(request, context) {
     const groomTitle = 'Sumit Weds Prachi'
     const groomDesc =
       'Together with their families, Sumit & Prachi request the honour of your gracious presence and blessings at their auspicious wedding celebrations. Celebrating love, sacred tradition, and joyous beginnings.'
-    const groomImage = `${origin}/og/wedding-preview-groom.jpg`
+    const groomImage = `${origin}/og/wedding-preview-groom.jpg?v=2`
     const groomUrl = `${origin}/?side=groom`
     const groomAlt =
       'Sumit Weds Prachi — Royal Wedding Celebration featuring Sumit & Prachi'
@@ -171,6 +179,14 @@ export default async function handler(request, context) {
     html = html.replace(
       /<meta\s+property="og:image:alt"\s+content="[^"]*"\s*\/?>/i,
       `<meta property="og:image:alt" content="${groomAlt}" />`
+    )
+    html = html.replace(
+      /<meta\s+property="og:image:width"\s+content="[^"]*"\s*\/?>/i,
+      '<meta property="og:image:width" content="935" />'
+    )
+    html = html.replace(
+      /<meta\s+property="og:image:height"\s+content="[^"]*"\s*\/?>/i,
+      '<meta property="og:image:height" content="1024" />'
     )
     html = html.replace(
       /<meta\s+name="twitter:image"\s+content="[^"]*"\s*\/?>/i,
