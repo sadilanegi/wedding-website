@@ -37,6 +37,30 @@ export function SvgGoldDefs() {
           <stop offset="78%" stopColor="#92691e" />
           <stop offset="100%" stopColor="#54370a" />
         </radialGradient>
+
+        {/* Lord Krishna Thematic Gradients */}
+        <linearGradient id="peacock-feather-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#0f766e" />
+          <stop offset="35%" stopColor="#0d9488" />
+          <stop offset="65%" stopColor="#14b8a6" />
+          <stop offset="85%" stopColor="#d4af37" />
+          <stop offset="100%" stopColor="#78350f" />
+        </linearGradient>
+
+        <radialGradient id="peacock-eye-radial" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stopColor="#1e1b4b" />
+          <stop offset="35%" stopColor="#1d4ed8" />
+          <stop offset="60%" stopColor="#0d9488" />
+          <stop offset="85%" stopColor="#eab308" />
+          <stop offset="100%" stopColor="#b45309" />
+        </radialGradient>
+
+        <linearGradient id="lotus-pink-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stopColor="#fbcfe8" />
+          <stop offset="40%" stopColor="#f472b6" />
+          <stop offset="80%" stopColor="#db2777" />
+          <stop offset="100%" stopColor="#9d174d" />
+        </linearGradient>
       </defs>
     </svg>
   )
@@ -75,6 +99,174 @@ export function GaneshaCrest({ className = 'ornament-ganesha' }) {
       <circle cx="60" cy="95" r="2.2" fill="url(#gold-foil-grad)" />
       <circle cx="25" cy="60" r="2.2" fill="url(#gold-foil-grad)" />
       <circle cx="95" cy="60" r="2.2" fill="url(#gold-foil-grad)" />
+    </svg>
+  )
+}
+
+// Sacred Lord Krishna Bansuri & Mor Pankh Invocation Crest
+export function KrishnaBansuriCrest({ className = 'ornament-krishna' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 160 130"
+      width="112"
+      height="90"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-label="Lord Krishna Bansuri and Peacock Feather Crest"
+    >
+      {/* Outer Radiance Halo */}
+      <circle cx="80" cy="65" r="58" stroke="url(#gold-foil-grad)" strokeWidth="0.8" strokeDasharray="3 3" opacity="0.65" />
+      <circle cx="80" cy="65" r="52" stroke="url(#gold-foil-grad)" strokeWidth="0.5" opacity="0.45" />
+
+      {/* Sunburst Rays */}
+      {[0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330].map((deg) => (
+        <line
+          key={deg}
+          x1="80"
+          y1="8"
+          x2="80"
+          y2="14"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="1"
+          strokeLinecap="round"
+          transform={`rotate(${deg} 80 65)`}
+          opacity="0.7"
+        />
+      ))}
+
+      {/* 1. Divine Mor Pankh (Peacock Feather) */}
+      <g id="mor-pankh" transform="translate(0, -2)">
+        {/* Feather Quill Stem */}
+        <path
+          d="M80 106 C80 82 85 54 90 22"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="1.8"
+          strokeLinecap="round"
+        />
+
+        {/* Outer Feather Silhouette with Peacock Gradient */}
+        <path
+          d="M90 20 C106 24 116 38 112 54 C108 66 98 74 90 82 C82 74 72 66 68 54 C64 38 74 24 90 20 Z"
+          fill="url(#peacock-feather-grad)"
+          opacity="0.92"
+        />
+
+        {/* Radiating Filaments */}
+        <path
+          d="M90 22 C96 28 106 32 110 38 M90 32 C98 38 108 44 111 50 M90 44 C98 50 105 56 107 64 M90 56 C96 62 101 68 102 74 M90 22 C84 28 74 32 70 38 M90 32 C82 38 72 44 69 50 M90 44 C82 50 75 56 73 64 M90 56 C84 62 79 68 78 74"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.85"
+          opacity="0.8"
+        />
+
+        {/* Peacock Eye */}
+        <ellipse cx="90" cy="48" rx="14" ry="17" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="1.2" />
+
+        {/* Inner Heart of the Feather Eye */}
+        <path
+          d="M90 41 C94 41 97 44 97 48 C97 53 90 58 90 58 C90 58 83 53 83 48 C83 44 86 41 90 41 Z"
+          fill="#0f172a"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="1"
+        />
+        <circle cx="90" cy="48" r="3" fill="#38bdf8" />
+        <circle cx="90" cy="48" r="1.5" fill="#ffffff" />
+      </g>
+
+      {/* 2. Divine Golden Bansuri (Flute) */}
+      <g id="bansuri" transform="rotate(-15 80 72)">
+        {/* Main Flute Body */}
+        <rect
+          x="24"
+          y="68"
+          width="112"
+          height="8"
+          rx="4"
+          fill="url(#gold-foil-grad)"
+          stroke="#452709"
+          strokeWidth="0.6"
+        />
+        {/* Mouthpiece & End Ferrules */}
+        <rect x="28" y="67.5" width="3.5" height="9" rx="0.5" fill="#fff8dd" />
+        <rect x="130" y="67.5" width="3.5" height="9" rx="0.5" fill="#fff8dd" />
+        <rect x="35" y="67.5" width="2" height="9" rx="0.5" fill="#d4af37" />
+        <rect x="123" y="67.5" width="2" height="9" rx="0.5" fill="#d4af37" />
+
+        {/* 6 Finger Holes */}
+        <ellipse cx="66" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+        <ellipse cx="76" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+        <ellipse cx="86" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+        <ellipse cx="96" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+        <ellipse cx="106" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+        <ellipse cx="116" cy="72" rx="1.6" ry="1.6" fill="#381b08" />
+
+        {/* Tassels with Pearl Drops */}
+        <path d="M125 74 C124 82 123 88 121 95" stroke="url(#gold-foil-grad)" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="121" cy="96" r="2.2" fill="#fff8dd" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+        <path d="M121 98 L119 108 L123 108 Z" fill="url(#gold-foil-grad)" />
+
+        <path d="M129 74 C130 82 132 87 134 93" stroke="url(#gold-foil-grad)" strokeWidth="1.2" strokeLinecap="round" />
+        <circle cx="134" cy="94" r="2.2" fill="#fff8dd" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+        <path d="M134 96 L132 106 L136 106 Z" fill="url(#gold-foil-grad)" />
+      </g>
+
+      {/* 3. Auspicious Lotus Blooms & Tilak */}
+      <g id="base-lotus">
+        {/* Center Petal */}
+        <path
+          d="M80 82 C74 92 73 104 80 114 C87 104 86 92 80 82 Z"
+          fill="url(#lotus-pink-grad)"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.8"
+        />
+        {/* Left Petal */}
+        <path
+          d="M80 94 C71 95 62 101 64 110 C70 112 76 106 80 94 Z"
+          fill="url(#lotus-pink-grad)"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.7"
+          opacity="0.9"
+        />
+        {/* Right Petal */}
+        <path
+          d="M80 94 C89 95 98 101 96 110 C90 112 84 106 80 94 Z"
+          fill="url(#lotus-pink-grad)"
+          stroke="url(#gold-foil-grad)"
+          strokeWidth="0.7"
+          opacity="0.9"
+        />
+        {/* Krishna Tilak / Chandan */}
+        <path
+          d="M78 48 C78 40 76 34 80 28 C84 34 82 40 82 48 C82 52 78 52 78 48 Z"
+          fill="#d97706"
+        />
+        <circle cx="80" cy="54" r="1.8" fill="#b91c1c" />
+      </g>
+    </svg>
+  )
+}
+
+// Standalone Peacock Feather SVG Icon
+export function PeacockFeatherIcon({ className = 'icon-peacock-feather', size = 24 }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 48 48"
+      width={size}
+      height={size}
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <path d="M12 42 C18 36 24 28 32 12" stroke="url(#gold-foil-grad)" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M32 10 C40 12 44 20 40 28 C36 34 30 38 24 40 C20 34 22 28 24 22 C26 16 28 12 32 10 Z"
+        fill="url(#peacock-feather-grad)"
+      />
+      <ellipse cx="32" cy="22" rx="6" ry="8" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+      <circle cx="32" cy="22" r="2.5" fill="#0f172a" />
+      <circle cx="32" cy="22" r="1" fill="#38bdf8" />
     </svg>
   )
 }
@@ -190,11 +382,16 @@ export function MonogramSeal({ monogram = 'P & S', className = 'ornament-monogra
               fill="none"
               strokeLinecap="round"
             />
-            {/* Crown flourish at top */}
-            <path
-              d="M45 22 L50 17 L55 22 L53 25 L47 25 Z"
-              fill="url(#gold-foil-grad)"
-            />
+            {/* Divine Peacock Feather & Flute Crown Motif */}
+            <g id="crown-morpankh" transform="translate(0, 1)">
+              <ellipse cx="50" cy="15" rx="5.5" ry="7" fill="url(#peacock-eye-radial)" stroke="url(#gold-foil-grad)" strokeWidth="0.8" />
+              <circle cx="50" cy="15" r="2" fill="#0f172a" />
+              <circle cx="50" cy="15" r="0.9" fill="#38bdf8" />
+              {/* Crossed Golden Bansuri */}
+              <line x1="36" y1="23" x2="64" y2="18" stroke="url(#gold-foil-grad)" strokeWidth="1.4" strokeLinecap="round" />
+              <circle cx="37" cy="22.8" r="1" fill="#fff8dd" />
+              <circle cx="63" cy="18.2" r="1" fill="#fff8dd" />
+            </g>
           </svg>
           <span className="monogram-seal__text">{monogram}</span>
         </div>

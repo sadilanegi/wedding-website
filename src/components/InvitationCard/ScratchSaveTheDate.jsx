@@ -266,9 +266,13 @@ export default function ScratchSaveTheDate({ general }) {
         <div className="scratch-medallion__prize">
           <div className="scratch-medallion__prize-header">
             <span className="scratch-medallion__star" aria-hidden="true">✦</span>
-            <p className="hero__medallion-badge">Save The Date</p>
+            <p className="hero__medallion-badge">Save The Sacred Date</p>
             <span className="scratch-medallion__star" aria-hidden="true">✦</span>
           </div>
+
+          <p className="scratch-medallion__radhe-sub" lang="sa">
+            ॥ श्री राधाकृष्णाभ्यां नमः ॥
+          </p>
 
           {hasDate ? (
             <p className="hero__medallion-date scratch-medallion__date-text">

@@ -7,6 +7,7 @@ import VenueSection from './VenueSection'
 import RSVPSection from './RSVPSection'
 import InvitationFooter from './InvitationFooter'
 import AmbientParticles from './AmbientParticles'
+import BrajBlessingShower from './BrajBlessingShower'
 import { use3DCardTilt } from '../../utils/use3DCardTilt.js'
 import { useScrollReveal } from '../../utils/useScrollReveal.js'
 import './InvitationCard.css'
@@ -88,6 +89,9 @@ export default function InvitationCard({
           </div>
         </div>
       </article>
+
+      {/* Interactive Celestial Radha-Krishna Pushpa & Mor-Pankh Blessing Shower */}
+      <BrajBlessingShower introState={introState} />
     </main>
   )
 }

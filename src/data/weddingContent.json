@@ -18,25 +18,25 @@
   "general": {
     "heading": "Wedding Invitation",
     "showInvocation": true,
-    "invocation": "॥ श्री गणेशाय नमः ॥",
-    "invocationSub": "Om Shri Ganeshaya Namah",
+    "invocation": "॥ श्री गणेशाय नमः ॥   •   ॥ श्री राधाकृष्णाभ्यां नमः ॥",
+    "invocationSub": "Om Shri Ganeshaya Namah   •   Shri Radha-Krishnabhyam Namah",
     "invitationGreeting": "Together with their families",
     "invitationPlea": "Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children",
-    "tagline": "Celebrating Love, Sacred Tradition & Joyous Beginnings",
+    "tagline": "Under the Eternal Grace of Lord Krishna & Shri Radha • Two Souls Unite in Sacred Matrimony",
     "date": "10 – 17 December",
     "place": "__",
     "guestArrivalTime": "__",
     "instructionTap": "Tap to open",
     "videoUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794127296/9ed453103d9bbd1196b9d17bd4256d20_720w_online-video-cutter.com_xzvmqy.mp4",
     "musicUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794140404/aaj-sajeya-alaya-f-goldie-sohel-punit-malhotra-official-video-sneakersong-dharm_QVmldlBL_qngg8r.mp3",
-    "familyBlessing": "With best compliments from near and dear ones of both families"
+    "familyBlessing": "May the divine flute of Lord Krishna shower eternal love, harmony, and joy upon their sacred union. With best compliments from near and dear ones of both families."
   },
 
   "events": [
     {
       "id": "haldi",
       "title": "Haldi Ceremony",
-      "tagline": "A morning of turmeric, sunshine, and laughter",
+      "tagline": "Braj Ki Kesar Haldi — A morning of golden turmeric, marigolds, and joyous laughter",
       "date": "10 December",
       "time": "10:00 AM",
       "guestArrivalTime": "__",
@@ -55,7 +55,7 @@
     {
       "id": "mehendi",
       "title": "Mehendi Ceremony",
-      "tagline": "Intricate henna motifs, folk beats, and festive cheer",
+      "tagline": "Kunj Galiyon Ki Mehendi — Auspicious peacock motifs, deep henna fragrance, and folk melodies",
       "date": "10 December",
       "time": "5:00 PM",
       "guestArrivalTime": "__",
@@ -74,7 +74,7 @@
     {
       "id": "wedding",
       "title": "Wedding Ceremony",
-      "tagline": "The sacred Vedic rituals and the seven holy pheras",
+      "tagline": "Rukmini-Kalyanam & Vedic Pheras — The sacred Vedic rituals and seven holy vows under divine grace",
       "date": "17 December",
       "time": "10:00 AM",
       "guestArrivalTime": "__",
@@ -93,7 +93,7 @@
     {
       "id": "reception",
       "title": "Grand Reception",
-      "tagline": "Dinner banquet, toasts, and blessings for the newlyweds",
+      "tagline": "Divya Raas & Royal Evening Gala — An enchanted starlit celebration of love, music, and blessings",
       "date": "11 December",
       "time": "7:00 PM",
       "guestArrivalTime": "__",

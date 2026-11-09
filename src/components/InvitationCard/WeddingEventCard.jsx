@@ -11,10 +11,10 @@ import {
 import './WeddingEventCard.css'
 
 const THEME_LABELS = {
-  haldi: 'Sacred Turmeric & Marigold',
-  mehendi: 'Auspicious Henna Artistry',
-  wedding: 'Sacred Vedic Union',
-  reception: 'Royal Evening Gala',
+  haldi: 'Braj Ki Kesar Haldi • Sacred Turmeric',
+  mehendi: 'Kunj Galiyon Ki Mehendi • Auspicious Henna',
+  wedding: 'Rukmini-Kalyanam • Sacred Vedic Union',
+  reception: 'Divya Raas • Royal Evening Gala',
 }
 
 export default function WeddingEventCard({ event, index, couple }) {

@@ -42,6 +42,38 @@
   pointer-events: none;
 }
 
+.video-open__seal-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-open__seal-halo {
+  position: absolute;
+  inset: -14px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(20, 184, 166, 0.42) 0%,
+    rgba(212, 175, 55, 0.35) 45%,
+    transparent 74%
+  );
+  animation: seal-halo-pulse 2.8s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes seal-halo-pulse {
+  0% {
+    transform: scale(0.94);
+    opacity: 0.45;
+  }
+  100% {
+    transform: scale(1.15);
+    opacity: 0.95;
+  }
+}
+
 .video-open__seal {
   width: min(36vw, 156px);
   height: auto;
@@ -52,6 +84,15 @@
 
 .video-open__tap.is-leaving .video-open__seal {
   transform: scale(1.08);
+}
+
+.video-open__shloka {
+  font-family: var(--font-devanagari, 'Noto Serif Devanagari', serif);
+  font-size: 14.5px;
+  font-weight: 600;
+  color: #fce7b0;
+  letter-spacing: 0.08em;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.85), 0 0 16px rgba(212, 175, 55, 0.4);
 }
 
 .video-open__hint {

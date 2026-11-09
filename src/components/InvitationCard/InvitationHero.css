@@ -47,9 +47,53 @@
   margin-top: 4px;
 }
 
+.hero__crests-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 10px;
+}
+
 .hero__ganesha {
-  filter: drop-shadow(0 2px 4px rgba(70, 45, 15, 0.25));
-  margin-bottom: 8px;
+  filter: drop-shadow(0 2px 5px rgba(70, 45, 15, 0.25));
+  width: 58px;
+  height: 58px;
+}
+
+.hero__krishna {
+  filter: drop-shadow(0 3px 6px rgba(13, 148, 136, 0.28));
+  width: 96px;
+  height: 76px;
+  transition: transform 0.4s ease;
+}
+
+.hero__krishna:hover {
+  transform: scale(1.05);
+}
+
+.hero__crest-om-flourish {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 0 4px;
+}
+
+.hero__crest-glyph {
+  font-family: var(--font-devanagari);
+  font-size: 19px;
+  font-weight: 700;
+  color: #c59835;
+  text-shadow: 0 1px 3px rgba(186, 142, 62, 0.45);
+}
+
+.hero__crest-dot {
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: #c59835;
 }
 
 .hero__shloka {

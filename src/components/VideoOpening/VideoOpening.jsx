@@ -55,12 +55,16 @@ export default function VideoOpening({ onComplete, onSealClick, leaving = false 
           className={`video-open__tap${seal === 'leaving' ? ' is-leaving' : ''}`}
           onClick={play}
         >
-          <img
-            className="video-open__seal"
-            src="/gold-wax-seal.png"
-            alt=""
-            draggable="false"
-          />
+          <span className="video-open__seal-wrapper">
+            <span className="video-open__seal-halo" aria-hidden="true" />
+            <img
+              className="video-open__seal"
+              src="/gold-wax-seal.png"
+              alt=""
+              draggable="false"
+            />
+          </span>
+          <span className="video-open__shloka" lang="sa">॥ श्री राधाकृष्णाय नमः ॥</span>
           <span className="video-open__hint">{wedding.general.instructionTap}</span>
         </button>
       )}
