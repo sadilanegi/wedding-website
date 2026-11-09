@@ -321,6 +321,170 @@ body {
   white-space: nowrap;
 }
 
+/* --- Bottom-Left Floating Royal Download Pill (Balanced with Music Toggle on Bottom-Right) --- */
+.floating-download-pill {
+  position: absolute;
+  bottom: calc(20px + env(safe-area-inset-bottom));
+  left: 16px;
+  right: auto;
+  z-index: 60;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 38px;
+  padding: 0 12px 0 10px;
+  border-radius: 999px;
+  background: linear-gradient(
+    135deg,
+    #fff8e2 0%,
+    #fbe5a2 24%,
+    #d4af37 58%,
+    #b08622 84%,
+    #875e0f 100%
+  );
+  border: 1px solid rgba(255, 252, 235, 0.95);
+  color: #45101a;
+  box-shadow:
+    0 6px 20px rgba(0, 0, 0, 0.32),
+    0 0 16px rgba(212, 175, 55, 0.42),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  animation: floatingDownloadReveal 850ms var(--ease-cinematic) 650ms both;
+  transition:
+    transform 0.28s var(--ease-cinematic),
+    box-shadow 0.28s ease,
+    filter 0.28s ease;
+  overflow: hidden;
+}
+
+@keyframes floatingDownloadReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.88);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.floating-download-pill:hover,
+.floating-download-pill:active {
+  transform: scale(1.05) translateY(-1px);
+  box-shadow:
+    0 10px 28px rgba(0, 0, 0, 0.4),
+    0 0 24px rgba(212, 175, 55, 0.65),
+    inset 0 1px 1px #ffffff;
+}
+
+.floating-download-pill__sheen {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.6) 50%,
+    transparent 100%
+  );
+  transform: skewX(-22deg);
+  animation: floatingDownloadSheen 4.5s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes floatingDownloadSheen {
+  0%, 70% {
+    left: -100%;
+  }
+  85%, 100% {
+    left: 180%;
+  }
+}
+
+.floating-download-pill__ring {
+  position: absolute;
+  inset: -3px;
+  border-radius: 999px;
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  opacity: 0;
+  pointer-events: none;
+  animation: floatingDownloadPulse 3s ease-out infinite;
+}
+
+@keyframes floatingDownloadPulse {
+  0% {
+    opacity: 0.7;
+    transform: scale(0.98);
+  }
+  60% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
+.floating-download-pill__icon {
+  width: 15px;
+  height: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #45101a;
+  flex-shrink: 0;
+}
+
+.floating-download-pill__icon svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.floating-download-pill__text {
+  font-family: var(--font-serif, 'Cinzel', Georgia, serif);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #45101a;
+  white-space: nowrap;
+}
+
+.floating-download-pill__badge {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  padding: 1.5px 5px;
+  border-radius: 4px;
+  background: #541525;
+  color: #fff6db;
+  text-transform: uppercase;
+  flex-shrink: 0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 360px) {
+  .floating-download-pill {
+    left: 10px;
+    padding: 0 9px 0 8px;
+    gap: 5px;
+  }
+  .side-audio-toggle {
+    right: 10px;
+    padding: 0 10px 0 8px;
+  }
+  .floating-download-pill__text {
+    font-size: 9px;
+  }
+}
+
 @media (min-width: 441px) {
   .app-mobile-stage {
     max-height: 880px;

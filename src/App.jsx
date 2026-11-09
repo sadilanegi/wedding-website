@@ -4,6 +4,7 @@ import { useWeddingPerspective } from './utils/weddingPerspective.js'
 import InvitationCard from './components/InvitationCard/InvitationCard'
 import VideoOpening from './components/VideoOpening/VideoOpening'
 import BrajBlessingShower from './components/InvitationCard/BrajBlessingShower'
+import PersonalizedCardModal from './components/InvitationDownload/PersonalizedCardModal'
 
 const FADE_MS = 1650
 const COUPLE_STAGE_MS = 3300
@@ -20,6 +21,7 @@ function App() {
   const hasMusic = musicUrl !== '' && !musicUrl.includes('__')
   const isDirectCard = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('card') === 'true'
   const [phase, setPhase] = useState(isDirectCard ? 'card' : (hasVideo ? 'video' : 'card'))
+  const [isDownloadModalOpen, setIsDownloadModalOpen] = useState(false)
 
   const audioRef = useRef(null)
   const fadeRafRef = useRef(null)
@@ -203,9 +205,47 @@ function App() {
             <InvitationCard
               introState={phase}
               onCoupleContinue={handleCoupleContinue}
+              onOpenDownloadModal={() => setIsDownloadModalOpen(true)}
             />
           </div>
         )}
+
+        {/* Floating Royal 24K Gold Download Pill on Bottom-Left (Balanced with Music Toggle on Bottom-Right) */}
+        {showCard && (phase === 'card' || phase === 'revealing') && !isDownloadModalOpen && (
+          <button
+            type="button"
+            className="floating-download-pill"
+            onClick={() => setIsDownloadModalOpen(true)}
+            aria-label="Personalize & Download Invitation Card (PDF)"
+            title="Personalize and download your royal wedding invitation"
+          >
+            <span className="floating-download-pill__sheen" aria-hidden="true" />
+            <span className="floating-download-pill__ring" aria-hidden="true" />
+            <span className="floating-download-pill__icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                <polyline points="7 10 12 15 17 10" />
+                <line x1="12" y1="15" x2="12" y2="3" />
+              </svg>
+            </span>
+            <span className="floating-download-pill__text">Download Card</span>
+            <span className="floating-download-pill__badge" aria-hidden="true">PDF</span>
+          </button>
+        )}
+
+        {/* Personalized Card Download & Offline Navigation Modal */}
+        <PersonalizedCardModal
+          isOpen={isDownloadModalOpen}
+          onClose={() => setIsDownloadModalOpen(false)}
+          weddingData={wedding}
+        />
       </div>
     </div>
   )
