@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import { isConfirmed, hasValidPhone } from '../../utils/weddingHelpers.js'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import { RoyalDivider, PhoneIcon } from './Ornaments'
 import './RSVPSection.css'
 
 const DEFAULT_ATTENDANCE_OPTIONS = ['Joyfully Attending', 'Warm Wishes From Afar']
 const GUEST_COUNTS = ['1', '2', '3', '4+']
 
-export default function RSVPSection({ rsvp, couple }) {
+export default function RSVPSection({ rsvp, couple: _couple }) {
+  const perspective = useWeddingPerspective()
   const validOptions =
     Array.isArray(rsvp?.attendanceOptions) &&
     rsvp.attendanceOptions.filter(isConfirmed).length > 0
@@ -27,10 +29,7 @@ export default function RSVPSection({ rsvp, couple }) {
   const hasContactPerson = isConfirmed(rsvp.contactPerson)
   const hasDeadline = isConfirmed(rsvp.deadline)
 
-  const coupleLabel =
-    couple?.groom?.firstName && couple?.bride?.firstName
-      ? `${couple.groom.firstName} & ${couple.bride.firstName}`
-      : 'Sumit & Prachi'
+  const coupleLabel = perspective.coupleLabel
 
   const isAttending =
     !attendance.toLowerCase().includes('afar') &&
@@ -106,7 +105,7 @@ export default function RSVPSection({ rsvp, couple }) {
             <p className="rsvp-success-card__body">
               {isAttending
                 ? `Your attendance with ${guestCount} ${guestCount === '1' ? 'guest' : 'guests'} has been warmly recorded in our wedding guestbook. We eagerly look forward to celebrating with you!`
-                : 'Your heartfelt blessings and warm wishes from afar have been conveyed to Sumit & Prachi. Thank you for holding us in your prayers.'}
+                : `Your heartfelt blessings and warm wishes from afar have been conveyed to ${coupleLabel}. Thank you for holding us in your prayers.`}
             </p>
             {personalMessage.trim() && (
               <div className="rsvp-success-card__quote">

@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import QRCode from 'qrcode'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import {
   SvgGoldDefs,
   GaneshaCrest,
@@ -21,6 +22,7 @@ export default function PrintableInvitationCard({
   _weddingData,
   forwardedRef,
 }) {
+  const perspective = useWeddingPerspective()
   const [qrDataUrl, setQrDataUrl] = useState('')
 
   const mapDestinationUrl =
@@ -163,7 +165,9 @@ export default function PrintableInvitationCard({
             <div className="print-card__couple-banner-border" aria-hidden="true" />
           </div>
 
-          <h1 className="print-card__couple-names">Sumit &amp; Prachi</h1>
+          <h1 className="print-card__couple-names">
+            {perspective.primaryName} &amp; {perspective.secondaryName}
+          </h1>
 
           <p className="print-card__blessing-tagline">
             Joined in Love, Blessed by the Eternal Grace of Lord Krishna &amp; Shri Radha
@@ -360,7 +364,7 @@ export default function PrintableInvitationCard({
           <div className="print-card__rsvp-badge">
             <span className="print-card__rsvp-title">✦ RSVP &amp; WARM INVITATION ✦</span>
             <p className="print-card__rsvp-plea">
-              Please kindly grace the occasion and confirm your presence with Sumit &amp; Prachi
+              Please kindly grace the occasion and confirm your presence with {perspective.coupleLabel}
             </p>
           </div>
 
@@ -375,7 +379,9 @@ export default function PrintableInvitationCard({
             MAY SHRI RADHA-KRISHNA BLESS THIS ETERNAL UNION
           </p>
 
-          <p className="print-card__footer-names">Sumit &amp; Prachi</p>
+          <p className="print-card__footer-names">
+            {perspective.primaryName} &amp; {perspective.secondaryName}
+          </p>
           <p className="print-card__hashtag">#SUPRA</p>
         </footer>
       </div>

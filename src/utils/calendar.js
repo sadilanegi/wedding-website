@@ -1,4 +1,5 @@
 import { isConfirmed } from './weddingHelpers.js'
+import { getPerspectiveFromUrl } from './weddingPerspective.js'
 
 /**
  * calendar.js
@@ -28,7 +29,7 @@ export const parseEventDate = (dateStr, timeStr) => {
   return parsed
 }
 
-export const createGoogleCalendarUrl = ({ event, couple }) => {
+export const createGoogleCalendarUrl = ({ event, couple: _couple }) => {
   if (!event || !isConfirmed(event.date)) return null
 
   const startDate = parseEventDate(event.date, event.time)
@@ -36,8 +37,9 @@ export const createGoogleCalendarUrl = ({ event, couple }) => {
 
   // Default event duration: 4 hours
   const endDate = new Date(startDate.getTime() + 4 * 60 * 60 * 1000)
+  const perspective = getPerspectiveFromUrl()
 
-  const title = `${event.title} — ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'} Wedding`
+  const title = `${event.title} — ${perspective.coupleLabel} Wedding`
   const dates = `${formatIcsDate(startDate)}/${formatIcsDate(endDate)}`
 
   const locationParts = [event.venue, event.address].filter(isConfirmed)
@@ -46,7 +48,7 @@ export const createGoogleCalendarUrl = ({ event, couple }) => {
   const detailsParts = [
     event.tagline,
     isConfirmed(event.dressCode) ? `Dress Code: ${event.dressCode}` : null,
-    `Celebrating the wedding of ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'}`
+    `Celebrating the wedding of ${perspective.coupleLabel}`
   ].filter(Boolean)
   const details = detailsParts.join('\n\n')
 
@@ -61,20 +63,21 @@ export const createGoogleCalendarUrl = ({ event, couple }) => {
   return `https://calendar.google.com/calendar/render?${params.toString()}`
 }
 
-export const downloadIcsFile = ({ event, couple }) => {
+export const downloadIcsFile = ({ event, couple: _couple }) => {
   if (!event || !isConfirmed(event.date)) return false
 
   const startDate = parseEventDate(event.date, event.time)
   if (!startDate) return false
 
   const endDate = new Date(startDate.getTime() + 4 * 60 * 60 * 1000)
-  const title = `${event.title} — ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'} Wedding`
+  const perspective = getPerspectiveFromUrl()
+  const title = `${event.title} — ${perspective.coupleLabel} Wedding`
   const locationParts = [event.venue, event.address].filter(isConfirmed)
   const location = locationParts.join(', ')
   const description = [
     event.tagline,
     isConfirmed(event.dressCode) ? `Dress Code: ${event.dressCode}` : null,
-    `Celebrating the wedding of ${couple?.groom?.firstName || 'Sumit'} & ${couple?.bride?.firstName || 'Prachi'}`
+    `Celebrating the wedding of ${perspective.coupleLabel}`
   ].filter(Boolean).join(' \\n ')
 
   const now = new Date()

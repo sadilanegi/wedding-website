@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { isConfirmed } from '../../utils/weddingHelpers.js'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import { RoyalDivider, WhatsAppIcon } from './Ornaments'
 import './InvitationFooter.css'
 
@@ -10,15 +11,22 @@ export default function InvitationFooter({
   onOpenDownloadModal,
 }) {
   const [sharedFeedback, setSharedFeedback] = useState(false)
+  const perspective = useWeddingPerspective()
 
   const hasBlessing = isConfirmed(general?.familyBlessing)
   const hasHashtag = isConfirmed(couple?.hashtag)
   const hasThankYou = isConfirmed(website?.thankYouMessage)
 
-  const coupleNames = `${couple.groom.firstName} & ${couple.bride.firstName}`
+  const coupleNames = perspective.coupleLabel
 
   const handleShareInvite = async () => {
-    const shareUrl = typeof window !== 'undefined' ? window.location.origin : ''
+    const origin = typeof window !== 'undefined' ? window.location.origin : ''
+    const currentParams = new URLSearchParams(typeof window !== 'undefined' ? window.location.search : '')
+    // Ensure the shared link retains the active perspective (?side=bride or ?side=groom)
+    currentParams.set('side', perspective.side)
+    currentParams.delete('card')
+    const queryString = currentParams.toString() ? `?${currentParams.toString()}` : `?side=${perspective.side}`
+    const shareUrl = `${origin}/${queryString}`
     const shareText = `You are cordially invited to celebrate the wedding festivities of ${coupleNames}! ${shareUrl}`
 
     if (typeof navigator !== 'undefined' && navigator.share) {
@@ -59,7 +67,7 @@ export default function InvitationFooter({
       </div>
 
       <p className="footer-section__names">
-        {couple.groom.firstName} &amp; {couple.bride.firstName}
+        {perspective.primaryName} &amp; {perspective.secondaryName}
       </p>
 
       {hasHashtag && (

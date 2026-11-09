@@ -1,5 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { getTargetWeddingDate, calculateCountdown } from '../../utils/countdown.js'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import { RoyalDivider } from './Ornaments'
 import './WeddingCountdown.css'
 
@@ -11,6 +12,7 @@ const DIAL_META = [
 ]
 
 export default function WeddingCountdown({ weddingData }) {
+  const perspective = useWeddingPerspective()
   const targetDate = useMemo(() => getTargetWeddingDate(weddingData), [weddingData])
   const [countdown, setCountdown] = useState(() => calculateCountdown(targetDate))
   const [rippleKey, setRippleKey] = useState(0)
@@ -122,7 +124,7 @@ export default function WeddingCountdown({ weddingData }) {
         {countdown.isLive ? (
           <div className="countdown-celebration">
             <p className="countdown-celebration__text">
-              Today, Sumit &amp; Prachi unite in sacred marriage. Thank you for gracing our joyous celebration!
+              Today, {perspective.coupleLabel} unite in sacred marriage. Thank you for gracing our joyous celebration!
             </p>
           </div>
         ) : countdown.isConcluded ? (

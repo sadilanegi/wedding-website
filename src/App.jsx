@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
 import wedding from './data/weddingContent.json'
+import { useWeddingPerspective } from './utils/weddingPerspective.js'
 import InvitationCard from './components/InvitationCard/InvitationCard'
 import VideoOpening from './components/VideoOpening/VideoOpening'
 import BrajBlessingShower from './components/InvitationCard/BrajBlessingShower'
@@ -13,6 +14,7 @@ function prefersReducedMotion() {
 }
 
 function App() {
+  useWeddingPerspective()
   const hasVideo = typeof wedding.general.videoUrl === 'string' && wedding.general.videoUrl.trim() !== ''
   const musicUrl = typeof wedding.general.musicUrl === 'string' ? wedding.general.musicUrl.trim() : ''
   const hasMusic = musicUrl !== '' && !musicUrl.includes('__')

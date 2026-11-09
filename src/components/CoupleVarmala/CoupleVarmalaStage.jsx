@@ -1,4 +1,5 @@
 import { useState, useMemo, useRef, useLayoutEffect } from 'react'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import './CoupleVarmalaStage.css'
 
 /**
@@ -15,6 +16,7 @@ export default function CoupleVarmalaStage({
   onSkipOrContinue,
 }) {
   const stageRef = useRef(null)
+  const perspective = useWeddingPerspective()
   const [burstKey, setBurstKey] = useState(0)
   const isIntro = introState === 'couple'
   const isRevealing = introState === 'revealing'
@@ -105,7 +107,7 @@ export default function CoupleVarmalaStage({
       onClick={handleStageTap}
       role={isIntro ? 'button' : 'img'}
       tabIndex={isIntro ? 0 : -1}
-      aria-label="Sumit and Prachi Varmala ceremony"
+      aria-label={`${perspective.coupleLabel} Varmala ceremony`}
       onKeyDown={(e) => {
         if (isIntro && (e.key === 'Enter' || e.key === ' ')) {
           e.preventDefault()
@@ -304,9 +306,9 @@ export default function CoupleVarmalaStage({
           <span className="varmala-stage__caption-line" aria-hidden="true" />
         </div>
         <h2 className="varmala-stage__couple-title">
-          <span>Sumit</span>
+          <span>{perspective.primaryName}</span>
           <span className="varmala-stage__couple-amp">&amp;</span>
-          <span>Prachi</span>
+          <span>{perspective.secondaryName}</span>
         </h2>
         <p className="varmala-stage__subtitle">Two Souls · One Sacred Journey</p>
       </div>

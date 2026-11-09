@@ -1,4 +1,5 @@
 import { isConfirmed } from '../../utils/weddingHelpers.js'
+import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import { GaneshaCrest, RoyalDivider } from './Ornaments'
 import CoupleVarmalaStage from '../CoupleVarmala/CoupleVarmalaStage'
 import ScratchSaveTheDate from './ScratchSaveTheDate'
@@ -12,6 +13,7 @@ export default function InvitationHero({
   onUnlockFestivities,
 }) {
   const { bride, groom } = couple
+  const perspective = useWeddingPerspective()
   const hasBrideParents = isConfirmed(bride.parents)
   const hasGroomParents = isConfirmed(groom.parents)
 
@@ -22,6 +24,11 @@ export default function InvitationHero({
   const brideFullName = isConfirmed(bride.lastName)
     ? `${bride.firstName} ${bride.lastName}`
     : bride.firstName
+
+  const firstFullName = perspective.isBride ? brideFullName : groomFullName
+  const secondFullName = perspective.isBride ? groomFullName : brideFullName
+  const firstNameClass = perspective.isBride ? 'hero__name--bride' : 'hero__name--groom'
+  const secondNameClass = perspective.isBride ? 'hero__name--groom' : 'hero__name--bride'
 
   return (
     <header className="hero" aria-label="Wedding announcement">
@@ -64,29 +71,46 @@ export default function InvitationHero({
         {/* The Couple Reveal — Pure, Clean, High-Contrast Royal Typography */}
         <div className="hero__couple-stage">
           <h1 className="hero__names">
-            <span className="hero__name hero__name--groom">{groomFullName}</span>
+            <span className={`hero__name ${firstNameClass}`}>{firstFullName}</span>
             <span className="hero__amp" aria-hidden="true">
               <span className="hero__amp-line" />
               <span className="hero__amp-glyph">&amp;</span>
               <span className="hero__amp-line" />
             </span>
             <span className="sr-only"> and </span>
-            <span className="hero__name hero__name--bride">{brideFullName}</span>
+            <span className={`hero__name ${secondNameClass}`}>{secondFullName}</span>
           </h1>
         </div>
 
         {/* Parents / Heritage Line (Shown only when confirmed) */}
         {(hasGroomParents || hasBrideParents) && (
           <div className="hero__heritage">
-            {hasGroomParents && (
-              <p className="hero__parent-line">
-                <span className="hero__parent-label">Son of</span> {groom.parents}
-              </p>
-            )}
-            {hasBrideParents && (
-              <p className="hero__parent-line">
-                <span className="hero__parent-label">Daughter of</span> {bride.parents}
-              </p>
+            {perspective.isBride ? (
+              <>
+                {hasBrideParents && (
+                  <p className="hero__parent-line">
+                    <span className="hero__parent-label">Daughter of</span> {bride.parents}
+                  </p>
+                )}
+                {hasGroomParents && (
+                  <p className="hero__parent-line">
+                    <span className="hero__parent-label">Son of</span> {groom.parents}
+                  </p>
+                )}
+              </>
+            ) : (
+              <>
+                {hasGroomParents && (
+                  <p className="hero__parent-line">
+                    <span className="hero__parent-label">Son of</span> {groom.parents}
+                  </p>
+                )}
+                {hasBrideParents && (
+                  <p className="hero__parent-line">
+                    <span className="hero__parent-label">Daughter of</span> {bride.parents}
+                  </p>
+                )}
+              </>
             )}
           </div>
         )}

@@ -1,4 +1,5 @@
 import * as htmlToImage from 'html-to-image'
+import { getPerspectiveFromUrl } from './weddingPerspective.js'
 
 /**
  * cardExporter.js
@@ -93,7 +94,9 @@ export async function exportCardNodeAsJpg(node, guestName = '') {
     const sanitized = (guestName.trim() || 'Guest')
       .replace(/[^a-zA-Z0-9_-]/g, '_')
       .substring(0, 32)
-    const fileName = `Sumit_Prachi_Wedding_Invitation_${sanitized}.jpg`
+    const perspective = getPerspectiveFromUrl()
+    const prefix = `${perspective.primaryName}_${perspective.secondaryName}`
+    const fileName = `${prefix}_Wedding_Invitation_${sanitized}.jpg`
 
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -215,7 +218,9 @@ export async function exportCardNodeAsPdf(node, guestName = '') {
     const sanitized = (guestName.trim() || 'Guest')
       .replace(/[^a-zA-Z0-9_-]/g, '_')
       .substring(0, 32)
-    const fileName = `Sumit_Prachi_Wedding_Invitation_${sanitized}.pdf`
+    const perspective = getPerspectiveFromUrl()
+    const prefix = `${perspective.primaryName}_${perspective.secondaryName}`
+    const fileName = `${prefix}_Wedding_Invitation_${sanitized}.pdf`
 
     const url = URL.createObjectURL(pdfBlob)
     const a = document.createElement('a')
