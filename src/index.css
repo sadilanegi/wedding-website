@@ -171,11 +171,12 @@ body {
   }
 }
 
-/* --- Bottom-Right Floating Wedding Music Toggle (Visible Only on Card) --- */
+/* --- Bottom-Left Floating Wedding Music Toggle (Visible Only on Card) --- */
 .side-audio-toggle {
   position: absolute;
-  bottom: calc(20px + env(safe-area-inset-bottom));
-  right: 16px;
+  bottom: calc(18px + env(safe-area-inset-bottom));
+  left: 14px;
+  right: auto;
   z-index: 60;
   display: inline-flex;
   align-items: center;
@@ -200,6 +201,22 @@ body {
     background 0.32s ease,
     border-color 0.32s ease,
     box-shadow 0.32s ease;
+}
+
+@media (max-width: 480px) {
+  .side-audio-toggle {
+    bottom: calc(16px + env(safe-area-inset-bottom));
+    left: 12px;
+  }
+}
+
+@media (max-width: 360px) {
+  .side-audio-toggle {
+    padding: 0 10px;
+  }
+  .side-audio-toggle__label {
+    display: none;
+  }
 }
 
 @keyframes sideAudioReveal {

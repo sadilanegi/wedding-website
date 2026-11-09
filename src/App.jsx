@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, useCallback } from 'react'
 import wedding from './data/weddingContent.json'
 import InvitationCard from './components/InvitationCard/InvitationCard'
 import VideoOpening from './components/VideoOpening/VideoOpening'
+import BrajBlessingShower from './components/InvitationCard/BrajBlessingShower'
 
 const FADE_MS = 1650
 const COUPLE_STAGE_MS = 3300
@@ -184,6 +185,9 @@ function App() {
             </span>
           </button>
         )}
+
+        {/* Floating Celestial Pushpa-Varsha & Mor-Pankh Blessing Button (Bottom-Right) */}
+        {showAudioToggle && <BrajBlessingShower />}
 
         {showVideo && (
           <VideoOpening
