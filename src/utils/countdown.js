@@ -19,13 +19,19 @@ export const getTargetWeddingDate = (weddingData) => {
   const weddingEvent = weddingData.events?.find((e) => e.id === 'wedding')
   if (weddingEvent && isConfirmed(weddingEvent.date)) {
     const timeStr = isConfirmed(weddingEvent.time) ? weddingEvent.time : '10:00:00'
-    const d = new Date(`${weddingEvent.date} ${timeStr}`)
+    const dateStr = weddingEvent.date
+    const hasYear = /\b\d{4}\b/.test(dateStr)
+    const normalizedDate = hasYear ? dateStr : `${dateStr} ${new Date().getFullYear()}`
+    const d = new Date(`${normalizedDate} ${timeStr}`)
     if (!isNaN(d.getTime())) return d
   }
 
   // 3. Check general.date fallback
   if (isConfirmed(weddingData.general?.date)) {
-    const d = new Date(weddingData.general.date)
+    const dateStr = weddingData.general.date
+    const hasYear = /\b\d{4}\b/.test(dateStr)
+    const normalizedDate = hasYear ? dateStr : `${dateStr} ${new Date().getFullYear()}`
+    const d = new Date(normalizedDate)
     if (!isNaN(d.getTime())) return d
   }
 

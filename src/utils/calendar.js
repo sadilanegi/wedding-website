@@ -15,12 +15,13 @@ const formatIcsDate = (date) => {
 export const parseEventDate = (dateStr, timeStr) => {
   if (!isConfirmed(dateStr)) return null
 
-  // Try parsing ISO or common wedding date formats
-  const combined = isConfirmed(timeStr) ? `${dateStr} ${timeStr}` : dateStr
+  const hasYear = /\b\d{4}\b/.test(dateStr)
+  const normalizedDate = hasYear ? dateStr : `${dateStr} ${new Date().getFullYear()}`
+  const combined = isConfirmed(timeStr) ? `${normalizedDate} ${timeStr}` : normalizedDate
   const parsed = new Date(combined)
   if (isNaN(parsed.getTime())) {
     // Attempt fallback format e.g. "December 18, 2026"
-    const parsedAlt = new Date(dateStr)
+    const parsedAlt = new Date(normalizedDate)
     if (isNaN(parsedAlt.getTime())) return null
     return parsedAlt
   }

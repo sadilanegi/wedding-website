@@ -1,14 +1,16 @@
 /* ============================================================================
    WeddingEventCard.css
-   Bespoke Theme-World Royal Pavilion Cards for the Five Sacred Celebrations
+   Bespoke Royal Pavilion Cards for the Sacred Celebrations (Sumit & Prachi)
+   Features top couple ceremony portrait banner and refined bottom details.
+   Universal venue location is kept in Chapter 4 (VenueSection).
    ============================================================================ */
 
 .event-card {
   position: relative;
   z-index: 1;
   width: 100%;
-  margin-top: 12px;
-  margin-bottom: 20px;
+  margin-top: 14px;
+  margin-bottom: 24px;
   background: radial-gradient(
     circle at 50% 0%,
     var(--event-tint, #fffbf0) 0%,
@@ -22,7 +24,7 @@
     inset 0 0 0 4px rgba(170, 135, 69, 0.28),
     0 12px 28px rgba(60, 35, 12, 0.1);
   opacity: 0;
-  transform: translate3d(0, 22px, 0) scale(0.985);
+  transform: translate3d(0, 20px, 0) scale(0.985);
   transition:
     opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
     transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
@@ -42,37 +44,35 @@
       inset 0 0 0 4px color-mix(in srgb, var(--event-accent, #aa8745) 45%, transparent),
       0 18px 38px rgba(70, 40, 15, 0.16);
   }
+
+  .event-card:hover .event-card__photo {
+    transform: scale(1.04);
+  }
 }
 
-/* Theme Palettes for the 5 Sacred Functions */
+/* Theme Palettes for the 4 Sacred Functions */
 .event-card--haldi {
   --event-accent: #d97706;
   --event-tint: #fff7db;
-  --event-glow: rgba(245, 158, 11, 0.28);
+  --event-glow: rgba(245, 158, 11, 0.32);
 }
 
 .event-card--mehendi {
   --event-accent: #15803d;
   --event-tint: #eefbf2;
-  --event-glow: rgba(21, 128, 61, 0.24);
-}
-
-.event-card--sangeet {
-  --event-accent: #7e22ce;
-  --event-tint: #f7effe;
-  --event-glow: rgba(126, 34, 206, 0.24);
+  --event-glow: rgba(21, 128, 61, 0.28);
 }
 
 .event-card--wedding {
   --event-accent: #b91c1c;
   --event-tint: #fff0f0;
-  --event-glow: rgba(185, 28, 28, 0.28);
+  --event-glow: rgba(185, 28, 28, 0.32);
 }
 
 .event-card--reception {
   --event-accent: #1e3a8a;
   --event-tint: #eff4ff;
-  --event-glow: rgba(30, 58, 138, 0.24);
+  --event-glow: rgba(30, 58, 138, 0.28);
 }
 
 /* Top Crown Accent Bar */
@@ -92,7 +92,7 @@
     var(--event-accent, #aa8745) 75%,
     transparent 100%
   );
-  z-index: 3;
+  z-index: 5;
 }
 
 /* Top 3D Numbered Timeline Medallion Node */
@@ -138,63 +138,213 @@
   justify-content: center;
 }
 
+/* Inner Card Container: Zero top padding so media banner hugs the top smoothly */
 .event-card__inner {
   position: relative;
   overflow: hidden;
   contain: layout paint;
   border-radius: inherit;
-  padding: 26px 18px 20px;
+  padding: 0 0 20px 0;
   display: flex;
   flex-direction: column;
 }
 
-/* Ambient Theme Sparkle Orbs in Card Header */
-.event-card__ambient {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 110px;
-  pointer-events: none;
+/* ============================================================================
+   TOP PORTRAIT BANNER (Photos & Ceremony Arch Slot)
+   ============================================================================ */
+
+.event-card__portrait-banner {
+  position: relative;
+  width: 100%;
+  height: 185px;
   overflow: hidden;
-  z-index: 0;
+  border-radius: 12px 12px 0 0;
+  background: radial-gradient(
+    circle at 50% 30%,
+    var(--event-tint, #fff7db) 0%,
+    #faf1de 70%,
+    #f2e3c7 100%
+  );
+  border-bottom: 1px solid rgba(186, 142, 62, 0.4);
 }
 
-.event-card__float-orb {
+/* 1. Confirmed Photo Frame State */
+.event-card__photo-frame {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.event-card__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 22%;
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.event-card__photo-overlay {
   position: absolute;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #fff8dc 0%, var(--event-accent, #d4af37) 100%);
-  opacity: 0.42;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    to top,
+    rgba(253, 248, 238, 0.96) 0%,
+    rgba(253, 248, 238, 0.22) 32%,
+    transparent 58%
+  );
 }
 
-.event-card__float-orb--1 { top: 24px; left: 14%; }
-.event-card__float-orb--2 { top: 48px; left: 42%; width: 5px; height: 5px; }
-.event-card__float-orb--3 { top: 18px; right: 26%; width: 7px; height: 7px; }
-.event-card__float-orb--4 { top: 56px; right: 10%; width: 4px; height: 4px; }
+.event-card__photo-arch-border {
+  position: absolute;
+  inset: 7px 7px 0 7px;
+  border: 1px solid rgba(255, 245, 200, 0.65);
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+  pointer-events: none;
+}
 
-/* --- Top Header with Badge & Bespoke 3D Emblem --- */
-.event-card__top {
+.event-card__photo-badge {
+  position: absolute;
+  bottom: 10px;
+  right: 12px;
+  z-index: 2;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: rgba(255, 252, 244, 0.94);
+  border: 1px solid rgba(186, 142, 62, 0.55);
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--event-accent, #641e32);
+  box-shadow: 0 2px 8px rgba(70, 45, 15, 0.15);
+}
+
+/* 2. Unconfirmed / Pending Portrait Arch Slot State */
+.event-card__portrait-placeholder {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 16px;
+  overflow: hidden;
+}
+
+.event-card__placeholder-sunburst {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--event-glow, rgba(212, 175, 55, 0.3)) 0%, transparent 72%);
+  pointer-events: none;
+}
+
+.event-card__placeholder-arch-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.event-card__portrait-seal {
   position: relative;
   z-index: 2;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8c6218 0%, #fff2be 50%, #6e4810 100%);
+  padding: 2.5px;
+  box-shadow:
+    0 6px 16px rgba(70, 45, 15, 0.2),
+    0 0 14px var(--event-glow, rgba(212, 175, 55, 0.28));
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+  justify-content: center;
+}
+
+.event-card__seal-ring {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fffdf8 0%, #f7ecd5 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(186, 142, 62, 0.45);
+}
+
+.event-card__seal-emblem {
+  width: 32px;
+  height: 32px;
+  color: var(--event-accent, #641e32);
+}
+
+.event-card__placeholder-tag {
+  position: relative;
+  z-index: 2;
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  text-align: center;
+}
+
+.event-card__placeholder-couple {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 600;
+  font-style: italic;
+  color: #443126;
+  letter-spacing: 0.02em;
+}
+
+.event-card__placeholder-sub {
+  font-family: var(--font-serif);
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--event-accent, #8c672b);
+}
+
+/* ============================================================================
+   BOTTOM BODY CONTAINER & CEREMONY DETAILS
+   ============================================================================ */
+
+.event-card__body {
+  position: relative;
+  z-index: 2;
+  padding: 16px 20px 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
 }
 
 .event-card__badge-wrap {
   display: flex;
   flex-direction: column;
-  text-align: left;
 }
 
 .event-card__kicker-row {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 5px;
+  gap: 6px;
 }
 
 .event-card__index {
@@ -221,44 +371,17 @@
 }
 
 .event-card__title {
-  margin-top: 4px;
+  margin-top: 3px;
   font-family: var(--font-display);
-  font-size: 23px;
+  font-size: 24px;
   font-weight: 600;
   color: #2c1b12;
   line-height: 1.2;
   letter-spacing: 0.01em;
 }
 
-.event-card__emblem-wrap {
-  position: relative;
-  width: 52px;
-  height: 52px;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.event-card__emblem-halo {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  background: radial-gradient(circle, var(--event-glow, rgba(212, 175, 55, 0.25)) 0%, transparent 72%);
-  border: 1px dashed color-mix(in srgb, var(--event-accent, #aa8745) 45%, transparent);
-}
-
-.event-card__emblem {
-  position: relative;
-  z-index: 1;
-  width: 44px;
-  height: 44px;
-}
-
-/* --- Tagline Banner --- */
+/* Tagline Banner */
 .event-card__tagline {
-  position: relative;
-  z-index: 2;
   margin-top: 10px;
   padding: 7px 12px;
   border-radius: 8px;
@@ -278,12 +401,10 @@
   margin: 0 2px;
 }
 
-/* --- Details / Metadata Rows with 24K Gold Medallion Icons --- */
+/* Details Rows */
 .event-card__details {
-  position: relative;
-  z-index: 2;
   margin-top: 14px;
-  padding: 14px 0 12px;
+  padding: 13px 0 12px;
   border-top: 1px dashed rgba(170, 135, 69, 0.42);
   border-bottom: 1px dashed rgba(170, 135, 69, 0.42);
   display: flex;
@@ -330,7 +451,7 @@
 
 .event-card__meta-value {
   font-family: var(--font-display);
-  font-size: 15.5px;
+  font-size: 16px;
   font-weight: 600;
   color: #23160e;
   line-height: 1.38;
@@ -377,29 +498,35 @@
   box-shadow: 0 0 6px var(--event-accent, #aa8745);
 }
 
-/* --- Action Buttons (Directions & Save Date) --- */
+/* ============================================================================
+   SINGLE UNIFIED CALENDAR ACTION (NO MAP BUTTON ON CARDS)
+   ============================================================================ */
+
 .event-card__actions {
   position: relative;
   z-index: 3;
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  width: 100%;
   margin-top: 16px;
 }
 
+.event-card__cal-wrap {
+  width: 100%;
+  position: relative;
+}
+
 .event-card__btn {
-  flex: 1;
+  width: 100%;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  min-height: 40px;
-  padding: 0 12px;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
   border-radius: 999px;
   font-family: var(--font-serif);
-  font-size: 9.5px;
+  font-size: 10px;
   font-weight: 600;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -407,28 +534,18 @@
   white-space: nowrap;
 }
 
-.event-card__btn--directions {
-  background: linear-gradient(135deg, #7c243b 0%, #581628 100%);
-  color: #fffdf8;
-  border: 1px solid #4a1323;
-  box-shadow: 0 4px 10px rgba(100, 30, 50, 0.25);
-}
-
-.event-card__btn--directions:hover {
-  background: linear-gradient(135deg, #8f2a45 0%, #681a30 100%);
-  transform: translateY(-1.5px);
-}
-
 .event-card__btn--calendar {
-  background: rgba(212, 175, 55, 0.14);
-  color: #573e0a;
-  border: 1px solid rgba(170, 135, 69, 0.55);
+  background: linear-gradient(135deg, rgba(255, 252, 240, 0.98) 0%, rgba(247, 235, 206, 0.95) 100%);
+  color: #5a3d0b;
+  border: 1.5px solid rgba(186, 142, 62, 0.65);
+  box-shadow: 0 4px 12px rgba(90, 60, 15, 0.08);
 }
 
 .event-card__btn--calendar:hover {
-  background: rgba(212, 175, 55, 0.26);
+  background: linear-gradient(135deg, #fff7d9 0%, #f3de9f 100%);
   border-color: #aa8745;
   transform: translateY(-1.5px);
+  box-shadow: 0 6px 16px rgba(90, 60, 15, 0.15);
 }
 
 .event-card__btn--disabled {
@@ -438,16 +555,7 @@
   cursor: not-allowed;
 }
 
-/* --- Calendar Dropdown Menu --- */
-.event-card__cal-wrap {
-  flex: 1;
-  position: relative;
-}
-
-.event-card__cal-wrap .event-card__btn--calendar {
-  width: 100%;
-}
-
+/* Calendar Dropdown Menu */
 .event-card__cal-menu {
   position: absolute;
   bottom: calc(100% + 6px);
@@ -455,7 +563,7 @@
   left: 0;
   z-index: 20;
   background: #fffdf8;
-  border: 1px solid #aa8745;
+  border: 1.5px solid #aa8745;
   border-radius: 8px;
   box-shadow: 0 8px 24px rgba(70, 45, 15, 0.2);
   display: flex;
@@ -478,10 +586,10 @@
 .event-card__cal-item {
   display: block;
   width: 100%;
-  padding: 8px 10px;
+  padding: 9px 12px;
   text-align: left;
   font-family: var(--font-serif);
-  font-size: 9.5px;
+  font-size: 10px;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: #33251e;
@@ -499,14 +607,17 @@
 }
 
 @media (max-width: 360px) {
-  .event-card__inner {
-    padding: 22px 14px 16px;
+  .event-card__portrait-banner {
+    height: 165px;
+  }
+  .event-card__body {
+    padding: 14px 14px 0;
   }
   .event-card__title {
-    font-size: 20px;
+    font-size: 21px;
   }
   .event-card__btn {
-    font-size: 8.5px;
-    padding: 0 8px;
+    font-size: 9px;
+    padding: 0 10px;
   }
 }

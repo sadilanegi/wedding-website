@@ -23,7 +23,7 @@
     "invitationGreeting": "Together with their families",
     "invitationPlea": "Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children",
     "tagline": "Celebrating Love, Sacred Tradition & Joyous Beginnings",
-    "date": "__",
+    "date": "10 – 17 December",
     "place": "__",
     "guestArrivalTime": "__",
     "instructionTap": "Tap to open",
@@ -37,10 +37,10 @@
       "id": "haldi",
       "title": "Haldi Ceremony",
       "tagline": "A morning of turmeric, sunshine, and laughter",
-      "date": "__",
-      "time": "__",
+      "date": "10 December",
+      "time": "10:00 AM",
       "guestArrivalTime": "__",
-      "startTime": "__",
+      "startTime": "10:00 AM",
       "endTime": "__",
       "venue": "__",
       "venueOverride": "__",
@@ -49,16 +49,17 @@
       "dressCode": "Sunshine Yellow & Florals",
       "instructions": "__",
       "accentColor": "#d97706",
-      "theme": "haldi"
+      "theme": "haldi",
+      "image": "__"
     },
     {
       "id": "mehendi",
       "title": "Mehendi Ceremony",
       "tagline": "Intricate henna motifs, folk beats, and festive cheer",
-      "date": "__",
-      "time": "__",
+      "date": "10 December",
+      "time": "5:00 PM",
       "guestArrivalTime": "__",
-      "startTime": "__",
+      "startTime": "5:00 PM",
       "endTime": "__",
       "venue": "__",
       "venueOverride": "__",
@@ -67,16 +68,17 @@
       "dressCode": "Henna Greens & Pastels",
       "instructions": "__",
       "accentColor": "#15803d",
-      "theme": "mehendi"
+      "theme": "mehendi",
+      "image": "__"
     },
     {
       "id": "wedding",
       "title": "Wedding Ceremony",
       "tagline": "The sacred Vedic rituals and the seven holy pheras",
-      "date": "__",
-      "time": "__",
+      "date": "17 December",
+      "time": "10:00 AM",
       "guestArrivalTime": "__",
-      "startTime": "__",
+      "startTime": "10:00 AM",
       "endTime": "__",
       "venue": "__",
       "venueOverride": "__",
@@ -85,16 +87,17 @@
       "dressCode": "Traditional Royal Ethnic / Vermillion & Gold",
       "instructions": "__",
       "accentColor": "#b91c1c",
-      "theme": "wedding"
+      "theme": "wedding",
+      "image": "__"
     },
     {
       "id": "reception",
       "title": "Grand Reception",
       "tagline": "Dinner banquet, toasts, and blessings for the newlyweds",
-      "date": "__",
-      "time": "__",
+      "date": "11 December",
+      "time": "7:00 PM",
       "guestArrivalTime": "__",
-      "startTime": "__",
+      "startTime": "7:00 PM",
       "endTime": "__",
       "venue": "__",
       "venueOverride": "__",
@@ -103,7 +106,8 @@
       "dressCode": "Black Tie / Indo-Western Haute Couture",
       "instructions": "__",
       "accentColor": "#1e3a8a",
-      "theme": "reception"
+      "theme": "reception",
+      "image": "__"
     }
   ],
 
