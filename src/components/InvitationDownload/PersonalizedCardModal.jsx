@@ -1,9 +1,6 @@
 import { useState, useEffect, useRef } from 'react'
 import PrintableInvitationCard from './PrintableInvitationCard'
-import {
-  exportCardNodeAsJpg,
-  exportCardNodeAsPdf,
-} from '../../utils/cardExporter.js'
+import { exportCardNodeAsPdf } from '../../utils/cardExporter.js'
 import './PersonalizedCardModal.css'
 
 export default function PersonalizedCardModal({
@@ -12,7 +9,6 @@ export default function PersonalizedCardModal({
   weddingData,
 }) {
   const [guestName, setGuestName] = useState('')
-  const [isExportingJpg, setIsExportingJpg] = useState(false)
   const [isExportingPdf, setIsExportingPdf] = useState(false)
   const [downloadSuccess, setDownloadSuccess] = useState('')
   const [exportError, setExportError] = useState('')
@@ -35,28 +31,6 @@ export default function PersonalizedCardModal({
 
   if (!isOpen) return null
 
-  const handleDownloadJpg = async () => {
-    const node = exportCardRef.current
-    if (!node || isExportingJpg) return
-
-    setIsExportingJpg(true)
-    setDownloadSuccess('')
-    setExportError('')
-    try {
-      const success = await exportCardNodeAsJpg(node, guestName)
-      if (success) {
-        setDownloadSuccess('✓ High-Resolution JPG downloaded to your photos!')
-        setTimeout(() => setDownloadSuccess(''), 4500)
-      } else {
-        setExportError('Could not generate JPG. Please try again.')
-      }
-    } catch {
-      setExportError('Export encountered an error. Please try again.')
-    } finally {
-      setIsExportingJpg(false)
-    }
-  }
-
   const handleDownloadPdf = async () => {
     const node = exportCardRef.current
     if (!node || isExportingPdf) return
@@ -67,7 +41,7 @@ export default function PersonalizedCardModal({
     try {
       const success = await exportCardNodeAsPdf(node, guestName)
       if (success) {
-        setDownloadSuccess('✓ Print-Ready PDF downloaded!')
+        setDownloadSuccess('✓ Print-Ready PDF downloaded successfully!')
         setTimeout(() => setDownloadSuccess(''), 4500)
       } else {
         setExportError('Could not generate PDF. Please try again.')
@@ -163,7 +137,7 @@ export default function PersonalizedCardModal({
           </div>
         </div>
 
-        {/* Clean Luxury Card Summary (Replaces heavy scroll preview for direct instant access) */}
+        {/* Clean Luxury Card Summary */}
         <div className="card-download-modal__card-summary">
           <div className="card-download-modal__summary-badge">
             <span className="card-download-modal__summary-star">✦</span>
@@ -190,39 +164,25 @@ export default function PersonalizedCardModal({
           </p>
         )}
 
-        {/* Direct Immediate Download Actions */}
+        {/* Direct Immediate PDF Download Action */}
         <div className="card-download-modal__actions">
           <button
             type="button"
             className="card-download-modal__btn card-download-modal__btn--primary"
-            onClick={handleDownloadJpg}
-            disabled={isExportingJpg || isExportingPdf}
-          >
-            <span className="card-download-modal__btn-icon">📥</span>
-            <span>
-              {isExportingJpg
-                ? 'Generating High-Res JPG...'
-                : 'Download as JPG (Photo)'}
-            </span>
-          </button>
-
-          <button
-            type="button"
-            className="card-download-modal__btn card-download-modal__btn--secondary"
             onClick={handleDownloadPdf}
-            disabled={isExportingJpg || isExportingPdf}
+            disabled={isExportingPdf}
           >
             <span className="card-download-modal__btn-icon">📄</span>
             <span>
               {isExportingPdf
-                ? 'Generating Print PDF...'
-                : 'Download as PDF (Print)'}
+                ? 'Generating High-Res PDF...'
+                : 'Download Personalized PDF'}
             </span>
           </button>
         </div>
 
         <p className="card-download-modal__offline-note">
-          ✦ Direct one-tap download. Ready for instant WhatsApp sharing or printing.
+          ✦ High-resolution printable PDF with complete ceremonies, couple portrait &amp; QR map.
         </p>
       </div>
 

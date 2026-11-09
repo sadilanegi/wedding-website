@@ -81,7 +81,7 @@ export default function InvitationFooter({
           onClick={onOpenDownloadModal}
         >
           <span className="footer-section__btn-icon" aria-hidden="true">📥</span>
-          <span>Download Personalized Card (JPG / PDF)</span>
+          <span>Download Personalized Invitation (PDF)</span>
         </button>
 
         <button
