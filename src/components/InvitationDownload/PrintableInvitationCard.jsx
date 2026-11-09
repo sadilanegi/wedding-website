@@ -201,8 +201,8 @@ export default function PrintableInvitationCard({
           {/* Full-width Royal Banner using the social preview image */}
           <div className="print-card__couple-banner-frame">
             <img
-              src="/og/wedding-preview.jpg"
-              alt="Sumit and Prachi Wedding Preview"
+              src={perspective.isBride ? '/og/wedding-preview-bride.jpg' : '/og/wedding-preview.jpg'}
+              alt={`${primaryFullName} and ${secondaryFullName} Wedding Preview`}
               className="print-card__couple-banner-img"
               crossOrigin="anonymous"
             />

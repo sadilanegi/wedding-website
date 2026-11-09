@@ -5,6 +5,14 @@
 [build.environment]
   NODE_VERSION = "22"
 
+[[edge_functions]]
+  path = "/"
+  function = "dynamic-og"
+
+[[edge_functions]]
+  path = "/index.html"
+  function = "dynamic-og"
+
 [[headers]]
   for = "/og/*"
   [headers.values]
