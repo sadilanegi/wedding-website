@@ -1,5 +1,5 @@
 import { isConfirmed } from '../../utils/weddingHelpers.js'
-import { GaneshaCrest, RoyalDivider, MonogramSeal } from './Ornaments'
+import { GaneshaCrest, RoyalDivider } from './Ornaments'
 import CoupleVarmalaStage from '../CoupleVarmala/CoupleVarmalaStage'
 import ScratchSaveTheDate from './ScratchSaveTheDate'
 import './InvitationHero.css'
@@ -9,8 +9,9 @@ export default function InvitationHero({
   general,
   introState = 'card',
   onCoupleContinue,
+  onUnlockFestivities,
 }) {
-  const { bride, groom, monogram } = couple
+  const { bride, groom } = couple
   const hasBrideParents = isConfirmed(bride.parents)
   const hasGroomParents = isConfirmed(groom.parents)
 
@@ -97,13 +98,8 @@ export default function InvitationHero({
           <p className="hero__tagline">{general.tagline}</p>
         )}
 
-        {/* Couple Monogram Royal Medallion */}
-        <div className="hero__monogram-wrap">
-          <MonogramSeal monogram={monogram} />
-        </div>
-
         {/* Interactive 24K Gold Foil Scratch-to-Reveal Save The Date Medallion */}
-        <ScratchSaveTheDate general={general} />
+        <ScratchSaveTheDate general={general} onUnlock={onUnlockFestivities} />
       </div>
     </header>
   )

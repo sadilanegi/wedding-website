@@ -1,3 +1,4 @@
+import { useState, useCallback, useEffect, useRef } from 'react'
 import wedding from '../../data/weddingContent.json'
 import { SvgGoldDefs, CornerFlourish, PichwaiKadambaToran, PichwaiFullCardWatermark } from './Ornaments'
 import InvitationHero from './InvitationHero'
@@ -20,10 +21,107 @@ export default function InvitationCard({
   useScrollReveal(containerRef, introState !== 'couple')
   const showCountdown = features?.countdown !== false
 
+  // Progressive Unlocking: Festivities are revealed after the 24K gold foil scratch ritual
+  const [isFestivitiesUnlocked, setIsFestivitiesUnlocked] = useState(false)
+  const [hasScrolledPastHero, setHasScrolledPastHero] = useState(false)
+  const userInteractedRef = useRef(false)
+  const autoScrollHeroTimerRef = useRef(null)
+
+  // Ensure card starts cleanly at the top on initial mount
+  useEffect(() => {
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual'
+    }
+    if (containerRef.current) {
+      containerRef.current.scrollTop = 0
+    }
+  }, [containerRef])
+
+  // Auto-scroll down to the 24K gold foil scratch card when card view loads
+  useEffect(() => {
+    if (introState !== 'card') return undefined
+
+    const stage = containerRef.current
+    if (!stage) return undefined
+
+    const markUserInteracted = () => {
+      userInteractedRef.current = true
+      if (autoScrollHeroTimerRef.current) {
+        clearTimeout(autoScrollHeroTimerRef.current)
+        autoScrollHeroTimerRef.current = null
+      }
+    }
+
+    const handleScroll = () => {
+      if (stage.scrollTop > 120) {
+        setHasScrolledPastHero(true)
+        markUserInteracted()
+      } else if (stage.scrollTop < 40) {
+        setHasScrolledPastHero(false)
+      }
+    }
+
+    stage.addEventListener('scroll', handleScroll, { passive: true })
+    stage.addEventListener('touchstart', markUserInteracted, { passive: true })
+    stage.addEventListener('wheel', markUserInteracted, { passive: true })
+
+    // If user has not scrolled within 2000ms, gently guide them down to the scratch card
+    autoScrollHeroTimerRef.current = setTimeout(() => {
+      if (userInteractedRef.current) return
+      const scratchEl = stage.querySelector('.scratch-medallion')
+      if (scratchEl) {
+        scratchEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      }
+    }, 2000)
+
+    return () => {
+      stage.removeEventListener('scroll', handleScroll)
+      stage.removeEventListener('touchstart', markUserInteracted)
+      stage.removeEventListener('wheel', markUserInteracted)
+      if (autoScrollHeroTimerRef.current) {
+        clearTimeout(autoScrollHeroTimerRef.current)
+      }
+    }
+  }, [introState, containerRef])
+
+  // Auto-scroll down to revealed festivities when unlocked
+  useEffect(() => {
+    if (!isFestivitiesUnlocked) return undefined
+    const stage = containerRef.current
+    if (!stage) return undefined
+
+    const timer = setTimeout(() => {
+      const chaptersBelow = stage.querySelector('.invite-card__chapters-below')
+      if (chaptersBelow) {
+        chaptersBelow.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      }
+    }, 1200)
+
+    return () => clearTimeout(timer)
+  }, [isFestivitiesUnlocked, containerRef])
+
+  const handleScrollToScratch = useCallback(() => {
+    userInteractedRef.current = true
+    if (autoScrollHeroTimerRef.current) {
+      clearTimeout(autoScrollHeroTimerRef.current)
+      autoScrollHeroTimerRef.current = null
+    }
+    const stage = containerRef.current
+    const scratchEl = stage?.querySelector('.scratch-medallion')
+    if (scratchEl) {
+      scratchEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [containerRef])
+
+  const handleUnlockFestivities = useCallback(() => {
+    setIsFestivitiesUnlocked(true)
+    setHasScrolledPastHero(true)
+  }, [])
+
   return (
     <main
       ref={containerRef}
-      className={`invite-stage invite-stage--${introState}`}
+      className={`invite-stage invite-stage--${introState} ${!isFestivitiesUnlocked ? 'invite-stage--locked-festivities' : 'invite-stage--unlocked'}`}
       aria-label={`Royal wedding invitation for ${couple.groom.firstName} and ${couple.bride.firstName}`}
       onClick={introState === 'couple' ? onCoupleContinue : undefined}
     >
@@ -67,9 +165,13 @@ export default function InvitationCard({
             general={general}
             introState={introState}
             onCoupleContinue={onCoupleContinue}
+            onUnlockFestivities={handleUnlockFestivities}
           />
 
-          <div className="invite-card__chapters-below">
+          <div
+            className={`invite-card__chapters-below ${isFestivitiesUnlocked ? 'is-unlocked' : 'is-locked'}`}
+            aria-hidden={!isFestivitiesUnlocked}
+          >
             {/* Chapter 2: Astronomical Wedding Countdown */}
             {showCountdown && <WeddingCountdown weddingData={wedding} />}
 
@@ -95,6 +197,25 @@ export default function InvitationCard({
           </div>
         </div>
       </article>
+
+      {/* Floating Royal Scroll Guide to Lead Guests to the 24K Gold Scratch Card */}
+      {introState === 'card' && !isFestivitiesUnlocked && (
+        <aside
+          className={`invite-scroll-guide ${hasScrolledPastHero ? 'is-hidden' : ''}`}
+          aria-hidden={hasScrolledPastHero}
+        >
+          <button
+            type="button"
+            className="invite-scroll-guide__btn"
+            onClick={handleScrollToScratch}
+            aria-label="Scroll down to reveal sacred scratch card"
+          >
+            <span className="invite-scroll-guide__star" aria-hidden="true">✦</span>
+            <span className="invite-scroll-guide__label">Scroll Down to Unveil</span>
+            <span className="invite-scroll-guide__arrow" aria-hidden="true">↓</span>
+          </button>
+        </aside>
+      )}
     </main>
   )
 }

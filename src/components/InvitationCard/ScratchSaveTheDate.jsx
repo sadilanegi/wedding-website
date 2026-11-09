@@ -8,7 +8,7 @@ import './ScratchSaveTheDate.css'
  * Guests can scratch with their finger (mobile touch) or cursor (desktop) to reveal
  * the wedding date announcement with live gold-dust sparks and celebratory confetti.
  */
-export default function ScratchSaveTheDate({ general }) {
+export default function ScratchSaveTheDate({ general, onUnlock }) {
   const canvasRef = useRef(null)
   const containerRef = useRef(null)
   const isDrawingRef = useRef(false)
@@ -23,6 +23,18 @@ export default function ScratchSaveTheDate({ general }) {
   const hasDate = isConfirmed(general?.date)
   const hasPlace = isConfirmed(general?.place)
   const hasGuestArrival = isConfirmed(general?.guestArrivalTime)
+
+  const triggerUnlock = useCallback(() => {
+    setIsRevealed(true)
+    if (onUnlock) onUnlock()
+    if (typeof navigator !== 'undefined' && navigator.vibrate) {
+      try {
+        navigator.vibrate([35, 50, 35])
+      } catch {
+        // ignore
+      }
+    }
+  }, [onUnlock])
 
   // Paint rich 24K brushed gold foil onto the canvas
   const initGoldFoilCanvas = useCallback(() => {
@@ -101,13 +113,13 @@ export default function ScratchSaveTheDate({ general }) {
     drawRosette(34, height / 2, 22)
     drawRosette(width - 34, height / 2, 22)
 
-    // 5. Stamped Foil Typography
+    // 5. Stamped Foil Typography for Unlocking Festivities
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
     ctx.font = '600 10px "Cinzel", Georgia, serif'
     ctx.fillStyle = 'rgba(78, 46, 8, 0.9)'
-    ctx.fillText('✦   S A V E   T H E   D A T E   ✦', width / 2, height / 2 - 22)
+    ctx.fillText('✦   S A C R E D   U N V E I L I N G   ✦', width / 2, height / 2 - 22)
 
     ctx.font = 'italic 600 20px "Cormorant Garamond", Georgia, serif'
     ctx.fillStyle = '#3b2105'
@@ -115,12 +127,12 @@ export default function ScratchSaveTheDate({ general }) {
     ctx.shadowOffsetX = 0
     ctx.shadowOffsetY = 1
     ctx.shadowBlur = 0
-    ctx.fillText('Scratch Gold Foil to Unveil', width / 2, height / 2 + 2)
+    ctx.fillText('Scratch to Unlock Celebrations', width / 2, height / 2 + 2)
 
     ctx.shadowColor = 'transparent'
-    ctx.font = '500 9.5px "Cinzel", Georgia, serif'
-    ctx.fillStyle = 'rgba(88, 52, 10, 0.85)'
-    ctx.fillText('USE YOUR FINGER OR CURSOR', width / 2, height / 2 + 25)
+    ctx.font = '500 9px "Cinzel", Georgia, serif'
+    ctx.fillStyle = 'rgba(88, 52, 10, 0.88)'
+    ctx.fillText('RUB GOLD FOIL WITH FINGER OR CURSOR', width / 2, height / 2 + 25)
 
     ctx.restore()
   }, [])
@@ -162,12 +174,12 @@ export default function ScratchSaveTheDate({ general }) {
 
       const ratio = totalSampled > 0 ? transparentPixels / totalSampled : 0
       if (ratio >= 0.36) {
-        setIsRevealed(true)
+        triggerUnlock()
       }
     } catch {
       // Fallback if getImageData is restricted
     }
-  }, [isRevealed])
+  }, [isRevealed, triggerUnlock])
 
   // Erase a circular/feathered stroke between previous and current pointer points
   const scratchAtPoint = useCallback(
@@ -364,15 +376,44 @@ export default function ScratchSaveTheDate({ general }) {
         </div>
       </div>
 
-      {/* Accessible One-Tap Reveal Helper below the Medallion */}
+      {/* Accessible One-Tap Unlock Helper below the Medallion */}
       {!isRevealed && (
         <button
           type="button"
           className="scratch-medallion__quick-reveal"
-          onClick={() => setIsRevealed(true)}
+          onClick={triggerUnlock}
         >
-          ✦ Rub gold foil above or tap here to reveal ✦
+          ✦ Rub gold foil above or tap here to unlock festivities ✦
         </button>
+      )}
+
+      {/* Celebratory Unlocked Scroll Cue Button */}
+      {isRevealed && (
+        <div
+          className="scratch-medallion__unlocked-cue"
+          onClick={() => {
+            const nextChapter = document.querySelector('.invite-card__chapters-below')
+            if (nextChapter) {
+              nextChapter.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault()
+              const nextChapter = document.querySelector('.invite-card__chapters-below')
+              if (nextChapter) {
+                nextChapter.scrollIntoView({ behavior: 'smooth', block: 'start' })
+              }
+            }
+          }}
+          role="button"
+          tabIndex={0}
+          aria-label="Scroll to explore celebrations"
+        >
+          <span className="scratch-medallion__unlocked-sparkle" aria-hidden="true">✨</span>
+          <span className="scratch-medallion__unlocked-text">Festivities Unlocked • Scroll to Explore</span>
+          <span className="scratch-medallion__unlocked-arrow" aria-hidden="true">↓</span>
+        </div>
       )}
     </div>
   )

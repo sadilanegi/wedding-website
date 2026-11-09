@@ -43,122 +43,13 @@
   color: #33251e;
 }
 
-/* --- Interactive Sacred Diya & Ashirwad Blessing Pavilion --- */
-.footer-ashirwad {
-  position: relative;
-  margin-top: 18px;
-  padding: 14px 20px;
-  width: 100%;
-  max-width: 340px;
-  border-radius: 12px;
-  background: radial-gradient(circle at 50% 30%, #fffdf8 0%, #faeed7 100%);
-  border: 1px solid rgba(186, 142, 62, 0.55);
-  box-shadow:
-    inset 0 0 0 2px rgba(255, 250, 236, 0.9),
-    0 8px 22px rgba(70, 40, 15, 0.09);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-
-.footer-ashirwad__diyas {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
-}
-
-.footer-ashirwad__diya {
-  display: inline-flex;
-  transition: transform 0.25s ease;
-}
-
-.footer-ashirwad__diya.is-glowing {
-  transform: scale(1.1);
-}
-
-.footer-ashirwad__btn {
-  padding: 7px 16px;
-  border-radius: 999px;
-  background: linear-gradient(135deg, #7c1d34 0%, #581325 100%);
-  border: 1px solid rgba(212, 175, 55, 0.65);
-  color: #fff8dc;
-  font-family: var(--font-serif);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  box-shadow: 0 4px 12px rgba(100, 30, 50, 0.25);
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.footer-ashirwad__btn:hover,
-.footer-ashirwad__btn:active {
-  transform: scale(1.04);
-  box-shadow:
-    0 6px 16px rgba(100, 30, 50, 0.32),
-    0 0 14px rgba(212, 175, 55, 0.45);
-}
-
-.footer-ashirwad__count {
-  font-family: var(--font-display);
-  font-size: 14px;
-  font-style: italic;
-  font-weight: 600;
-  color: #7c1d34;
-}
-
-.footer-ashirwad__burst {
-  position: absolute;
-  left: 50%;
-  top: 40%;
-  width: 0;
-  height: 0;
-  pointer-events: none;
-  z-index: 10;
-}
-
-.footer-ashirwad__petal {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 65% 35% 70% 30%;
-  animation: ashirwadPetalFly 950ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-.footer-ashirwad__petal.is-marigold {
-  background: radial-gradient(circle, #fde047 0%, #f59e0b 80%);
-  box-shadow: 0 0 6px rgba(245, 158, 11, 0.75);
-}
-
-.footer-ashirwad__petal.is-rose {
-  background: radial-gradient(circle, #ef4444 0%, #991b1b 85%);
-  box-shadow: 0 0 6px rgba(185, 28, 28, 0.65);
-}
-
-@keyframes ashirwadPetalFly {
-  0% {
-    opacity: 1;
-    transform: translate(0, 0) scale(0.4) rotate(0deg);
-  }
-  80% {
-    opacity: 0.9;
-  }
-  100% {
-    opacity: 0;
-    transform: translate(var(--tx, 40px), var(--ty, -60px)) scale(1.15) rotate(240deg);
-  }
-}
-
 /* Sacred Krishna Closing Blessing */
 .footer-section__krishna-closing {
-  margin: 18px 0 6px;
+  margin: 18px 0 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
+  gap: 3px;
 }
 
 .footer-section__radhe-callout {
@@ -177,16 +68,6 @@
   text-transform: uppercase;
   color: #8c672b;
   font-weight: 600;
-}
-
-.footer-section__monogram {
-  margin: 14px 0 12px;
-  transform: scale(0.75);
-  transition: transform 950ms cubic-bezier(0.2, 0.95, 0.32, 1.15) 180ms;
-}
-
-.footer-section.is-in-view .footer-section__monogram {
-  transform: scale(1);
 }
 
 .footer-section__names {

@@ -114,9 +114,9 @@
   "venueSummary": {
     "title": "Venue & Celebration Location",
     "hall": "__",
-    "address": "__",
-    "city": "__",
-    "mapUrl": "__"
+    "address": "__, Vrindavan",
+    "city": "Vrindavan, Uttar Pradesh",
+    "mapUrl": "https://maps.google.com/?q=Vrindavan,+Uttar+Pradesh"
   },
 
   "design": {
