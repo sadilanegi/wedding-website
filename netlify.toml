@@ -14,11 +14,22 @@
   function = "dynamic-og"
 
 [[headers]]
+  for = "/events/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, immutable"
+    Access-Control-Allow-Origin = "*"
+
+[[headers]]
   for = "/og/*"
   [headers.values]
     Cache-Control = "public, max-age=86400, must-revalidate"
     Access-Control-Allow-Origin = "*"
     X-Robots-Tag = "all"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
 
 [[redirects]]
   from = "/*"

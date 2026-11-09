@@ -65,6 +65,59 @@ export default function PrintableInvitationCard({
     ? venueSummary.mapUrl
     : 'https://www.google.com/maps/search/?api=1&query=Vrindavan%2C%20Uttar%20Pradesh'
 
+  const [coupleDataUrl, setCoupleDataUrl] = useState('')
+  const [eventDataUrls, setEventDataUrls] = useState({})
+
+  useEffect(() => {
+    let isMounted = true
+
+    const toDataUrl = async (url) => {
+      try {
+        const res = await fetch(url)
+        if (!res.ok) return url
+        const blob = await res.blob()
+        return await new Promise((resolve) => {
+          const reader = new FileReader()
+          reader.onloadend = () => resolve(reader.result)
+          reader.onerror = () => resolve(url)
+          reader.readAsDataURL(blob)
+        })
+      } catch {
+        return url
+      }
+    }
+
+    const bannerUrl = perspective.isBride
+      ? '/og/wedding-preview-bride.jpg'
+      : '/og/wedding-preview-groom.jpg'
+
+    toDataUrl(bannerUrl).then((dUrl) => {
+      if (isMounted) setCoupleDataUrl(dUrl)
+    })
+
+    const eventSources = [
+      ['haldi', '/events/haldi.jpg'],
+      ['mehendi', '/events/mehendi.jpg'],
+      ['wedding', '/events/wedding.jpg'],
+      ['reception', '/events/reception.jpg'],
+    ]
+
+    Promise.all(
+      eventSources.map(async ([key, url]) => {
+        const dUrl = await toDataUrl(url)
+        return [key, dUrl]
+      })
+    ).then((entries) => {
+      if (isMounted) {
+        setEventDataUrls(Object.fromEntries(entries))
+      }
+    })
+
+    return () => {
+      isMounted = false
+    }
+  }, [perspective.isBride])
+
   useEffect(() => {
     QRCode.toDataURL(mapDestinationUrl, {
       margin: 1,
@@ -201,10 +254,14 @@ export default function PrintableInvitationCard({
           {/* Full-width Royal Banner using the social preview image */}
           <div className="print-card__couple-banner-frame">
             <img
-              src={perspective.isBride ? '/og/wedding-preview-bride.jpg' : '/og/wedding-preview-groom.jpg'}
+              src={
+                coupleDataUrl ||
+                (perspective.isBride
+                  ? '/og/wedding-preview-bride.jpg'
+                  : '/og/wedding-preview-groom.jpg')
+              }
               alt={`${primaryFullName} and ${secondaryFullName} Wedding Preview`}
               className="print-card__couple-banner-img"
-              crossOrigin="anonymous"
               loading="eager"
               decoding="sync"
             />
@@ -328,10 +385,11 @@ export default function PrintableInvitationCard({
                 {/* Clean Full-Width Ceremony Photo */}
                 <div className="print-card__event-media">
                   <img
-                    src={ev.image}
+                    src={eventDataUrls[ev.id] || ev.image}
                     alt={ev.title}
                     className="print-card__event-img"
-                    crossOrigin="anonymous"
+                    loading="eager"
+                    decoding="sync"
                   />
                   <div className="print-card__event-photo-overlay" aria-hidden="true" />
                   <div className="print-card__event-photo-border" aria-hidden="true" />

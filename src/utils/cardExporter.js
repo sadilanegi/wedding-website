@@ -160,6 +160,41 @@ async function ensureDocumentFontsReady() {
 }
 
 /**
+ * Convert all <img> elements inside the node to inline Base64 data URLs.
+ * On iOS Safari / WebKit, SVG <foreignObject> strictly prohibits subresource
+ * loading during canvas rasterization, causing external or relative images
+ * to render blank in generated PDFs on iPhones.
+ * Inlining all images as base64 data URLs ensures 100% synchronous, bulletproof
+ * rasterization on iOS Safari, Android, and Desktop without CORS or sandbox blocking.
+ */
+async function inlineAllImagesAsBase64(node) {
+  const images = Array.from(node.querySelectorAll('img'))
+  await Promise.all(
+    images.map(async (img) => {
+      const src = img.currentSrc || img.getAttribute('src') || img.src || ''
+      if (!src || src.startsWith('data:')) return
+
+      try {
+        const res = await fetch(src)
+        if (res.ok) {
+          const blob = await res.blob()
+          const dataUrl = await new Promise((resolve, reject) => {
+            const reader = new FileReader()
+            reader.onloadend = () => resolve(reader.result)
+            reader.onerror = reject
+            reader.readAsDataURL(blob)
+          })
+          img.removeAttribute('crossorigin')
+          img.src = dataUrl
+        }
+      } catch (err) {
+        console.warn('[CardExporter] Could not inline image to base64:', src, err)
+      }
+    })
+  )
+}
+
+/**
  * Wait until all <img> tags inside the card node are fully loaded and decoded.
  */
 async function ensureImagesLoaded(node) {
@@ -193,6 +228,7 @@ export async function exportCardNodeAsPdf(node, guestName = '') {
   try {
     console.log('[CardExporter] Ensuring fonts & images loaded for PDF...')
     await ensureDocumentFontsReady()
+    await inlineAllImagesAsBase64(node)
     await ensureImagesLoaded(node)
     // Let layout settle after fonts swap in
     await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
