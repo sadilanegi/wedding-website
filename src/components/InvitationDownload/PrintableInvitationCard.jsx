@@ -105,6 +105,13 @@ export default function PrintableInvitationCard({
   const displayGuestName =
     guestName.trim() !== '' ? guestName.trim() : 'Our Honoured Guests & Family'
 
+  // Auto-fit the guest name onto ONE line across the full card width.
+  // ~620px usable width; Cormorant Garamond bold averages ~0.5em per character.
+  const guestNameFontSize = Math.max(
+    18,
+    Math.min(32, Math.floor(600 / (displayGuestName.length * 0.5)))
+  )
+
   return (
     <div ref={forwardedRef} className="print-card">
       {/* 24K Gold & Metallic Gradient System */}
@@ -190,7 +197,12 @@ export default function PrintableInvitationCard({
             <span className="print-card__guest-badge-star">✦</span>
           </div>
 
-          <h2 className="print-card__guest-name">{displayGuestName}</h2>
+          <h2
+            className="print-card__guest-name"
+            style={{ fontSize: `${guestNameFontSize}px` }}
+          >
+            {displayGuestName}
+          </h2>
 
           <p className="print-card__invitation-plea">
             Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children
@@ -203,21 +215,19 @@ export default function PrintableInvitationCard({
         <section className="print-card__schedule-highlights">
           <div className="print-card__highlight-box">
             <span className="print-card__highlight-day">DAY 1 · 10 DECEMBER</span>
-            <span className="print-card__highlight-events">
-              Mangal Haldi (10:00 AM) &amp; Mehendi (5:00 PM)
-            </span>
+            <span className="print-card__highlight-event">Mangal Haldi · 10:00 AM</span>
+            <span className="print-card__highlight-event">Mehendi · 5:00 PM</span>
           </div>
           <div className="print-card__highlight-divider" aria-hidden="true">✦</div>
           <div className="print-card__highlight-box">
             <span className="print-card__highlight-day">DAY 2 · 11 DECEMBER</span>
-            <span className="print-card__highlight-events">
-              Vedic Saat Pheras (10:00 AM) &amp; Grand Reception (7:00 PM)
-            </span>
+            <span className="print-card__highlight-event">Vedic Saat Pheras · 10:00 AM</span>
+            <span className="print-card__highlight-event">Grand Reception · 7:00 PM</span>
           </div>
         </section>
 
         {/* ====================================================================
-            5. THE FOUR SACRED WEDDING CEREMONIES (FULL WIDTH, 1 PER ROW)
+            5. THE FOUR SACRED WEDDING CEREMONIES (2 × 2 GRID)
             ==================================================================== */}
         <section className="print-card__events-section">
           {/* Lord Krishna Divine Bansuri & Mor Pankh Crest flanked by Kamdhenu Cows */}
@@ -240,7 +250,7 @@ export default function PrintableInvitationCard({
             Four auspicious ceremonies to celebrate love, tradition, and eternal union
           </p>
 
-          {/* Full-width Stacked Ceremony Cards */}
+          {/* 2 × 2 Ceremony Grid */}
           <div className="print-card__events-list">
             {events.map((ev) => (
               <article key={ev.id} className={`print-card__event-card print-card__event-card--${ev.theme}`}>
