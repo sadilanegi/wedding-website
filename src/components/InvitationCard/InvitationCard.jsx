@@ -17,10 +17,9 @@ export default function InvitationCard({
   introState = 'card',
   onCoupleContinue,
 }) {
-  const { couple, general, events, venueSummary, rsvp, features, website } = wedding
+  const { couple, general, events, venueSummary, rsvp } = wedding
   const { containerRef, cardRef } = use3DCardTilt()
   useScrollReveal(containerRef, introState !== 'couple')
-  const showCountdown = features?.countdown !== false
 
   // Progressive Unlocking: Festivities are revealed after the 24K gold foil scratch ritual
   const [isFestivitiesUnlocked, setIsFestivitiesUnlocked] = useState(false)
@@ -175,7 +174,7 @@ export default function InvitationCard({
             aria-hidden={!isFestivitiesUnlocked}
           >
             {/* Chapter 2: Astronomical Wedding Countdown */}
-            {showCountdown && <WeddingCountdown weddingData={wedding} />}
+            <WeddingCountdown weddingData={wedding} />
 
             {/* Chapter 3: The Five Sacred Celebrations */}
             <WeddingTimeline
@@ -194,7 +193,6 @@ export default function InvitationCard({
             <InvitationFooter
               couple={couple}
               general={general}
-              website={website}
               onOpenDownloadModal={() => setIsDownloadModalOpen(true)}
             />
           </div>

@@ -1,31 +1,29 @@
-
 {
   "couple": {
     "bride": {
       "firstName": "Prachi",
       "lastName": "__",
-      "parents": "__"
+      "fatherName": "__",
+      "motherName": "__"
     },
     "groom": {
       "firstName": "Sumit",
       "lastName": "__",
-      "parents": "__"
+      "fatherName": "__",
+      "motherName": "__"
     },
-    "monogram": "S & P",
     "hashtag": "#SUPRA"
   },
 
   "general": {
     "heading": "Wedding Invitation",
-    "showInvocation": true,
     "invocation": "॥ श्री गणेशाय नमः ॥",
     "invocationSub": "Om Shri Ganeshaya Namah",
     "invitationGreeting": "Together with their families",
     "invitationPlea": "Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children",
     "tagline": "Joined in Love, Blessed by the Eternal Grace of Lord Krishna & Shri Radha",
     "date": "10 – 11 December",
-    "place": "__",
-    "guestArrivalTime": "__",
+    "place": "Vrindavan, Uttar Pradesh",
     "instructionTap": "Tap to open",
     "videoUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794127296/9ed453103d9bbd1196b9d17bd4256d20_720w_online-video-cutter.com_xzvmqy.mp4",
     "musicUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794140404/aaj-sajeya-alaya-f-goldie-sohel-punit-malhotra-official-video-sneakersong-dharm_QVmldlBL_qngg8r.mp3",
@@ -39,13 +37,6 @@
       "tagline": "Braj Ki Kesar Haldi — A morning of golden turmeric, marigolds, and joyous laughter",
       "date": "10 December",
       "time": "10:00 AM",
-      "guestArrivalTime": "__",
-      "startTime": "10:00 AM",
-      "endTime": "__",
-      "venue": "__",
-      "venueOverride": "__",
-      "address": "__",
-      "mapUrl": "__",
       "dressCode": "Sunshine Yellow & Florals",
       "instructions": "__",
       "accentColor": "#d97706",
@@ -58,13 +49,6 @@
       "tagline": "Kunj Galiyon Ki Mehendi — Auspicious peacock motifs, deep henna fragrance, and folk melodies",
       "date": "10 December",
       "time": "5:00 PM",
-      "guestArrivalTime": "__",
-      "startTime": "5:00 PM",
-      "endTime": "__",
-      "venue": "__",
-      "venueOverride": "__",
-      "address": "__",
-      "mapUrl": "__",
       "dressCode": "Henna Greens & Pastels",
       "instructions": "__",
       "accentColor": "#15803d",
@@ -77,13 +61,6 @@
       "tagline": "Rukmini-Kalyanam & Vedic Pheras — The sacred Vedic rituals and seven holy vows under divine grace",
       "date": "11 December",
       "time": "10:00 AM",
-      "guestArrivalTime": "__",
-      "startTime": "10:00 AM",
-      "endTime": "__",
-      "venue": "__",
-      "venueOverride": "__",
-      "address": "__",
-      "mapUrl": "__",
       "dressCode": "Traditional Royal Ethnic / Vermillion & Gold",
       "instructions": "__",
       "accentColor": "#b91c1c",
@@ -96,13 +73,6 @@
       "tagline": "Divya Raas & Royal Evening Gala — An enchanted starlit celebration of love, music, and blessings",
       "date": "11 December",
       "time": "7:00 PM",
-      "guestArrivalTime": "__",
-      "startTime": "7:00 PM",
-      "endTime": "__",
-      "venue": "__",
-      "venueOverride": "__",
-      "address": "__",
-      "mapUrl": "__",
       "dressCode": "Black Tie / Indo-Western Haute Couture",
       "instructions": "__",
       "accentColor": "#1e3a8a",
@@ -119,51 +89,11 @@
     "mapUrl": "https://maps.google.com/?q=Vrindavan,+Uttar+Pradesh"
   },
 
-  "design": {
-    "theme": "__",
-    "colors": [],
-    "overallStyle": "__",
-    "inspirationUrls": [],
-    "customRequests": []
-  },
-
-  "media": {
-    "photoLinks": [],
-    "videoLinks": [],
-    "galleryPreference": "__",
-    "photoAvailability": "__",
-    "videoAvailability": "__"
-  },
-
-  "features": {
-    "countdown": true,
-    "photoGallery": "__",
-    "rsvp": "__",
-    "googleMaps": "__",
-    "whatsappSharing": "__",
-    "calendarLinks": "__",
-    "qrCode": "__",
-    "guestbook": "__",
-    "thankYouPage": "__"
-  },
-
   "rsvp": {
     "googleSheetsScriptUrl": "https://script.google.com/macros/s/AKfycbzdEgFX7GV99_xW3h-7-JBWoJwh0_nmT3gE8OMRSz6riF7nC7f4oy1SnUMskOntf9ZK/exec",
-    "note": "Please kindly grace the occasion and confirm your presence by __",
-    "contactPerson": "__",
-    "phone": "__",
-    "whatsappNumber": "__",
-    "whatsappMessage": "Hi Sumit & Prachi, I would love to confirm my attendance for your wedding celebrations!",
+    "note": "__",
     "deadline": "__",
-    "attendanceOptions": [],
-    "guestCountPreference": "__",
-    "privacyPreference": "__"
-  },
-
-  "website": {
-    "language": "__",
-    "postWeddingBehavior": "__",
-    "thankYouMessage": "__",
-    "additionalRequests": []
+    "contactPerson": "__",
+    "phone": "__"
   }
 }

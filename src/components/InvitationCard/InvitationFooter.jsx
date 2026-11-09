@@ -7,7 +7,6 @@ import './InvitationFooter.css'
 export default function InvitationFooter({
   couple,
   general,
-  website,
   onOpenDownloadModal,
 }) {
   const [sharedFeedback, setSharedFeedback] = useState(false)
@@ -15,7 +14,6 @@ export default function InvitationFooter({
 
   const hasBlessing = isConfirmed(general?.familyBlessing)
   const hasHashtag = isConfirmed(couple?.hashtag)
-  const hasThankYou = isConfirmed(website?.thankYouMessage)
 
   const coupleNames = perspective.coupleLabel
 
@@ -54,10 +52,6 @@ export default function InvitationFooter({
 
       {hasBlessing && (
         <p className="footer-section__blessing">{general.familyBlessing}</p>
-      )}
-
-      {hasThankYou && (
-        <p className="footer-section__thank-you">{website.thankYouMessage}</p>
       )}
 
       {/* Sacred Krishna Closing Blessing */}

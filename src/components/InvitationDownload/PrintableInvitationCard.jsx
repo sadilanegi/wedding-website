@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react'
 import QRCode from 'qrcode'
+import weddingContent from '../../data/weddingContent.json'
+import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { useWeddingPerspective } from '../../utils/weddingPerspective.js'
 import {
   SvgGoldDefs,
@@ -17,16 +19,51 @@ import {
 } from '../InvitationCard/Ornaments'
 import './PrintableInvitationCard.css'
 
+function formatParentsLine(person) {
+  if (!person) return ''
+  const mother = isConfirmed(person.motherName) ? person.motherName.trim() : ''
+  const father = isConfirmed(person.fatherName) ? person.fatherName.trim() : ''
+  if (mother && father) return `${mother} & ${father}`
+  if (father) return father
+  if (mother) return mother
+  return ''
+}
+
 export default function PrintableInvitationCard({
   guestName = '',
-  _weddingData,
+  weddingData,
   forwardedRef,
 }) {
+  const data = weddingData || weddingContent
+  const couple = data?.couple || weddingContent.couple
+  const venueSummary = data?.venueSummary || weddingContent.venueSummary
   const perspective = useWeddingPerspective()
   const [qrDataUrl, setQrDataUrl] = useState('')
 
-  const mapDestinationUrl =
-    'https://www.google.com/maps/search/?api=1&query=Vrindavan%2C%20Uttar%20Pradesh'
+  const groomFullName = isConfirmed(couple?.groom?.lastName)
+    ? `${couple.groom.firstName} ${couple.groom.lastName}`
+    : couple?.groom?.firstName || 'Sumit'
+
+  const brideFullName = isConfirmed(couple?.bride?.lastName)
+    ? `${couple.bride.firstName} ${couple.bride.lastName}`
+    : couple?.bride?.firstName || 'Prachi'
+
+  const primaryFullName = perspective.isBride ? brideFullName : groomFullName
+  const secondaryFullName = perspective.isBride ? groomFullName : brideFullName
+
+  const brideParentsText = formatParentsLine(couple?.bride)
+  const groomParentsText = formatParentsLine(couple?.groom)
+  const hasBrideParents = Boolean(brideParentsText)
+  const hasGroomParents = Boolean(groomParentsText)
+
+  const venueHall = isConfirmed(venueSummary?.hall)
+    ? venueSummary.hall
+    : 'Venue & Celebration Grounds'
+  const venueAddress = venueSummary?.address || '__, Vrindavan'
+  const venueCity = (venueSummary?.city || 'Vrindavan, Uttar Pradesh').toUpperCase()
+  const mapDestinationUrl = isConfirmed(venueSummary?.mapUrl)
+    ? venueSummary.mapUrl
+    : 'https://www.google.com/maps/search/?api=1&query=Vrindavan%2C%20Uttar%20Pradesh'
 
   useEffect(() => {
     QRCode.toDataURL(mapDestinationUrl, {
@@ -41,7 +78,7 @@ export default function PrintableInvitationCard({
       .catch(() => {
         // fallback
       })
-  }, [])
+  }, [mapDestinationUrl])
 
   const events = [
     {
@@ -173,8 +210,40 @@ export default function PrintableInvitationCard({
           </div>
 
           <h1 className="print-card__couple-names">
-            {perspective.primaryName} &amp; {perspective.secondaryName}
+            {primaryFullName} &amp; {secondaryFullName}
           </h1>
+
+          {(hasBrideParents || hasGroomParents) && (
+            <div className="print-card__parents-block">
+              {perspective.isBride ? (
+                <>
+                  {hasBrideParents && (
+                    <p className="print-card__parent-line">
+                      <span>Daughter of</span> {brideParentsText}
+                    </p>
+                  )}
+                  {hasGroomParents && (
+                    <p className="print-card__parent-line">
+                      <span>Son of</span> {groomParentsText}
+                    </p>
+                  )}
+                </>
+              ) : (
+                <>
+                  {hasGroomParents && (
+                    <p className="print-card__parent-line">
+                      <span>Son of</span> {groomParentsText}
+                    </p>
+                  )}
+                  {hasBrideParents && (
+                    <p className="print-card__parent-line">
+                      <span>Daughter of</span> {brideParentsText}
+                    </p>
+                  )}
+                </>
+              )}
+            </div>
+          )}
 
           <p className="print-card__blessing-tagline">
             Joined in Love, Blessed by the Eternal Grace of Lord Krishna &amp; Shri Radha
@@ -335,12 +404,12 @@ export default function PrintableInvitationCard({
                   <span className="print-card__venue-kicker">
                     ✦ SACRED CELEBRATION LOCATION ✦
                   </span>
-                  <h3 className="print-card__venue-hall">Venue &amp; Celebration Grounds</h3>
+                  <h3 className="print-card__venue-hall">{venueHall}</h3>
                 </div>
               </div>
 
-              <p className="print-card__venue-address">__, Vrindavan</p>
-              <p className="print-card__venue-city">VRINDAVAN, UTTAR PRADESH</p>
+              <p className="print-card__venue-address">{venueAddress}</p>
+              <p className="print-card__venue-city">{venueCity}</p>
               <p className="print-card__venue-district">
                 Holy Land of Shri Radha Krishna · Mathura District
               </p>

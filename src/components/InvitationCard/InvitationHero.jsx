@@ -5,6 +5,17 @@ import CoupleVarmalaStage from '../CoupleVarmala/CoupleVarmalaStage'
 import ScratchSaveTheDate from './ScratchSaveTheDate'
 import './InvitationHero.css'
 
+function formatParentsLine(person) {
+  if (!person) return ''
+  const mother = isConfirmed(person.motherName) ? person.motherName.trim() : ''
+  const father = isConfirmed(person.fatherName) ? person.fatherName.trim() : ''
+  if (mother && father) return `${mother} & ${father}`
+  if (father) return father
+  if (mother) return mother
+  if (isConfirmed(person.parents)) return person.parents.trim()
+  return ''
+}
+
 export default function InvitationHero({
   couple,
   general,
@@ -14,8 +25,10 @@ export default function InvitationHero({
 }) {
   const { bride, groom } = couple
   const perspective = useWeddingPerspective()
-  const hasBrideParents = isConfirmed(bride.parents)
-  const hasGroomParents = isConfirmed(groom.parents)
+  const brideParentsText = formatParentsLine(bride)
+  const groomParentsText = formatParentsLine(groom)
+  const hasBrideParents = Boolean(brideParentsText)
+  const hasGroomParents = Boolean(groomParentsText)
 
   const groomFullName = isConfirmed(groom.lastName)
     ? `${groom.firstName} ${groom.lastName}`
@@ -34,15 +47,13 @@ export default function InvitationHero({
     <header className="hero" aria-label="Wedding announcement">
       <div className="hero__upper-reveal">
         {/* Sacred Invocation (Lord Ganesha) */}
-        {general.showInvocation && (
-          <div className="hero__invocation-wrap">
-            <GaneshaCrest className="hero__ganesha" />
-            <p className="hero__shloka" lang="sa">
-              {general.invocation}
-            </p>
-            <p className="hero__shloka-en">{general.invocationSub}</p>
-          </div>
-        )}
+        <div className="hero__invocation-wrap">
+          <GaneshaCrest className="hero__ganesha" />
+          <p className="hero__shloka" lang="sa">
+            {general.invocation}
+          </p>
+          <p className="hero__shloka-en">{general.invocationSub}</p>
+        </div>
 
         <RoyalDivider className="hero__divider hero__divider--top" />
 
@@ -82,19 +93,19 @@ export default function InvitationHero({
           </h1>
         </div>
 
-        {/* Parents / Heritage Line (Shown only when confirmed) */}
+        {/* Parents / Heritage Line (Shown only when confirmed, ordered by active side) */}
         {(hasGroomParents || hasBrideParents) && (
           <div className="hero__heritage">
             {perspective.isBride ? (
               <>
                 {hasBrideParents && (
                   <p className="hero__parent-line">
-                    <span className="hero__parent-label">Daughter of</span> {bride.parents}
+                    <span className="hero__parent-label">Daughter of</span> {brideParentsText}
                   </p>
                 )}
                 {hasGroomParents && (
                   <p className="hero__parent-line">
-                    <span className="hero__parent-label">Son of</span> {groom.parents}
+                    <span className="hero__parent-label">Son of</span> {groomParentsText}
                   </p>
                 )}
               </>
@@ -102,12 +113,12 @@ export default function InvitationHero({
               <>
                 {hasGroomParents && (
                   <p className="hero__parent-line">
-                    <span className="hero__parent-label">Son of</span> {groom.parents}
+                    <span className="hero__parent-label">Son of</span> {groomParentsText}
                   </p>
                 )}
                 {hasBrideParents && (
                   <p className="hero__parent-line">
-                    <span className="hero__parent-label">Daughter of</span> {bride.parents}
+                    <span className="hero__parent-label">Daughter of</span> {brideParentsText}
                   </p>
                 )}
               </>
