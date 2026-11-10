@@ -214,11 +214,11 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     const dpr = canvas.width / Math.max(1, width)
 
     // Center of horizontal S placed gracefully in the center of the card
-    // Smooth horizontal span: ~58px wide, gentle vertical undulation: ~17px high
+    // Smooth horizontal span: ~60px wide, gentle vertical undulation: ~18px high
     const cx = width * 0.5 * dpr
     const cy = (height * 0.5 + 2) * dpr
-    const ws = 28 * dpr // half-width
-    const hs = 8.5 * dpr // wave amplitude
+    const ws = 30 * dpr // half-width
+    const hs = 9 * dpr // wave amplitude
 
     const duration = 1050
     const startTime = performance.now()
@@ -247,8 +247,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       ctx.globalCompositeOperation = 'destination-out'
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
-      // Thin, crisp fingernail scratch line: 5.5px
-      ctx.lineWidth = 5.5 * dpr
+      // Slightly thicker, clearly visible scratch stroke: 10px
+      ctx.lineWidth = 10 * dpr
 
       if (prevPoint) {
         ctx.beginPath()
