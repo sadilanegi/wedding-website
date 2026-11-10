@@ -1,6 +1,56 @@
-import { useEffect, useRef, useState, useCallback } from 'react'
+import { useEffect, useRef, useState, useCallback, useMemo } from 'react'
 import { isConfirmed } from '../../utils/weddingHelpers.js'
 import './ScratchSaveTheDate.css'
+
+/**
+ * Generates an SVG path string for a perforated postage stamp outline.
+ * Semicircular cutouts are carved inward on all 4 edges with sharp 90-degree corner teeth.
+ */
+function createStampPath(width, height, radius = 5.0) {
+  const w = Math.max(200, Math.round(width || 320))
+  const h = Math.max(100, Math.round(height || 140))
+  const r = radius
+  const nx = Math.max(3, Math.round((w - 24) / 18))
+  const ny = Math.max(2, Math.round((h - 24) / 18))
+  const stepX = (w - 24) / nx
+  const stepY = (h - 24) / ny
+
+  let d = 'M 0 0'
+
+  // Top edge (left to right)
+  for (let i = 0; i < nx; i++) {
+    const cx = 12 + (i + 0.5) * stepX
+    d += ` L ${(cx - r).toFixed(1)} 0`
+    d += ` A ${r} ${r} 0 0 0 ${(cx + r).toFixed(1)} 0`
+  }
+  d += ` L ${w} 0`
+
+  // Right edge (top to bottom)
+  for (let i = 0; i < ny; i++) {
+    const cy = 12 + (i + 0.5) * stepY
+    d += ` L ${w} ${(cy - r).toFixed(1)}`
+    d += ` A ${r} ${r} 0 0 0 ${w} ${(cy + r).toFixed(1)}`
+  }
+  d += ` L ${w} ${h}`
+
+  // Bottom edge (right to left)
+  for (let i = nx - 1; i >= 0; i--) {
+    const cx = 12 + (i + 0.5) * stepX
+    d += ` L ${(cx + r).toFixed(1)} ${h}`
+    d += ` A ${r} ${r} 0 0 0 ${(cx - r).toFixed(1)} ${h}`
+  }
+  d += ` L 0 ${h}`
+
+  // Left edge (bottom to top)
+  for (let i = ny - 1; i >= 0; i--) {
+    const cy = 12 + (i + 0.5) * stepY
+    d += ` L 0 ${(cy + r).toFixed(1)}`
+    d += ` A ${r} ${r} 0 0 0 0 ${(cy - r).toFixed(1)}`
+  }
+  d += ' Z'
+
+  return { d, w, h }
+}
 
 /**
  * ScratchSaveTheDate.jsx
@@ -19,6 +69,12 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
   const demoRafRef = useRef(null)
   const autoUnlockTimerRef = useRef(null)
   const hasRunDemoRef = useRef(false)
+
+  const [dimensions, setDimensions] = useState({ width: 320, height: 152 })
+  const stamp = useMemo(
+    () => createStampPath(dimensions.width, dimensions.height, 4.8),
+    [dimensions.width, dimensions.height]
+  )
 
   const [isRevealed, setIsRevealed] = useState(false)
   const [hasStartedScratching, setHasStartedScratching] = useState(false)
@@ -52,8 +108,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     if (!canvas || !container) return
 
     const rect = container.getBoundingClientRect()
-    const width = Math.max(260, Math.round(rect.width || 300))
-    const height = Math.max(128, Math.round(rect.height || 140))
+    const width = Math.max(260, Math.round(rect.width || 320))
+    const height = Math.max(128, Math.round(rect.height || 152))
     const dpr = Math.min(window.devicePixelRatio || 1, 2)
 
     canvas.width = width * dpr
@@ -91,15 +147,11 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       ctx.stroke()
     }
 
-    // 3. Ornate Double Border Inset inside the Gold Foil
-    ctx.strokeStyle = 'rgba(92, 58, 12, 0.55)'
-    ctx.lineWidth = 1.2
-    ctx.strokeRect(7, 7, width - 14, height - 14)
-
-    ctx.strokeStyle = 'rgba(255, 250, 224, 0.7)'
-    ctx.lineWidth = 0.8
+    // 3. Inner Dashed Philatelic Border Inset inside the Gold Foil Stamp
+    ctx.strokeStyle = 'rgba(255, 250, 224, 0.75)'
+    ctx.lineWidth = 0.9
     ctx.setLineDash([4, 3])
-    ctx.strokeRect(11, 11, width - 22, height - 22)
+    ctx.strokeRect(12, 12, width - 24, height - 24)
     ctx.setLineDash([])
 
     // 4. Subtle Decorative Mandala Rosettes on Left & Right
@@ -119,8 +171,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       }
       ctx.restore()
     }
-    drawRosette(34, height / 2, 22)
-    drawRosette(width - 34, height / 2, 22)
+    drawRosette(36, height / 2, 19)
+    drawRosette(width - 36, height / 2, 19)
 
     // 5. Stamped Foil Typography for Unlocking Festivities
     ctx.textAlign = 'center'
@@ -157,8 +209,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     if (!ctx) return
 
     const rect = container.getBoundingClientRect()
-    const width = Math.max(260, Math.round(rect.width || 300))
-    const height = Math.max(128, Math.round(rect.height || 140))
+    const width = Math.max(260, Math.round(rect.width || 320))
+    const height = Math.max(128, Math.round(rect.height || 152))
     const dpr = canvas.width / Math.max(1, width)
 
     // Center of S placed naturally on the card
@@ -257,7 +309,30 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
   }, [hasStartedScratching, isRevealed])
 
   useEffect(() => {
-    if (isRevealed) return undefined
+    const updateSize = () => {
+      const container = containerRef.current
+      if (container) {
+        const rect = container.getBoundingClientRect()
+        const w = Math.round(rect.width)
+        const h = Math.round(rect.height)
+        if (w > 0 && h > 0) {
+          setDimensions((prev) => (prev.width === w && prev.height === h ? prev : { width: w, height: h }))
+        }
+      }
+    }
+    updateSize()
+
+    let resizeObserver = null
+    if (typeof ResizeObserver !== 'undefined' && containerRef.current) {
+      resizeObserver = new ResizeObserver(updateSize)
+      resizeObserver.observe(containerRef.current)
+    }
+
+    if (isRevealed) {
+      return () => {
+        if (resizeObserver) resizeObserver.disconnect()
+      }
+    }
     initGoldFoilCanvas()
 
     const targetEl = containerRef.current
@@ -303,12 +378,14 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     }
 
     const handleResize = () => {
+      updateSize()
       if (!hasStartedScratching && !isRevealed) {
         initGoldFoilCanvas()
       }
     }
     window.addEventListener('resize', handleResize)
     return () => {
+      if (resizeObserver) resizeObserver.disconnect()
       if (observer) observer.disconnect()
       if (demoTimer) clearTimeout(demoTimer)
       if (autoUnlockTimerRef.current) clearTimeout(autoUnlockTimerRef.current)
@@ -479,10 +556,46 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
 
   return (
     <div className="hero__date-medallion scratch-medallion">
+      {/* Hidden SVG defs defining the exact postage stamp clip-path and metallic gold gradient */}
+      <svg width="0" height="0" style={{ position: 'absolute', pointerEvents: 'none' }} aria-hidden="true">
+        <defs>
+          <clipPath id="scratch-stamp-clip" clipPathUnits="userSpaceOnUse">
+            <path d={stamp.d} />
+          </clipPath>
+          <linearGradient id="stamp-gold-border" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#ba8e3e" />
+            <stop offset="35%" stopColor="#ffd978" />
+            <stop offset="65%" stopColor="#b8862d" />
+            <stop offset="100%" stopColor="#8a5a12" />
+          </linearGradient>
+        </defs>
+      </svg>
+
       <div
         ref={containerRef}
         className={`hero__medallion-border scratch-medallion__box ${isRevealed ? 'is-revealed' : ''}`}
       >
+        {/* Crisp Embossed Postage Stamp Golden Outline & Inner Dotted Border */}
+        <svg
+          className="scratch-medallion__stamp-frame"
+          viewBox={`0 0 ${stamp.w} ${stamp.h}`}
+          preserveAspectRatio="none"
+          aria-hidden="true"
+        >
+          <path d={stamp.d} fill="none" stroke="url(#stamp-gold-border)" strokeWidth="2.2" />
+          <rect
+            x="11"
+            y="11"
+            width={Math.max(1, stamp.w - 22)}
+            height={Math.max(1, stamp.h - 22)}
+            rx="2"
+            fill="none"
+            stroke="rgba(186, 142, 62, 0.45)"
+            strokeWidth="1"
+            strokeDasharray="3 3"
+          />
+        </svg>
+
         {/* Bottom Revealed Layer: The Wedding Date & Auspicious Details */}
         <div className="scratch-medallion__prize">
           <div className="scratch-medallion__prize-header">

@@ -11,41 +11,46 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  filter: drop-shadow(0 10px 24px rgba(70, 35, 10, 0.22)) drop-shadow(0 2px 6px rgba(186, 142, 62, 0.35));
 }
 
 .scratch-medallion__box {
   position: relative;
-  width: 100%;
-  min-height: 138px;
-  padding: 18px 20px 16px;
+  width: 320px;
+  max-width: calc(100vw - 36px);
+  height: 152px;
+  padding: 14px 18px 12px;
   overflow: hidden;
   contain: layout paint;
-  border-radius: 10px;
+  clip-path: url(#scratch-stamp-clip);
+  -webkit-clip-path: url(#scratch-stamp-clip);
+  border: none;
+  border-radius: 0;
   background: radial-gradient(
     circle at 50% 35%,
     #fffdf7 0%,
     #fbf2df 65%,
     #f2e2c2 100%
   );
-  border: 1.5px solid rgba(186, 142, 62, 0.72);
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 250, 236, 0.92),
-    inset 0 0 0 4px rgba(170, 135, 69, 0.38),
-    0 10px 26px rgba(60, 35, 12, 0.14);
+  box-shadow: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition:
-    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .scratch-medallion__box.is-revealed {
   transform: scale(1.015);
-  box-shadow:
-    inset 0 0 0 3px rgba(255, 250, 236, 0.95),
-    inset 0 0 0 4px rgba(196, 150, 62, 0.52),
-    0 14px 34px rgba(100, 30, 50, 0.18);
+  box-shadow: none;
+}
+
+.scratch-medallion__stamp-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 6;
 }
 
 .scratch-medallion__prize {
