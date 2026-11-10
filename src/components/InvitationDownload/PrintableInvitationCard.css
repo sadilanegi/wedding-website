@@ -795,24 +795,43 @@
 
 .print-card__venue-address {
   font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
-  font-size: 17px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 600;
   line-height: 1.4;
   color: #3b261b;
-  margin: 8px 0 2px;
-  white-space: nowrap;
+  margin: 6px 0 2px;
+}
+
+.print-card__venue-landmark {
+  font-family: var(--font-display, 'Cormorant Garamond', Georgia, serif);
+  font-size: 14.5px;
+  font-style: italic;
+  font-weight: 600;
+  color: #7a5518;
+  line-height: 1.4;
+  margin: 2px 0;
+}
+
+.print-card__venue-landmark-label {
+  font-family: var(--font-serif, 'Cinzel', Georgia, serif);
+  font-size: 8.5px;
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #8c672b;
+  margin-right: 4px;
 }
 
 .print-card__venue-city {
   font-family: var(--font-serif, 'Cinzel', Georgia, serif);
-  font-size: 11.5px;
+  font-size: 10px;
   font-weight: 700;
-  line-height: 1.4;
-  letter-spacing: 0.16em;
+  line-height: 1.45;
+  letter-spacing: 0.12em;
   color: #7a5518;
   text-transform: uppercase;
-  margin: 2px 0;
-  white-space: nowrap;
+  margin: 3px 0 2px;
 }
 
 .print-card__venue-district {

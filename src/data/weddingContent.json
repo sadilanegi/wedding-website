@@ -3,13 +3,13 @@
     "bride": {
       "firstName": "Prachi",
       "lastName": "Sharma",
-      "fatherName": "Pramod Sharma",
+      "fatherName": "Pramod Awadhraj Sharma",
       "motherName": "Reena Pramod Sharma"
     },
     "groom": {
       "firstName": "Sumit",
       "lastName": "Negi",
-      "fatherName": "Sadbir Dhyanpal Negi",
+      "fatherName": "Sadbir Dhyanpal Singh Negi",
       "motherName": "Urmila Sadbir Negi"
     },
     "hashtag": "#SUPRA"
@@ -23,7 +23,7 @@
     "invitationPlea": "Request the honour of your gracious presence and blessings to celebrate the wedding festivities of their children",
     "tagline": "Joined in Love, Blessed by the Eternal Grace of Lord Krishna & Shri Radha",
     "date": "10 – 11 December",
-    "place": "Vrindavan, Uttar Pradesh",
+    "place": "Govardhan, Mathura",
     "instructionTap": "Tap to open",
     "videoUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794127296/9ed453103d9bbd1196b9d17bd4256d20_720w_online-video-cutter.com_xzvmqy.mp4",
     "musicUrl": "https://res.cloudinary.com/dvxemrtys/video/upload/v1794140404/aaj-sajeya-alaya-f-goldie-sohel-punit-malhotra-official-video-sneakersong-dharm_QVmldlBL_qngg8r.mp3",
@@ -37,6 +37,8 @@
       "tagline": "Braj Ki Kesar Haldi — A morning of golden turmeric, marigolds, and joyous laughter",
       "date": "10 December",
       "time": "10:00 AM",
+      "venue": "Shri Giridhari Gaudiya Math",
+      "address": "FFW9+GF6, Radha Kund Road, Govardhan",
       "dressCode": "Sunshine Yellow & Florals",
       "instructions": "__",
       "accentColor": "#d97706",
@@ -49,6 +51,8 @@
       "tagline": "Kunj Galiyon Ki Mehendi — Auspicious peacock motifs, deep henna fragrance, and folk melodies",
       "date": "10 December",
       "time": "5:00 PM",
+      "venue": "Shri Giridhari Gaudiya Math",
+      "address": "FFW9+GF6, Radha Kund Road, Govardhan",
       "dressCode": "Henna Greens & Pastels",
       "instructions": "__",
       "accentColor": "#15803d",
@@ -61,6 +65,8 @@
       "tagline": "Rukmini-Kalyanam & Vedic Pheras — The sacred Vedic rituals and seven holy vows under divine grace",
       "date": "11 December",
       "time": "10:00 AM",
+      "venue": "Shri Giridhari Gaudiya Math",
+      "address": "FFW9+GF6, Radha Kund Road, Govardhan",
       "dressCode": "Traditional Royal Ethnic / Vermillion & Gold",
       "instructions": "__",
       "accentColor": "#b91c1c",
@@ -73,6 +79,8 @@
       "tagline": "Divya Raas & Royal Evening Gala — An enchanted starlit celebration of love, music, and blessings",
       "date": "11 December",
       "time": "7:00 PM",
+      "venue": "Shri Giridhari Gaudiya Math",
+      "address": "FFW9+GF6, Radha Kund Road, Govardhan",
       "dressCode": "Black Tie / Indo-Western Haute Couture",
       "instructions": "__",
       "accentColor": "#1e3a8a",
@@ -83,10 +91,11 @@
 
   "venueSummary": {
     "title": "Venue & Celebration Location",
-    "hall": "__",
-    "address": "__, Vrindavan",
-    "city": "Vrindavan, Uttar Pradesh",
-    "mapUrl": "https://maps.google.com/?q=Vrindavan,+Uttar+Pradesh"
+    "hall": "Shri Giridhari Gaudiya Math",
+    "address": "FFW9+GF6, Radha Kund Road",
+    "landmark": "Govardhan Bus Stand",
+    "city": "Govardhan, District Mathura, Uttar Pradesh – 281123, India",
+    "mapUrl": "https://share.google/C7Wn48eprzZGzMbFE"
   },
 
   "rsvp": {

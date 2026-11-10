@@ -22,18 +22,19 @@ All values listed below are currently unconfirmed and must be designated with th
 
 | Content Field | Status | Placeholder Token |
 | :--- | :--- | :--- |
-| **Bride's Surname & Family Details** | Unconfirmed | `__` |
-| **Groom's Surname & Family Details** | Unconfirmed | `__` |
-| **Parents & Family Host Names** | Unconfirmed | `__` |
-| **Wedding Dates (Day, Month, Year)** | Unconfirmed | `__` |
-| **Function Start & End Timings** | Unconfirmed | `__` |
-| **Venue Names & Banquet Halls** | Unconfirmed | `__` |
-| **City, State & Full Physical Addresses**| Unconfirmed | `__` |
-| **Google Maps Coordinates & Links** | Unconfirmed | `https://maps.google.com/?q=__` |
-| **Dress Codes & Attire Color Themes** | Unconfirmed | `__` |
+| **Bride's Surname & Family Details** | Confirmed | Sharma (Pramod Sharma & Reena Sharma) |
+| **Groom's Surname & Family Details** | Confirmed | Negi (Sadbir Negi & Urmila Negi) |
+| **Parents & Family Host Names** | Confirmed | Confirmed in `weddingContent.json` |
+| **Wedding Dates (Day, Month, Year)** | Confirmed | 10 – 11 December 2026 |
+| **Function Start & End Timings** | Confirmed | Haldi: 10 AM, Mehendi: 5 PM, Vivah: 10 AM, Reception: 7 PM |
+| **Venue Names & Banquet Halls** | Confirmed | Shri Giridhari Gaudiya Math |
+| **City, State & Full Physical Addresses**| Confirmed | FFW9+GF6, Radha Kund Road, Govardhan, District Mathura, UP – 281123, India |
+| **Nearby Landmark** | Confirmed | Govardhan Bus Stand |
+| **Google Maps Coordinates & Links** | Confirmed | `https://share.google/C7Wn48eprzZGzMbFE` |
+| **Dress Codes & Attire Color Themes** | Confirmed | Confirmed in `weddingContent.json` |
 | **RSVP Contacts & Phone Numbers** | Unconfirmed | `__` |
-| **Official Wedding Hashtag** | Unconfirmed | `#PrachiWedsSumit` / `__` |
-| **Live Deployed Domain URL** | Unconfirmed | `https://__` |
+| **Official Wedding Hashtag** | Confirmed | `#SUPRA` |
+| **Live Deployed Domain URL** | Confirmed | `https://sumit-weds-prachi.netlify.app/` |
 
 ---
 

@@ -25,11 +25,17 @@ export default function VenueSection({ venueSummary, events = [] }) {
         ? fallbackEventVenue.venue
         : 'Venue To Be Finalized'
 
-  const address = venueSummary.address || fallbackEventVenue?.address || '__, Vrindavan'
-  const city = venueSummary.city || 'Vrindavan, Uttar Pradesh'
+  const address = venueSummary.address || fallbackEventVenue?.address || 'FFW9+GF6, Radha Kund Road'
+  const landmark = isConfirmed(venueSummary.landmark) ? venueSummary.landmark : null
+  const city = venueSummary.city || 'Govardhan, District Mathura, Uttar Pradesh – 281123, India'
 
-  // Forced native maps redirect: Apple Maps on iOS/macOS, Google Maps on Android/desktop
+  // Forced native maps redirect: Direct pinned Google Maps URL or fallback
   const handleOpenMap = () => {
+    if (isConfirmed(venueSummary.mapUrl)) {
+      window.open(venueSummary.mapUrl, '_blank', 'noopener,noreferrer')
+      return
+    }
+
     const isApple =
       typeof navigator !== 'undefined' &&
       (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent) ||
@@ -43,7 +49,7 @@ export default function VenueSection({ venueSummary, events = [] }) {
     const query =
       cleanAddressParts.length > 0
         ? cleanAddressParts.join(', ')
-        : 'Vrindavan, Uttar Pradesh'
+        : 'Govardhan, District Mathura, Uttar Pradesh'
 
     const encoded = encodeURIComponent(query)
 
@@ -75,6 +81,11 @@ export default function VenueSection({ venueSummary, events = [] }) {
           <span className="venue-card__sacred-kicker">✦ Sacred Land of Shri Radha Krishna ✦</span>
           <h3 className="venue-card__hall">{hall}</h3>
           <p className="venue-card__address">{address}</p>
+          {landmark && (
+            <p className="venue-card__landmark">
+              <span className="venue-card__landmark-label">Nearby Landmark:</span> {landmark}
+            </p>
+          )}
           <p className="venue-card__city">{city}</p>
         </div>
 
@@ -83,10 +94,10 @@ export default function VenueSection({ venueSummary, events = [] }) {
           type="button"
           className="venue-card__map-btn"
           onClick={handleOpenMap}
-          aria-label="Open wedding venue location in your Maps app"
+          aria-label="Open wedding venue location in Google Maps"
         >
           <MapPinIcon className="venue-card__map-btn-icon" />
-          <span>Open in Google / Apple Maps</span>
+          <span>Open Live Location in Google Maps</span>
           <span className="venue-card__map-btn-arrow" aria-hidden="true">↗</span>
         </button>
       </div>

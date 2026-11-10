@@ -148,7 +148,7 @@ export default function PersonalizedCardModal({
           <h3 className="card-download-modal__summary-guest">{displayName}</h3>
 
           <p className="card-download-modal__summary-desc">
-            Your card includes the royal couple portrait, all 4 ceremony photos (Haldi, Mehendi, Shaadi, Reception), Vrindavan venue, and offline scannable QR directions.
+            Your card includes the royal couple portrait, all 4 ceremony photos (Haldi, Mehendi, Shaadi, Reception), Govardhan venue, and offline scannable QR directions.
           </p>
         </div>
 

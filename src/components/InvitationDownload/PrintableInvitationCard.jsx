@@ -58,12 +58,13 @@ export default function PrintableInvitationCard({
 
   const venueHall = isConfirmed(venueSummary?.hall)
     ? venueSummary.hall
-    : 'Venue & Celebration Grounds'
-  const venueAddress = venueSummary?.address || '__, Vrindavan'
-  const venueCity = (venueSummary?.city || 'Vrindavan, Uttar Pradesh').toUpperCase()
+    : 'Shri Giridhari Gaudiya Math'
+  const venueAddress = venueSummary?.address || 'FFW9+GF6, Radha Kund Road'
+  const venueLandmark = isConfirmed(venueSummary?.landmark) ? venueSummary.landmark : 'Govardhan Bus Stand'
+  const venueCity = venueSummary?.city || 'Govardhan, District Mathura, Uttar Pradesh – 281123, India'
   const mapDestinationUrl = isConfirmed(venueSummary?.mapUrl)
     ? venueSummary.mapUrl
-    : 'https://www.google.com/maps/search/?api=1&query=Vrindavan%2C%20Uttar%20Pradesh'
+    : 'https://share.google/C7Wn48eprzZGzMbFE'
 
   const [coupleDataUrl, setCoupleDataUrl] = useState('')
   const [eventDataUrls, setEventDataUrls] = useState({})
@@ -311,7 +312,7 @@ export default function PrintableInvitationCard({
           <div className="print-card__span-badge">
             <span className="print-card__span-date">10 &amp; 11 December 2026</span>
             <span className="print-card__span-bullet">✦</span>
-            <span className="print-card__span-city">Vrindavan, Uttar Pradesh</span>
+            <span className="print-card__span-city">Govardhan, Mathura</span>
           </div>
         </section>
 
@@ -469,12 +470,17 @@ export default function PrintableInvitationCard({
               </div>
 
               <p className="print-card__venue-address">{venueAddress}</p>
+              {venueLandmark && (
+                <p className="print-card__venue-landmark">
+                  <span className="print-card__venue-landmark-label">Nearby Landmark:</span> {venueLandmark}
+                </p>
+              )}
               <p className="print-card__venue-city">{venueCity}</p>
               <p className="print-card__venue-district">
-                Holy Land of Shri Radha Krishna · Mathura District
+                Holy Land of Shri Radha Krishna · Govardhan, Mathura District
               </p>
               <p className="print-card__venue-note">
-                Guests travelling to Vrindavan can scan the QR code alongside using any smartphone camera to open immediate live GPS directions on Google Maps or Apple Maps.
+                Guests travelling to Govardhan can scan the QR code alongside using any smartphone camera to open immediate live GPS directions on Google Maps.
               </p>
             </div>
 
@@ -483,14 +489,14 @@ export default function PrintableInvitationCard({
                 <div className="print-card__qr-frame">
                   <img
                     src={qrDataUrl}
-                    alt="Scan for Directions to Vrindavan Venue"
+                    alt={`Scan for Directions to ${venueHall}`}
                     className="print-card__qr-img"
                   />
                 </div>
                 <span className="print-card__qr-label">
                   SCAN FOR MAP &amp; DIRECTIONS
                 </span>
-                <span className="print-card__qr-sub">Instant GPS to Vrindavan</span>
+                <span className="print-card__qr-sub">Instant GPS to Govardhan</span>
               </div>
             )}
           </div>

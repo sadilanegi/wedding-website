@@ -164,6 +164,27 @@
   margin-top: 2px;
 }
 
+.venue-card__landmark {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-style: italic;
+  font-weight: 500;
+  color: #7a5518;
+  line-height: 1.4;
+  margin: 3px 0 1px;
+}
+
+.venue-card__landmark-label {
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #8c672b;
+  margin-right: 4px;
+}
+
 .venue-card__city {
   font-family: var(--font-serif);
   font-size: 11px;
