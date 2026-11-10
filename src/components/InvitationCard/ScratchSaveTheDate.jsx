@@ -147,6 +147,7 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
   }, [])
 
   // Programmatically erase a smooth tutorial swipe across the canvas
+  // Programmatically draw a small, thin, elegant S-shaped scratch tutorial across the gold foil
   const runDemoScratch = useCallback(() => {
     const canvas = canvasRef.current
     const container = containerRef.current
@@ -160,12 +161,21 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     const height = Math.max(128, Math.round(rect.height || 140))
     const dpr = canvas.width / Math.max(1, width)
 
-    // Bezier control points across the middle of the card
-    const p0 = { x: width * 0.18 * dpr, y: height * 0.38 * dpr }
-    const p1 = { x: width * 0.5 * dpr, y: height * 0.62 * dpr }
-    const p2 = { x: width * 0.82 * dpr, y: height * 0.44 * dpr }
+    // Center of S placed naturally on the card
+    // Small, thin dimensions: ~24px wide, ~38px high
+    const cx = width * 0.5 * dpr
+    const cy = height * 0.5 * dpr
+    const ws = 12 * dpr
+    const hs = 19 * dpr
 
-    const duration = 1100
+    // S-curve control points (top arc loops left, bottom arc loops right)
+    const p0 = { x: cx + ws * 0.85, y: cy - hs }
+    const cp1 = { x: cx - ws * 1.85, y: cy - hs * 0.95 }
+    const p1 = { x: cx, y: cy }
+    const cp2 = { x: cx + ws * 1.85, y: cy + hs * 0.95 }
+    const p2 = { x: cx - ws * 0.85, y: cy + hs }
+
+    const duration = 1000
     const startTime = performance.now()
     let prevPoint = null
 
@@ -183,42 +193,50 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2
 
-      // Quadratic bezier formula
-      const t = eased
-      const invT = 1 - t
-      const currX = invT * invT * p0.x + 2 * invT * t * p1.x + t * t * p2.x
-      const currY = invT * invT * p0.y + 2 * invT * t * p1.y + t * t * p2.y
+      // Evaluate the S-curve
+      let currX
+      let currY
+      if (eased <= 0.5) {
+        const u = eased * 2
+        const invU = 1 - u
+        currX = invU * invU * p0.x + 2 * invU * u * cp1.x + u * u * p1.x
+        currY = invU * invU * p0.y + 2 * invU * u * cp1.y + u * u * p1.y
+      } else {
+        const u = (eased - 0.5) * 2
+        const invU = 1 - u
+        currX = invU * invU * p1.x + 2 * invU * u * cp2.x + u * u * p2.x
+        currY = invU * invU * p1.y + 2 * invU * u * cp2.y + u * u * p2.y
+      }
 
       ctx.save()
       ctx.globalCompositeOperation = 'destination-out'
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
-      ctx.lineWidth = 26 * dpr
+      // Thin, realistic fingernail scratch line: 6.5px (NOT thick)
+      ctx.lineWidth = 6.5 * dpr
 
-      ctx.beginPath()
       if (prevPoint) {
+        ctx.beginPath()
         ctx.moveTo(prevPoint.x, prevPoint.y)
         ctx.lineTo(currX, currY)
-      } else {
-        ctx.arc(currX, currY, 13 * dpr, 0, Math.PI * 2)
+        ctx.stroke()
       }
-      ctx.stroke()
       ctx.restore()
 
       prevPoint = { x: currX, y: currY }
 
-      // Update demo hand position (CSS pixels)
+      // Update demo finger position (CSS pixels)
       const cssX = currX / dpr
       const cssY = currY / dpr
       setDemoFinger({ x: cssX, y: cssY, active: true })
 
-      // Spawn gold spark
-      if (Math.random() > 0.4) {
+      // Spawn subtle golden spark
+      if (Math.random() > 0.5) {
         const sparkId = `demo-${Date.now()}-${Math.random()}`
-        const dx = (Math.random() - 0.5) * 28
-        const dy = -8 - Math.random() * 20
+        const dx = (Math.random() - 0.5) * 16
+        const dy = -4 - Math.random() * 14
         setSparks((prev) => [
-          ...prev.slice(-10),
+          ...prev.slice(-8),
           { id: sparkId, x: cssX, y: cssY, dx: `${dx.toFixed(1)}px`, dy: `${dy.toFixed(1)}px` },
         ])
       }
@@ -226,8 +244,12 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       if (progress < 1) {
         demoRafRef.current = requestAnimationFrame(animateDemo)
       } else {
-        // Demo complete: leave hand in gentle gliding mode across the center
-        setDemoFinger({ x: width * 0.5, y: height * 0.5, active: false })
+        // S scratch complete: gracefully dismiss finger guide after 350ms so card is clean
+        setTimeout(() => {
+          if (!hasStartedScratching && !isRevealed) {
+            setDemoFinger(null)
+          }
+        }, 350)
       }
     }
 
@@ -327,8 +349,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     }
   }, [isRevealed, triggerUnlock])
 
-  // Clear a generous circular patch at tap point
-  const clearCircleAtPoint = useCallback((clientX, clientY, radius = 45) => {
+  // Clear a circular patch at tap point
+  const clearCircleAtPoint = useCallback((clientX, clientY, radius = 22) => {
     const canvas = canvasRef.current
     if (!canvas || isRevealed) return
     const rect = canvas.getBoundingClientRect()
@@ -436,8 +458,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       const duration = Date.now() - meta.time
       if (dist < 10 && duration < 380) {
         tapCountRef.current += 1
-        clearCircleAtPoint(e.clientX, e.clientY, 48)
-        if (tapCountRef.current >= 2) {
+        clearCircleAtPoint(e.clientX, e.clientY, 22)
+        if (tapCountRef.current >= 3) {
           triggerUnlock()
         }
       }
@@ -538,23 +560,18 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
             onPointerCancel={handlePointerUp}
           />
 
-          {/* Animated Scratch Guide Hand & Pulse Wave */}
-          {!hasStartedScratching && !isRevealed && (
+          {/* Animated Scratch Guide Hand & Pulse Wave during S demo */}
+          {!hasStartedScratching && !isRevealed && demoFinger && (
             <div
-              className={`scratch-medallion__hand-guide ${demoFinger?.active ? 'is-demoing' : 'is-gliding'}`}
-              style={
-                demoFinger?.active
-                  ? {
-                      left: `${demoFinger.x}px`,
-                      top: `${demoFinger.y}px`,
-                    }
-                  : undefined
-              }
+              className={`scratch-medallion__hand-guide ${demoFinger?.active ? 'is-demoing' : ''}`}
+              style={{
+                left: `${demoFinger.x}px`,
+                top: `${demoFinger.y}px`,
+              }}
               aria-hidden="true"
             >
               <span className="scratch-medallion__hand-pulse" />
               <span className="scratch-medallion__hand-icon">👆</span>
-              <span className="scratch-medallion__hand-pill">Swipe to Scratch</span>
             </div>
           )}
 
