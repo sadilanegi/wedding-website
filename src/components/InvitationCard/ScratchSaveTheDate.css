@@ -182,43 +182,91 @@
   cursor: grabbing;
 }
 
-/* Floating Animated Scratch Guide Indicator */
-.scratch-medallion__hint {
+/* Floating Animated Scratch Guide Indicator with Hand & Ripple */
+.scratch-medallion__hand-guide {
   position: absolute;
-  inset: 0;
+  z-index: 8;
   pointer-events: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  user-select: none;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.25s ease;
 }
 
-.scratch-medallion__coin {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  background: radial-gradient(circle at 35% 35%, #fffbe6 0%, #f3d06b 55%, #9e6f14 100%);
-  border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow:
-    0 4px 12px rgba(60, 35, 8, 0.38),
-    0 0 14px rgba(255, 240, 175, 0.85);
-  color: #5c3806;
-  font-size: 13px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  animation: scratchCoinGlide 2.4s ease-in-out infinite alternate;
+.scratch-medallion__hand-guide.is-gliding {
+  left: 50%;
+  top: 50%;
+  animation: scratchHandGlide 2.4s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite alternate;
 }
 
-@keyframes scratchCoinGlide {
+@keyframes scratchHandGlide {
   0% {
-    transform: translate(-54px, 6px) rotate(-18deg) scale(0.95);
+    transform: translate(-72px, -35%) rotate(-12deg);
   }
   50% {
-    transform: translate(0px, -6px) rotate(0deg) scale(1.08);
+    transform: translate(0px, -55%) rotate(0deg) scale(1.06);
   }
   100% {
-    transform: translate(54px, 6px) rotate(18deg) scale(0.95);
+    transform: translate(72px, -35%) rotate(12deg);
   }
+}
+
+.scratch-medallion__hand-pulse {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(255, 240, 160, 0.75) 0%, rgba(212, 175, 55, 0) 70%);
+  animation: handPulseWave 1.4s ease-out infinite;
+  pointer-events: none;
+}
+
+@keyframes handPulseWave {
+  0% {
+    transform: translate(-50%, -50%) scale(0.35);
+    opacity: 0.95;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2.3);
+    opacity: 0;
+  }
+}
+
+.scratch-medallion__hand-icon {
+  font-size: 26px;
+  line-height: 1;
+  filter: drop-shadow(0 3px 8px rgba(60, 30, 5, 0.5));
+  animation: handFingerTap 1.2s ease-in-out infinite alternate;
+}
+
+@keyframes handFingerTap {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-4px) scale(1.08);
+  }
+}
+
+.scratch-medallion__hand-pill {
+  margin-top: 5px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(35, 18, 6, 0.92);
+  border: 1px solid rgba(255, 235, 165, 0.9);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  font-family: var(--font-serif);
+  font-size: 8.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #fff6d8;
+  white-space: nowrap;
 }
 
 /* Live Gold Foil Sparks on Finger Drag */
@@ -286,21 +334,88 @@
 }
 
 .scratch-medallion__quick-reveal {
-  margin-top: 8px;
+  margin-top: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 9px 20px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #fffcf0 0%, #f7e6ba 50%, #e6c16f 100%);
+  border: 1.5px solid rgba(186, 142, 62, 0.9);
+  box-shadow: 0 4px 16px rgba(80, 45, 12, 0.16), 0 0 16px rgba(212, 175, 55, 0.35);
   font-family: var(--font-serif);
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #8c672b;
-  opacity: 0.85;
+  color: #541525;
   cursor: pointer;
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.22s ease, filter 0.22s ease;
+  animation: quickRevealPulse 2.4s ease-in-out infinite;
 }
 
 .scratch-medallion__quick-reveal:hover {
-  opacity: 1;
-  transform: translateY(-1px);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 24px rgba(80, 45, 12, 0.22), 0 0 24px rgba(212, 175, 55, 0.55);
+  filter: brightness(1.04);
+}
+
+.scratch-medallion__quick-reveal:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.scratch-medallion__quick-icon {
+  font-size: 13px;
+  line-height: 1;
+  display: inline-block;
+  animation: quickSparkleSpin 3s linear infinite;
+}
+
+.scratch-medallion__quick-text {
+  white-space: nowrap;
+}
+
+.scratch-medallion__quick-arrow {
+  font-size: 12px;
+  font-weight: 800;
+  color: #8c253b;
+  display: inline-block;
+  animation: quickArrowBounce 1.4s ease-in-out infinite;
+}
+
+@keyframes quickRevealPulse {
+  0%, 100% {
+    box-shadow: 0 4px 16px rgba(80, 45, 12, 0.16), 0 0 16px rgba(212, 175, 55, 0.35);
+    transform: translateY(0);
+  }
+  50% {
+    box-shadow: 0 6px 22px rgba(80, 45, 12, 0.24), 0 0 24px rgba(212, 175, 55, 0.6);
+    transform: translateY(-1.5px);
+  }
+}
+
+@keyframes quickSparkleSpin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes quickArrowBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(3px);
+  }
 }
 
 /* Celebratory Unlocked Scroll Cue Pill */
@@ -372,7 +487,16 @@
 @media (prefers-reduced-motion: reduce) {
   .scratch-medallion__foil-wrap::after,
   .scratch-medallion__coin,
-  .scratch-medallion__star {
+  .scratch-medallion__star,
+  .scratch-medallion__hand-guide,
+  .scratch-medallion__hand-pulse,
+  .scratch-medallion__hand-icon,
+  .scratch-medallion__spark,
+  .scratch-medallion__quick-reveal,
+  .scratch-medallion__quick-icon,
+  .scratch-medallion__quick-arrow,
+  .scratch-medallion__unlocked-cue,
+  .scratch-medallion__unlocked-arrow {
     animation: none !important;
   }
 }

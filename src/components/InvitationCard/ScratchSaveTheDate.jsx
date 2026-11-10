@@ -14,9 +14,15 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
   const isDrawingRef = useRef(false)
   const lastPointRef = useRef(null)
   const moveCounterRef = useRef(0)
+  const pointerDownMetaRef = useRef(null)
+  const tapCountRef = useRef(0)
+  const demoRafRef = useRef(null)
+  const autoUnlockTimerRef = useRef(null)
+  const hasRunDemoRef = useRef(false)
 
   const [isRevealed, setIsRevealed] = useState(false)
   const [hasStartedScratching, setHasStartedScratching] = useState(false)
+  const [demoFinger, setDemoFinger] = useState(null)
   const [sparks, setSparks] = useState([])
   const [resetCount, setResetCount] = useState(0)
 
@@ -25,7 +31,10 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
   const hasGuestArrival = isConfirmed(general?.guestArrivalTime)
 
   const triggerUnlock = useCallback(() => {
+    if (demoRafRef.current) cancelAnimationFrame(demoRafRef.current)
+    if (autoUnlockTimerRef.current) clearTimeout(autoUnlockTimerRef.current)
     setIsRevealed(true)
+    setDemoFinger(null)
     if (onUnlock) onUnlock()
     if (typeof navigator !== 'undefined' && navigator.vibrate) {
       try {
@@ -117,29 +126,159 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
 
-    ctx.font = '600 10px "Cinzel", Georgia, serif'
-    ctx.fillStyle = 'rgba(78, 46, 8, 0.9)'
-    ctx.fillText('✦   S A C R E D   U N V E I L I N G   ✦', width / 2, height / 2 - 22)
+    ctx.font = '700 9.5px "Cinzel", Georgia, serif'
+    ctx.fillStyle = 'rgba(78, 46, 8, 0.92)'
+    ctx.fillText('✦   S A C R E D   U N V E I L I N G   ✦', width / 2, height / 2 - 24)
 
-    ctx.font = 'italic 600 20px "Cormorant Garamond", Georgia, serif'
+    ctx.font = 'italic 700 20px "Cormorant Garamond", Georgia, serif'
     ctx.fillStyle = '#3b2105'
-    ctx.shadowColor = 'rgba(255, 250, 225, 0.75)'
+    ctx.shadowColor = 'rgba(255, 250, 225, 0.85)'
     ctx.shadowOffsetX = 0
     ctx.shadowOffsetY = 1
     ctx.shadowBlur = 0
-    ctx.fillText('Scratch to Unlock Celebrations', width / 2, height / 2 + 2)
+    ctx.fillText('Scratch with Finger to Reveal', width / 2, height / 2 + 1)
 
     ctx.shadowColor = 'transparent'
-    ctx.font = '500 9px "Cinzel", Georgia, serif'
-    ctx.fillStyle = 'rgba(88, 52, 10, 0.88)'
-    ctx.fillText('RUB GOLD FOIL WITH FINGER OR CURSOR', width / 2, height / 2 + 25)
+    ctx.font = '700 8.5px "Cinzel", Georgia, serif'
+    ctx.fillStyle = 'rgba(88, 52, 10, 0.92)'
+    ctx.fillText('👆 SWIPE GOLD FOIL OR TAP BUTTON BELOW', width / 2, height / 2 + 25)
 
     ctx.restore()
   }, [])
 
+  // Programmatically erase a smooth tutorial swipe across the canvas
+  const runDemoScratch = useCallback(() => {
+    const canvas = canvasRef.current
+    const container = containerRef.current
+    if (!canvas || !container || isRevealed || hasStartedScratching) return
+
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    const rect = container.getBoundingClientRect()
+    const width = Math.max(260, Math.round(rect.width || 300))
+    const height = Math.max(128, Math.round(rect.height || 140))
+    const dpr = canvas.width / Math.max(1, width)
+
+    // Bezier control points across the middle of the card
+    const p0 = { x: width * 0.18 * dpr, y: height * 0.38 * dpr }
+    const p1 = { x: width * 0.5 * dpr, y: height * 0.62 * dpr }
+    const p2 = { x: width * 0.82 * dpr, y: height * 0.44 * dpr }
+
+    const duration = 1100
+    const startTime = performance.now()
+    let prevPoint = null
+
+    const animateDemo = (now) => {
+      if (hasStartedScratching || isRevealed) {
+        setDemoFinger(null)
+        return
+      }
+
+      const elapsed = now - startTime
+      const progress = Math.min(1, elapsed / duration)
+      // Ease in-out cubic
+      const eased =
+        progress < 0.5
+          ? 4 * progress * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 3) / 2
+
+      // Quadratic bezier formula
+      const t = eased
+      const invT = 1 - t
+      const currX = invT * invT * p0.x + 2 * invT * t * p1.x + t * t * p2.x
+      const currY = invT * invT * p0.y + 2 * invT * t * p1.y + t * t * p2.y
+
+      ctx.save()
+      ctx.globalCompositeOperation = 'destination-out'
+      ctx.lineCap = 'round'
+      ctx.lineJoin = 'round'
+      ctx.lineWidth = 26 * dpr
+
+      ctx.beginPath()
+      if (prevPoint) {
+        ctx.moveTo(prevPoint.x, prevPoint.y)
+        ctx.lineTo(currX, currY)
+      } else {
+        ctx.arc(currX, currY, 13 * dpr, 0, Math.PI * 2)
+      }
+      ctx.stroke()
+      ctx.restore()
+
+      prevPoint = { x: currX, y: currY }
+
+      // Update demo hand position (CSS pixels)
+      const cssX = currX / dpr
+      const cssY = currY / dpr
+      setDemoFinger({ x: cssX, y: cssY, active: true })
+
+      // Spawn gold spark
+      if (Math.random() > 0.4) {
+        const sparkId = `demo-${Date.now()}-${Math.random()}`
+        const dx = (Math.random() - 0.5) * 28
+        const dy = -8 - Math.random() * 20
+        setSparks((prev) => [
+          ...prev.slice(-10),
+          { id: sparkId, x: cssX, y: cssY, dx: `${dx.toFixed(1)}px`, dy: `${dy.toFixed(1)}px` },
+        ])
+      }
+
+      if (progress < 1) {
+        demoRafRef.current = requestAnimationFrame(animateDemo)
+      } else {
+        // Demo complete: leave hand in gentle gliding mode across the center
+        setDemoFinger({ x: width * 0.5, y: height * 0.5, active: false })
+      }
+    }
+
+    demoRafRef.current = requestAnimationFrame(animateDemo)
+  }, [hasStartedScratching, isRevealed])
+
   useEffect(() => {
     if (isRevealed) return undefined
     initGoldFoilCanvas()
+
+    const targetEl = containerRef.current
+    let demoTimer = null
+
+    const startDemoAndSafety = () => {
+      if (hasRunDemoRef.current) return
+      hasRunDemoRef.current = true
+
+      // Run demo scratch swipe 420ms after appearing in view
+      demoTimer = setTimeout(() => {
+        if (!hasStartedScratching && !isRevealed) {
+          runDemoScratch()
+        }
+      }, 420)
+
+      // Auto-unlock safety timer: generous 16s safety window so nobody gets stuck
+      autoUnlockTimerRef.current = setTimeout(() => {
+        if (!isRevealed) {
+          triggerUnlock()
+        }
+      }, 16000)
+    }
+
+    let observer = null
+    if (typeof IntersectionObserver !== 'undefined' && targetEl) {
+      observer = new IntersectionObserver(
+        (entries) => {
+          const entry = entries[0]
+          if (entry && entry.isIntersecting) {
+            startDemoAndSafety()
+            if (observer) {
+              observer.disconnect()
+              observer = null
+            }
+          }
+        },
+        { threshold: 0.25 }
+      )
+      observer.observe(targetEl)
+    } else {
+      startDemoAndSafety()
+    }
 
     const handleResize = () => {
       if (!hasStartedScratching && !isRevealed) {
@@ -147,8 +286,14 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       }
     }
     window.addEventListener('resize', handleResize)
-    return () => window.removeEventListener('resize', handleResize)
-  }, [initGoldFoilCanvas, isRevealed, hasStartedScratching, resetCount])
+    return () => {
+      if (observer) observer.disconnect()
+      if (demoTimer) clearTimeout(demoTimer)
+      if (autoUnlockTimerRef.current) clearTimeout(autoUnlockTimerRef.current)
+      if (demoRafRef.current) cancelAnimationFrame(demoRafRef.current)
+      window.removeEventListener('resize', handleResize)
+    }
+  }, [initGoldFoilCanvas, isRevealed, hasStartedScratching, resetCount, runDemoScratch, triggerUnlock])
 
   // Measure what percentage of the canvas has been scratched transparent
   const checkScratchCompletion = useCallback(() => {
@@ -173,13 +318,33 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
       }
 
       const ratio = totalSampled > 0 ? transparentPixels / totalSampled : 0
-      if (ratio >= 0.36) {
+      // Lower threshold to 20% so 2 natural finger swipes unlock the festivities!
+      if (ratio >= 0.20) {
         triggerUnlock()
       }
     } catch {
       // Fallback if getImageData is restricted
     }
   }, [isRevealed, triggerUnlock])
+
+  // Clear a generous circular patch at tap point
+  const clearCircleAtPoint = useCallback((clientX, clientY, radius = 45) => {
+    const canvas = canvasRef.current
+    if (!canvas || isRevealed) return
+    const rect = canvas.getBoundingClientRect()
+    const dpr = canvas.width / Math.max(1, rect.width)
+    const x = (clientX - rect.left) * dpr
+    const y = (clientY - rect.top) * dpr
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    ctx.save()
+    ctx.globalCompositeOperation = 'destination-out'
+    ctx.beginPath()
+    ctx.arc(x, y, radius * dpr, 0, Math.PI * 2)
+    ctx.fill()
+    ctx.restore()
+  }, [isRevealed])
 
   // Erase a circular/feathered stroke between previous and current pointer points
   const scratchAtPoint = useCallback(
@@ -227,7 +392,7 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
         ])
       }
 
-      if (moveCounterRef.current % 7 === 0) {
+      if (moveCounterRef.current % 6 === 0) {
         checkScratchCompletion()
       }
     },
@@ -236,9 +401,14 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
 
   const handlePointerDown = (e) => {
     if (isRevealed) return
+    if (demoRafRef.current) cancelAnimationFrame(demoRafRef.current)
+    if (autoUnlockTimerRef.current) clearTimeout(autoUnlockTimerRef.current)
     isDrawingRef.current = true
     setHasStartedScratching(true)
+    setDemoFinger(null)
     lastPointRef.current = null
+    pointerDownMetaRef.current = { x: e.clientX, y: e.clientY, time: Date.now() }
+
     if (e.currentTarget.setPointerCapture) {
       try {
         e.currentTarget.setPointerCapture(e.pointerId)
@@ -254,10 +424,25 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     scratchAtPoint(e.clientX, e.clientY)
   }
 
-  const handlePointerUp = () => {
+  const handlePointerUp = (e) => {
     if (!isDrawingRef.current) return
     isDrawingRef.current = false
     lastPointRef.current = null
+
+    // Check if this interaction was a quick tap
+    const meta = pointerDownMetaRef.current
+    if (meta && e) {
+      const dist = Math.hypot(e.clientX - meta.x, e.clientY - meta.y)
+      const duration = Date.now() - meta.time
+      if (dist < 10 && duration < 380) {
+        tapCountRef.current += 1
+        clearCircleAtPoint(e.clientX, e.clientY, 48)
+        if (tapCountRef.current >= 2) {
+          triggerUnlock()
+        }
+      }
+    }
+    pointerDownMetaRef.current = null
     checkScratchCompletion()
   }
 
@@ -265,6 +450,8 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     setIsRevealed(false)
     setHasStartedScratching(false)
     setSparks([])
+    tapCountRef.current = 0
+    hasRunDemoRef.current = false
     setResetCount((c) => c + 1)
   }
 
@@ -351,10 +538,23 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
             onPointerCancel={handlePointerUp}
           />
 
-          {/* Animated Floating Shimmer Glint & Finger/Coin Guide before First Touch */}
+          {/* Animated Scratch Guide Hand & Pulse Wave */}
           {!hasStartedScratching && !isRevealed && (
-            <div className="scratch-medallion__hint" aria-hidden="true">
-              <span className="scratch-medallion__coin">✦</span>
+            <div
+              className={`scratch-medallion__hand-guide ${demoFinger?.active ? 'is-demoing' : 'is-gliding'}`}
+              style={
+                demoFinger?.active
+                  ? {
+                      left: `${demoFinger.x}px`,
+                      top: `${demoFinger.y}px`,
+                    }
+                  : undefined
+              }
+              aria-hidden="true"
+            >
+              <span className="scratch-medallion__hand-pulse" />
+              <span className="scratch-medallion__hand-icon">👆</span>
+              <span className="scratch-medallion__hand-pill">Swipe to Scratch</span>
             </div>
           )}
 
@@ -376,14 +576,17 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
         </div>
       </div>
 
-      {/* Accessible One-Tap Unlock Helper below the Medallion */}
+      {/* Radiant One-Tap Unlock Button below the Medallion */}
       {!isRevealed && (
         <button
           type="button"
           className="scratch-medallion__quick-reveal"
           onClick={triggerUnlock}
+          aria-label="Tap to unlock wedding festivities immediately"
         >
-          ✦ Rub gold foil above or tap here to unlock festivities ✦
+          <span className="scratch-medallion__quick-icon" aria-hidden="true">✨</span>
+          <span className="scratch-medallion__quick-text">Tap Here to Reveal All Celebrations</span>
+          <span className="scratch-medallion__quick-arrow" aria-hidden="true">↓</span>
         </button>
       )}
 
