@@ -3,15 +3,39 @@ import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { RoyalDivider, MapPinIcon } from './Ornaments'
 import './VenueSection.css'
 
+/**
+ * Strict iOS mobile detector:
+ * Ensures Windows (even touch laptops), Android, and Linux are NEVER treated as iOS.
+ * Returns true ONLY for authentic iPhone, iPad, or iPod devices.
+ */
+function isStrictIOS() {
+  if (typeof navigator === 'undefined' || typeof window === 'undefined') {
+    return false
+  }
+
+  const ua = navigator.userAgent || ''
+  const platform = navigator.platform || ''
+  const maxTouchPoints = navigator.maxTouchPoints || 0
+
+  // 1. Strictly exclude Windows, Android, Linux, ChromeOS
+  if (
+    /Windows|Win32|Win64|Android|CrOS|Linux/i.test(ua) ||
+    /Win|Linux/i.test(platform)
+  ) {
+    return false
+  }
+
+  // 2. Strict Apple Mobile check: iPhone, iPad, iPod
+  const isIPhoneOrIPod = /iPhone|iPod/i.test(ua)
+  const isIPad =
+    /iPad/i.test(ua) || (platform === 'MacIntel' && maxTouchPoints > 1)
+
+  return isIPhoneOrIPod || isIPad
+}
+
 export default function VenueSection({ venueSummary, events = [] }) {
-  // Detect if user is viewing on an iOS device (iPhone/iPad)
-  const [isAppleDevice] = useState(() => {
-    if (typeof navigator === 'undefined') return false
-    return (
-      /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
-    )
-  })
+  // Detect if user is viewing on an authentic iOS device (iPhone/iPad)
+  const [isAppleDevice] = useState(() => isStrictIOS())
 
   // Fall back to first confirmed event venue if venueSummary is pending
   const fallbackEventVenue = useMemo(() => {
@@ -40,14 +64,9 @@ export default function VenueSection({ venueSummary, events = [] }) {
 
   // Smart native map launcher:
   // - On iOS (iPhone, iPad): Opens native Apple Maps app with pinned venue and coordinates
-  // - On Android & other platforms: Opens native Google Maps app via short URL
+  // - On Windows, Android, and Desktop: Opens native Google Maps app via confirmed short link
   const handleOpenMap = () => {
-    const isApple =
-      typeof navigator !== 'undefined' &&
-      (/iPhone|iPad|iPod/i.test(navigator.userAgent) ||
-        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-
-    if (isApple) {
+    if (isStrictIOS()) {
       const appleUrl =
         venueSummary?.appleMapsUrl ||
         `https://maps.apple.com/?q=${encodeURIComponent(hall)}&ll=27.4958,77.4683&address=${encodeURIComponent(`${address}, ${city}`)}`
