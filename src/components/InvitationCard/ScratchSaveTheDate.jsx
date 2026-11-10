@@ -213,21 +213,14 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
     const height = Math.max(128, Math.round(rect.height || 152))
     const dpr = canvas.width / Math.max(1, width)
 
-    // Center of S placed naturally on the card
-    // Small, thin dimensions: ~24px wide, ~38px high
+    // Center of horizontal S placed gracefully in the center of the card
+    // Smooth horizontal span: ~58px wide, gentle vertical undulation: ~17px high
     const cx = width * 0.5 * dpr
-    const cy = height * 0.5 * dpr
-    const ws = 12 * dpr
-    const hs = 19 * dpr
+    const cy = (height * 0.5 + 2) * dpr
+    const ws = 28 * dpr // half-width
+    const hs = 8.5 * dpr // wave amplitude
 
-    // S-curve control points (top arc loops left, bottom arc loops right)
-    const p0 = { x: cx + ws * 0.85, y: cy - hs }
-    const cp1 = { x: cx - ws * 1.85, y: cy - hs * 0.95 }
-    const p1 = { x: cx, y: cy }
-    const cp2 = { x: cx + ws * 1.85, y: cy + hs * 0.95 }
-    const p2 = { x: cx - ws * 0.85, y: cy + hs }
-
-    const duration = 1000
+    const duration = 1050
     const startTime = performance.now()
     let prevPoint = null
 
@@ -239,33 +232,23 @@ export default function ScratchSaveTheDate({ general, onUnlock }) {
 
       const elapsed = now - startTime
       const progress = Math.min(1, elapsed / duration)
-      // Ease in-out cubic
+      // Ease in-out cubic for natural human swipe gesture
       const eased =
         progress < 0.5
           ? 4 * progress * progress * progress
           : 1 - Math.pow(-2 * progress + 2, 3) / 2
 
-      // Evaluate the S-curve
-      let currX
-      let currY
-      if (eased <= 0.5) {
-        const u = eased * 2
-        const invU = 1 - u
-        currX = invU * invU * p0.x + 2 * invU * u * cp1.x + u * u * p1.x
-        currY = invU * invU * p0.y + 2 * invU * u * cp1.y + u * u * p1.y
-      } else {
-        const u = (eased - 0.5) * 2
-        const invU = 1 - u
-        currX = invU * invU * p1.x + 2 * invU * u * cp2.x + u * u * p2.x
-        currY = invU * invU * p1.y + 2 * invU * u * cp2.y + u * u * p2.y
-      }
+      // Pure mathematically continuous horizontal S-curve (sinusoid wave)
+      // Flows smoothly from left (cx - ws) to right (cx + ws)
+      const currX = (cx - ws) + 2 * ws * eased
+      const currY = cy - hs * Math.sin(2 * Math.PI * eased)
 
       ctx.save()
       ctx.globalCompositeOperation = 'destination-out'
       ctx.lineCap = 'round'
       ctx.lineJoin = 'round'
-      // Thin, realistic fingernail scratch line: 6.5px (NOT thick)
-      ctx.lineWidth = 6.5 * dpr
+      // Thin, crisp fingernail scratch line: 5.5px
+      ctx.lineWidth = 5.5 * dpr
 
       if (prevPoint) {
         ctx.beginPath()
