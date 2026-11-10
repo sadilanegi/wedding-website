@@ -64,7 +64,7 @@ export default function PrintableInvitationCard({
   const venueCity = venueSummary?.city || 'Govardhan, District Mathura, Uttar Pradesh – 281123, India'
   const mapDestinationUrl = isConfirmed(venueSummary?.mapUrl)
     ? venueSummary.mapUrl
-    : 'https://share.google/C7Wn48eprzZGzMbFE'
+    : 'https://maps.app.goo.gl/MrznUHbn5yhMNbv8A'
 
   const [coupleDataUrl, setCoupleDataUrl] = useState('')
   const [eventDataUrls, setEventDataUrls] = useState({})

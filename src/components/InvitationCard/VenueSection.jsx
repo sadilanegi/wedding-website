@@ -1,9 +1,18 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { isConfirmed } from '../../utils/weddingHelpers.js'
 import { RoyalDivider, MapPinIcon } from './Ornaments'
 import './VenueSection.css'
 
 export default function VenueSection({ venueSummary, events = [] }) {
+  // Detect if user is viewing on an iOS device (iPhone/iPad)
+  const [isAppleDevice] = useState(() => {
+    if (typeof navigator === 'undefined') return false
+    return (
+      /iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+      (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)
+    )
+  })
+
   // Fall back to first confirmed event venue if venueSummary is pending
   const fallbackEventVenue = useMemo(() => {
     if (!Array.isArray(events)) return null
@@ -29,35 +38,25 @@ export default function VenueSection({ venueSummary, events = [] }) {
   const landmark = isConfirmed(venueSummary.landmark) ? venueSummary.landmark : null
   const city = venueSummary.city || 'Govardhan, District Mathura, Uttar Pradesh – 281123, India'
 
-  // Forced native maps redirect: Direct pinned Google Maps URL or fallback
+  // Smart native map launcher:
+  // - On iOS (iPhone, iPad): Opens native Apple Maps app with pinned venue and coordinates
+  // - On Android & other platforms: Opens native Google Maps app via short URL
   const handleOpenMap = () => {
-    if (isConfirmed(venueSummary.mapUrl)) {
-      window.open(venueSummary.mapUrl, '_blank', 'noopener,noreferrer')
+    const isApple =
+      typeof navigator !== 'undefined' &&
+      (/iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
+
+    if (isApple) {
+      const appleUrl =
+        venueSummary?.appleMapsUrl ||
+        `https://maps.apple.com/?q=${encodeURIComponent(hall)}&ll=27.4958,77.4683&address=${encodeURIComponent(`${address}, ${city}`)}`
+      window.open(appleUrl, '_blank', 'noopener,noreferrer')
       return
     }
 
-    const isApple =
-      typeof navigator !== 'undefined' &&
-      (/iPhone|iPad|iPod|Macintosh/i.test(navigator.userAgent) ||
-        (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1))
-
-    // Build clean query string for maps app
-    const cleanAddressParts = [hall, address, city].filter(
-      (part) => part && !part.includes('__') && !part.includes('To Be')
-    )
-
-    const query =
-      cleanAddressParts.length > 0
-        ? cleanAddressParts.join(', ')
-        : 'Govardhan, District Mathura, Uttar Pradesh'
-
-    const encoded = encodeURIComponent(query)
-
-    const mapTargetUrl = isApple
-      ? `https://maps.apple.com/?q=${encoded}`
-      : `https://www.google.com/maps/search/?api=1&query=${encoded}`
-
-    window.open(mapTargetUrl, '_blank', 'noopener,noreferrer')
+    const googleUrl = venueSummary?.mapUrl || 'https://maps.app.goo.gl/MrznUHbn5yhMNbv8A'
+    window.open(googleUrl, '_blank', 'noopener,noreferrer')
   }
 
   return (
@@ -89,15 +88,23 @@ export default function VenueSection({ venueSummary, events = [] }) {
           <p className="venue-card__city">{city}</p>
         </div>
 
-        {/* 2. Map Redirect Action Button */}
+        {/* 2. Map Redirect Action Button (Adapts to Apple Maps on iOS, Google Maps on Android) */}
         <button
           type="button"
           className="venue-card__map-btn"
           onClick={handleOpenMap}
-          aria-label="Open wedding venue location in Google Maps"
+          aria-label={
+            isAppleDevice
+              ? 'Open wedding venue location in Apple Maps'
+              : 'Open wedding venue location in Google Maps'
+          }
         >
           <MapPinIcon className="venue-card__map-btn-icon" />
-          <span>Open Live Location in Google Maps</span>
+          <span>
+            {isAppleDevice
+              ? 'Open Live Location in Apple Maps'
+              : 'Open Live Location in Google Maps'}
+          </span>
           <span className="venue-card__map-btn-arrow" aria-hidden="true">↗</span>
         </button>
       </div>
