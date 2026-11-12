@@ -1,0 +1,300 @@
+/* ============================================================================
+   BestWishesSection.css
+   Royal Family Blessings Folio — Groom's Side Only (Mobile-First Precision)
+   ============================================================================ */
+
+.best-wishes-section {
+  width: 100%;
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.best-wishes-section__head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 12px;
+  opacity: 0;
+  transform: translate3d(0, 16px, 0);
+  transition:
+    opacity 480ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 480ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.best-wishes-section__head.is-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0);
+}
+
+.best-wishes-section__divider {
+  width: 100%;
+  max-width: 280px;
+  margin: 10px auto 6px;
+}
+
+.best-wishes-section__kicker {
+  font-family: var(--font-serif);
+  font-size: 9.5px;
+  font-weight: 600;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #8c672b;
+}
+
+.best-wishes-section__title {
+  margin-top: 4px;
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #541525;
+}
+
+/* --- Royal Parchment Blessings Card --- */
+.best-wishes-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 386px;
+  padding: 20px 12px 18px;
+  background: radial-gradient(circle at 50% 18%, #fffefa 0%, #fcf4e3 65%, #f1dfc0 100%);
+  border: 1.5px solid rgba(186, 142, 62, 0.65);
+  border-radius: 14px;
+  box-shadow:
+    inset 0 0 0 3px rgba(255, 250, 236, 0.92),
+    inset 0 0 0 4px rgba(170, 135, 69, 0.32),
+    0 12px 30px rgba(70, 40, 15, 0.12);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.985);
+  transition:
+    opacity 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.28s ease;
+}
+
+.best-wishes-card.is-in-view {
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .best-wishes-card.is-in-view:hover {
+    transform: translate3d(0, -2px, 0);
+    box-shadow:
+      inset 0 0 0 3px rgba(255, 250, 236, 0.96),
+      inset 0 0 0 4px rgba(186, 142, 62, 0.45),
+      0 16px 36px rgba(70, 45, 15, 0.16);
+  }
+}
+
+/* Sacred Mangal Kalash & Lotus Medallion Crest */
+.best-wishes-card__crest {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #fffefb 0%, #fcf1d8 55%, #efdbb2 100%);
+  border: 1.2px solid rgba(186, 142, 62, 0.72);
+  box-shadow:
+    inset 0 0 0 2px rgba(255, 253, 245, 0.9),
+    0 4px 14px rgba(70, 45, 15, 0.16),
+    0 0 14px rgba(212, 175, 55, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 9px;
+}
+
+.best-wishes-card__crest-icon {
+  width: 38px;
+  height: 38px;
+  display: block;
+}
+
+.best-wishes-card__crest::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px dashed rgba(186, 142, 62, 0.4);
+  pointer-events: none;
+}
+
+.best-wishes-card__subtitle {
+  max-width: 30ch;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #574438;
+}
+
+.best-wishes-card__hairline {
+  width: 72%;
+  height: 1px;
+  margin: 10px auto 12px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(186, 142, 62, 0.65) 50%,
+    transparent 100%
+  );
+}
+
+.best-wishes-card__hairline--closing {
+  width: 56%;
+  margin: 14px auto 10px;
+}
+
+/* --- Grouped Family Well-Wishers Tiers --- */
+.best-wishes-card__groups {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 11px;
+}
+
+.best-wishes-card__group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.best-wishes-card__relation-heading {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #7c4f13;
+}
+
+.best-wishes-card__relation-dot {
+  font-size: 7px;
+  color: #c29534;
+}
+
+.best-wishes-card__names-list {
+  width: 100%;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.best-wishes-card__names-list--single {
+  grid-template-columns: minmax(0, 1fr);
+  justify-items: center;
+}
+
+.best-wishes-card__name-pill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  padding: 5px 6px;
+  border-radius: 999px;
+  background: rgba(255, 253, 248, 0.85);
+  border: 1px solid rgba(186, 142, 62, 0.34);
+  box-shadow: 0 2px 5px rgba(70, 45, 15, 0.04);
+  font-family: var(--font-display);
+  font-size: clamp(12.2px, 3.35vw, 14.5px);
+  font-weight: 600;
+  line-height: 1.25;
+  color: #2c1810;
+  letter-spacing: 0.005em;
+  text-align: center;
+}
+
+/* Single-item groups get comfortable side padding around the centered pill */
+.best-wishes-card__names-list--single .best-wishes-card__name-pill {
+  padding: 5px 16px;
+}
+
+/* Odd last pill in multi-name groups spans both columns and stays centered */
+.best-wishes-card__names-list:not(.best-wishes-card__names-list--single)
+  .best-wishes-card__name-pill:last-child:nth-child(odd) {
+  grid-column: 1 / -1;
+  justify-self: center;
+  min-width: calc(50% - 3px);
+  padding: 5px 14px;
+}
+
+.best-wishes-card__closing-note {
+  max-width: 28ch;
+  font-family: var(--font-display);
+  font-size: 14.5px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.4;
+  color: #541525;
+}
+
+/* --- Dev Empty-State Preview --- */
+.best-wishes-card__empty-preview {
+  width: 100%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px dashed rgba(186, 142, 62, 0.55);
+  background: rgba(255, 252, 242, 0.65);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.best-wishes-card__empty-badge {
+  font-family: var(--font-serif);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #7a5a14;
+}
+
+.best-wishes-card__empty-note {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  color: #574438;
+  line-height: 1.4;
+}
+
+@media (max-width: 350px) {
+  .best-wishes-card {
+    padding: 18px 8px 16px;
+  }
+
+  .best-wishes-card__names-list {
+    gap: 5px;
+  }
+
+  .best-wishes-card__name-pill {
+    padding: 4px 4px;
+    font-size: 11.6px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .best-wishes-section__head,
+  .best-wishes-card {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}

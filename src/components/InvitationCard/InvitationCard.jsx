@@ -6,6 +6,7 @@ import WeddingCountdown from './WeddingCountdown'
 import WeddingTimeline from './WeddingTimeline'
 import VenueSection from './VenueSection'
 import RSVPSection from './RSVPSection'
+import BestWishesSection from './BestWishesSection'
 import InvitationFooter from './InvitationFooter'
 import AmbientParticles from './AmbientParticles'
 import { use3DCardTilt } from '../../utils/use3DCardTilt.js'
@@ -17,7 +18,7 @@ export default function InvitationCard({
   onCoupleContinue,
   onOpenDownloadModal,
 }) {
-  const { couple, general, events, venueSummary, rsvp } = wedding
+  const { couple, general, events, venueSummary, rsvp, bestWishes } = wedding
   const { containerRef, cardRef } = use3DCardTilt()
   useScrollReveal(containerRef, introState !== 'couple')
 
@@ -188,7 +189,10 @@ export default function InvitationCard({
             {/* Chapter 5: Warm Personal RSVP */}
             <RSVPSection rsvp={rsvp} couple={couple} />
 
-            {/* Chapter 6: Closing Blessings & Download */}
+            {/* Chapter 6: With Best Wishes From (Groom's Side Only) */}
+            <BestWishesSection bestWishes={bestWishes} />
+
+            {/* Chapter 7: Closing Blessings & Download */}
             <InvitationFooter
               couple={couple}
               general={general}

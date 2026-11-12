@@ -106,5 +106,53 @@
     "deadline": "__",
     "contactPerson": "__",
     "phone": "__"
+  },
+
+  "bestWishes": {
+    "kicker": "Well-Wishers",
+    "title": "With Best Wishes From",
+    "subtitle": "With warm love and joyful blessings from the Negi family",
+    "groomSideGroups": [
+      {
+        "relation": "Grandfather",
+        "names": [
+          "Mr. Lakhan Singh Negi"
+        ]
+      },
+      {
+        "relation": "Elder Uncle",
+        "names": [
+          "Mr. Bharat Singh Negi"
+        ]
+      },
+      {
+        "relation": "Uncles",
+        "names": [
+          "Mr. Suresh Singh Negi",
+          "Mr. Sunil Singh Negi",
+          "Mr. Bimal Singh Negi",
+          "Mr. Danveer Singh Negi",
+          "Mr. Tejendra Singh Negi"
+        ]
+      },
+      {
+        "relation": "Sisters",
+        "names": [
+          "Ms. Sapna Negi",
+          "Ms. Shakshi Negi",
+          "Ms. Sailja Negi"
+        ]
+      },
+      {
+        "relation": "Brothers",
+        "names": [
+          "Mr. Sonu Singh Negi",
+          "Mr. Sachin Singh Negi",
+          "Mr. Saurabh Negi",
+          "Mr. Sameer Singh Negi"
+        ]
+      }
+    ],
+    "closingNote": "And the entire Negi family and all well-wishers."
   }
 }

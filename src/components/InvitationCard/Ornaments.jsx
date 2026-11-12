@@ -1222,4 +1222,102 @@ export function KamdhenuBlessingPair({ className = 'timeline-kamdhenu-pair' }) {
   )
 }
 
+// Auspicious Mangal Kalash & Blooming Lotus Family Blessings Crest
+export function FamilyBlessingsCrest({ className = '' }) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 64 64"
+      width="36"
+      height="36"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      {/* Subtle Inner Radiant Laurel Arcs */}
+      <path
+        d="M15 44 C10 36 11 24 17 16 M49 44 C54 36 53 24 47 16"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        opacity="0.75"
+      />
+      <circle cx="12" cy="30" r="1.2" fill="url(#gold-foil-grad)" opacity="0.8" />
+      <circle cx="52" cy="30" r="1.2" fill="url(#gold-foil-grad)" opacity="0.8" />
+
+      {/* Top Sacred Lotus Crown (Three Symmetrical Petals) */}
+      <circle cx="32" cy="7.5" r="1.5" fill="url(#gold-foil-grad)" />
+      <path
+        d="M32 28 C25 25 21 19 24 14 C27 17 30 22 32 28 Z"
+        fill="url(#lotus-pink-grad)"
+        stroke="#641e32"
+        strokeWidth="0.6"
+      />
+      <path
+        d="M32 28 C39 25 43 19 40 14 C37 17 34 22 32 28 Z"
+        fill="url(#lotus-pink-grad)"
+        stroke="#641e32"
+        strokeWidth="0.6"
+      />
+      <path
+        d="M32 10.5 C28 16.5 28 22.5 32 28.5 C36 22.5 36 16.5 32 10.5 Z"
+        fill="url(#lotus-pink-grad)"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.8"
+      />
+
+      {/* Auspicious Mango Leaves (Panchapallava) Flanking Neck */}
+      <path
+        d="M27 29 C22 28 18 24 17 20 C21 21 25 24 27 29 Z"
+        fill="#0f766e"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.65"
+      />
+      <path
+        d="M37 29 C42 28 46 24 47 20 C43 21 39 24 37 29 Z"
+        fill="#0f766e"
+        stroke="url(#gold-foil-grad)"
+        strokeWidth="0.65"
+      />
+
+      {/* Sacred Golden Kalash Neck Collar & Rim */}
+      <path
+        d="M24.5 28.5 H39.5 C40 30.2 38.8 31.4 37.2 31.4 H26.8 C25.2 31.4 24 30.2 24.5 28.5 Z"
+        fill="url(#gold-foil-grad)"
+        stroke="#5c3a0d"
+        strokeWidth="0.65"
+      />
+
+      {/* Ornate Golden Kalash Vessel Belly */}
+      <path
+        d="M26.5 31.4 C22.5 34.5 20.5 39.5 22 44.5 C23.5 48.8 27.5 50.8 32 50.8 C36.5 50.8 40.5 48.8 42 44.5 C43.5 39.5 41.5 34.5 37.5 31.4 Z"
+        fill="url(#gold-foil-grad)"
+        stroke="#5c3a0d"
+        strokeWidth="0.75"
+      />
+
+      {/* Decorative Kalash Waist Filigree Band */}
+      <path
+        d="M22.2 39.5 Q32 42.5 41.8 39.5"
+        stroke="#641e32"
+        strokeWidth="0.9"
+        strokeLinecap="round"
+        opacity="0.7"
+      />
+
+      {/* Sacred Crimson Tilak Jewel at Kalash Heart */}
+      <circle cx="32" cy="41.5" r="2.6" fill="#7c1d32" stroke="#fff8dd" strokeWidth="0.6" />
+      <circle cx="32" cy="41.5" r="0.95" fill="#fff8dd" />
+
+      {/* Grounding Golden Pedestal Base */}
+      <path
+        d="M25.5 54 H38.5 L36.8 50.8 H27.2 Z"
+        fill="url(#gold-foil-grad)"
+        stroke="#5c3a0d"
+        strokeWidth="0.65"
+      />
+    </svg>
+  )
+}
+
 

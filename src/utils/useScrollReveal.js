@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
 const REVEAL_SELECTOR =
-  '[data-reveal], .ornament-divider, .countdown-section, .timeline-section__head, .event-card, .venue-section__head, .venue-card, .rsvp-section__head, .rsvp-card, .footer-section'
+  '[data-reveal], .ornament-divider, .countdown-section, .timeline-section__head, .event-card, .venue-section__head, .venue-card, .rsvp-section__head, .rsvp-card, .best-wishes-section__head, .best-wishes-card, .footer-section'
 
 /**
  * useScrollReveal.js
